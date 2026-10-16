@@ -1,0 +1,9 @@
+# Synthetic / fictional lab repository. Not a real team or GitHub org.
+#
+# Ownership is UNASSIGNED. data/inventory.json and data/findings.json list
+# owner "unassigned" for telemetry-exporter.
+#
+# Per devin/knowledge/engineering-policies.md, "Unknown owner = escalation":
+# escalate to a human to assign an owner. Do not invent or infer one.
+#
+# No owner rule is defined in this file on purpose.
