@@ -1,0 +1,402 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://riti-singh.github.io/lucid-connected-cloud-security-lab/data.schema.json",
+  "title": "Lab security-operations dashboard data contract (dashboard/public/data.json)",
+  "description": "Produced by dashboard/build_data.py from data/findings.json, data/inventory.json, data/osv/, data/evidence/, data/remediations.json, baseline output, tools/audit_findings.py and tools/triage.py output, and GitHub API enrichment. All content is synthetic. Field names copied from data/findings.json keep their original names. Semantic invariants not expressible here are enforced by dashboard/validate_data.py.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_at", "synthetic", "repository", "sources", "services", "findings", "root_cause_groups", "advisories", "remediations", "demonstrated_remediations", "combined_validations", "escalations", "sessions", "evidence_bundles", "baselines", "audits", "ci", "history"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "generated_at": { "$ref": "#/$defs/datetime" },
+    "synthetic": { "const": true },
+    "disclaimer": { "type": "string" },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "name", "url", "default_branch", "commit_sha"],
+      "properties": {
+        "owner": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "default_branch": { "type": "string" },
+        "commit_sha": { "type": ["string", "null"], "description": "git HEAD the data was built from" },
+        "pages_url": { "type": ["string", "null"] }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["github", "baselines", "inputs"],
+      "properties": {
+        "github": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "authenticated", "fetched_at", "error"],
+          "properties": {
+            "status": { "enum": ["ok", "partial", "unavailable", "skipped"] },
+            "authenticated": { "type": "boolean" },
+            "fetched_at": { "$ref": "#/$defs/datetime_or_null" },
+            "error": { "type": ["string", "null"] },
+            "rate_limit_remaining": { "type": ["integer", "null"] }
+          }
+        },
+        "baselines": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source"],
+          "properties": {
+            "source": { "enum": ["run_baselines.py", "baseline-results.txt"] },
+            "note": { "type": ["string", "null"] }
+          }
+        },
+        "inputs": { "type": "array", "items": { "type": "string" }, "description": "repo-relative input paths read by the build" }
+      }
+    },
+    "services": { "type": "array", "items": { "$ref": "#/$defs/service" } },
+    "findings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+    "root_cause_groups": { "type": "array", "items": { "$ref": "#/$defs/root_cause_group" } },
+    "advisories": { "type": "array", "items": { "$ref": "#/$defs/advisory" } },
+    "remediations": { "type": "array", "items": { "$ref": "#/$defs/remediation" } },
+    "demonstrated_remediations": { "type": "array", "items": { "$ref": "#/$defs/demonstrated_remediation" } },
+    "combined_validations": { "type": "array", "items": { "type": "object" } },
+    "escalations": { "type": "array", "items": { "$ref": "#/$defs/escalation" } },
+    "sessions": { "type": "array", "items": { "$ref": "#/$defs/session" } },
+    "evidence_bundles": { "type": "array", "items": { "$ref": "#/$defs/evidence_bundle" } },
+    "baselines": { "$ref": "#/$defs/baselines" },
+    "audits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audit_findings", "triage"],
+      "properties": {
+        "audit_findings": { "$ref": "#/$defs/command_result" },
+        "triage": { "$ref": "#/$defs/command_result" }
+      }
+    },
+    "ci": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lab_validation_main"],
+      "properties": {
+        "lab_validation_main": { "anyOf": [{ "$ref": "#/$defs/workflow_run" }, { "type": "null" }] },
+        "deploy_dashboard_main": { "anyOf": [{ "$ref": "#/$defs/workflow_run" }, { "type": "null" }] }
+      }
+    },
+    "history": { "type": "array", "items": { "$ref": "#/$defs/history_event" }, "description": "sorted newest first" }
+  },
+  "$defs": {
+    "datetime": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$" },
+    "datetime_or_null": { "anyOf": [{ "$ref": "#/$defs/datetime" }, { "type": "null" }] },
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "ticket": { "type": "string", "pattern": "^(LAB|DEP)-\\d{3}$" },
+    "severity": { "enum": ["critical", "high", "medium", "low"] },
+    "language": { "enum": ["Python", "TypeScript", "Java", "Go"] },
+    "service": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repo", "owner", "owner_assigned", "criticality", "deployment", "data_classification", "language", "finding_ids", "source_url"],
+      "properties": {
+        "repo": { "type": "string" },
+        "owner": { "type": "string" },
+        "owner_assigned": { "type": "boolean", "description": "false when inventory owner is 'unassigned'" },
+        "criticality": { "type": "string" },
+        "deployment": { "type": "string" },
+        "data_classification": { "type": "string" },
+        "language": { "$ref": "#/$defs/language" },
+        "finding_ids": { "type": "array", "items": { "$ref": "#/$defs/ticket" } },
+        "source_url": { "type": "string" }
+      }
+    },
+    "evidence_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "url"],
+      "properties": {
+        "path": { "type": "string", "description": "repo-relative path; may be a directory (trailing /)" },
+        "url": { "type": "string", "description": "GitHub blob/tree URL at repository.commit_sha (or default branch)" },
+        "bundle_id": { "type": ["string", "null"] }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ticket", "kind", "repository", "language", "cwe", "title", "severity", "owner", "owner_assigned", "sla_days", "reported_at", "due_at", "source", "verification_status", "test_name", "root_cause_group", "triage_state", "advisory_id", "aliases", "evidence", "remediation_pr_numbers", "status", "blocked_reason", "synthetic", "actual_lucid_finding", "requires_human_approval"],
+      "properties": {
+        "ticket": { "$ref": "#/$defs/ticket" },
+        "kind": { "enum": ["code", "intake", "dependency"], "description": "code = LAB-1xx..4xx, intake = LAB-5xx, dependency = DEP-*" },
+        "repository": { "type": "string" },
+        "language": { "$ref": "#/$defs/language" },
+        "cwe": { "type": "array", "items": { "type": "string", "pattern": "^CWE-\\d+$" }, "minItems": 1, "description": "normalized to a list (LAB-* source is a string, DEP-* a list)" },
+        "title": { "type": "string" },
+        "severity": { "$ref": "#/$defs/severity" },
+        "owner": { "type": "string" },
+        "owner_assigned": { "type": "boolean" },
+        "sla_days": { "type": "integer", "minimum": 1 },
+        "reported_at": { "$ref": "#/$defs/date" },
+        "due_at": { "$ref": "#/$defs/date", "description": "reported_at + sla_days calendar days" },
+        "source": { "type": "string" },
+        "verification_status": { "type": "string" },
+        "verification_notes": { "type": ["string", "null"] },
+        "test_name": { "type": ["string", "null"] },
+        "root_cause_group": { "type": "string" },
+        "triage_state": { "enum": ["triaged", "untriaged"], "description": "untriaged iff root_cause_group is intake-unclassified" },
+        "advisory_id": { "type": ["string", "null"] },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "ecosystem": { "type": ["string", "null"] },
+        "package": { "type": ["string", "null"] },
+        "pinned_version": { "type": ["string", "null"] },
+        "fixed_version": { "type": ["string", "null"] },
+        "severity_source": { "type": ["string", "null"] },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence_ref" } },
+        "remediation_pr_numbers": { "type": "array", "items": { "type": "integer" }, "description": "PRs of category 'remediation' whose tickets include this finding" },
+        "status": { "enum": ["open", "fix-in-review", "fix-blocked", "fix-merged"], "description": "derived from linked remediation PR state; open = no fix PR" },
+        "blocked_reason": { "type": ["string", "null"] },
+        "synthetic": { "const": true },
+        "actual_lucid_finding": { "const": false },
+        "requires_human_approval": { "type": "boolean" }
+      }
+    },
+    "root_cause_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "classification", "verified", "finding_ids", "source", "triage_line", "remediation_pr_numbers", "advisory_ids"],
+      "properties": {
+        "id": { "type": "string" },
+        "classification": { "enum": ["code-root-cause", "dependency-advisory", "untriaged-intake"] },
+        "verified": { "type": "boolean", "description": "true only for code-root-cause groups whose findings are all reproduced by a failing test; always false for untriaged-intake" },
+        "finding_ids": { "type": "array", "items": { "$ref": "#/$defs/ticket" } },
+        "source": { "type": "string" },
+        "triage_line": { "type": "string", "description": "verbatim line from tools/triage.py output" },
+        "remediation_pr_numbers": { "type": "array", "items": { "type": "integer" } },
+        "advisory_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "advisory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "aliases", "summary", "details", "severity", "cwe_ids", "published", "modified", "retrieved_utc", "ecosystem", "package", "fixed_version", "references", "finding_ids", "osv_path", "osv_url"],
+      "properties": {
+        "id": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "summary": { "type": "string" },
+        "details": { "type": "string" },
+        "severity": { "type": ["string", "null"], "description": "OSV database_specific.severity as recorded" },
+        "cwe_ids": { "type": "array", "items": { "type": "string" } },
+        "published": { "type": ["string", "null"] },
+        "modified": { "type": ["string", "null"] },
+        "retrieved_utc": { "type": "string" },
+        "ecosystem": { "type": ["string", "null"] },
+        "package": { "type": ["string", "null"] },
+        "fixed_version": { "type": ["string", "null"] },
+        "references": { "type": "array", "items": { "type": "object", "required": ["type", "url"], "properties": { "type": { "type": "string" }, "url": { "type": "string" } } } },
+        "finding_ids": { "type": "array", "items": { "$ref": "#/$defs/ticket" } },
+        "osv_path": { "type": "string" },
+        "osv_url": { "type": "string" }
+      }
+    },
+    "check_run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "status", "conclusion", "html_url"],
+      "properties": {
+        "name": { "type": "string" },
+        "status": { "type": "string" },
+        "conclusion": { "type": ["string", "null"] },
+        "html_url": { "type": ["string", "null"] },
+        "completed_at": { "type": ["string", "null"] }
+      }
+    },
+    "github_pr": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "merged", "merged_at", "closed_at", "head_sha", "updated_at", "html_url", "requested_reviewers", "checks", "fetched_at"],
+      "properties": {
+        "state": { "enum": ["open", "closed"] },
+        "merged": { "type": "boolean" },
+        "draft": { "type": "boolean" },
+        "merged_at": { "type": ["string", "null"] },
+        "closed_at": { "type": ["string", "null"] },
+        "head_sha": { "type": "string" },
+        "updated_at": { "type": "string" },
+        "html_url": { "type": "string" },
+        "requested_reviewers": { "type": "array", "items": { "type": "string" } },
+        "checks": { "type": "array", "items": { "$ref": "#/$defs/check_run" } },
+        "checks_conclusion": { "enum": ["success", "failure", "pending", "none", "unknown"] },
+        "fetched_at": { "$ref": "#/$defs/datetime" }
+      }
+    },
+    "remediation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["number", "title", "category", "url", "tickets", "root_cause_group", "service", "fixed_language", "state", "state_source", "review_state", "blocked_reason", "created_at", "merged_at", "session_id", "session_url", "depends_on", "validation", "summary", "recorded_state", "github"],
+      "properties": {
+        "number": { "type": "integer" },
+        "title": { "type": "string" },
+        "category": { "enum": ["remediation", "policy", "docs", "dependency-evidence", "devin-capabilities", "intake-data", "ci-validation", "dependency-tickets", "report", "dashboard"] },
+        "url": { "type": "string" },
+        "tickets": { "type": "array", "items": { "$ref": "#/$defs/ticket" } },
+        "root_cause_group": { "type": ["string", "null"] },
+        "service": { "type": ["string", "null"] },
+        "fixed_language": { "enum": ["python", "typescript", "java", "go", null] },
+        "state": { "enum": ["open", "merged", "closed"], "description": "effective state: GitHub when available, else recorded_state" },
+        "state_source": { "enum": ["github", "recorded"] },
+        "recorded_state": { "enum": ["open", "merged", "closed"] },
+        "review_state": { "enum": ["human-review", "blocked-owner-assignment", "merged", "closed"] },
+        "blocked_reason": { "type": ["string", "null"] },
+        "created_at": { "type": ["string", "null"] },
+        "merged_at": { "type": ["string", "null"] },
+        "session_id": { "type": ["string", "null"] },
+        "session_url": { "type": ["string", "null"] },
+        "depends_on": { "type": "array", "items": { "type": "integer" } },
+        "validation": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["validated_head", "runner_args", "ci_workflow", "ci_conclusion", "ci_run_url", "notes"],
+              "properties": {
+                "validated_head": { "type": ["string", "null"] },
+                "runner_args": { "type": ["string", "null"] },
+                "ci_workflow": { "type": ["string", "null"] },
+                "ci_conclusion": { "type": ["string", "null"] },
+                "ci_run_url": { "type": ["string", "null"] },
+                "notes": { "type": ["string", "null"] }
+              }
+            }
+          ]
+        },
+        "summary": { "type": "string" },
+        "github": { "anyOf": [{ "$ref": "#/$defs/github_pr" }, { "type": "null" }] }
+      }
+    },
+    "demonstrated_remediation": {
+      "type": "object",
+      "required": ["id", "tickets", "kind", "status", "summary", "evidence"],
+      "properties": {
+        "id": { "type": "string" },
+        "tickets": { "type": "array", "items": { "$ref": "#/$defs/ticket" } },
+        "kind": { "type": "string" },
+        "status": { "type": "string" },
+        "summary": { "type": "string" },
+        "reachability": { "type": "string" },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence_ref" } },
+        "tool": { "type": "string" },
+        "pr_numbers": { "type": "array", "items": { "type": "integer" } }
+      }
+    },
+    "escalation": {
+      "type": "object",
+      "required": ["id", "service", "tickets", "pr_numbers", "reason"],
+      "properties": {
+        "id": { "type": "string" },
+        "service": { "type": "string" },
+        "tickets": { "type": "array", "items": { "$ref": "#/$defs/ticket" } },
+        "pr_numbers": { "type": "array", "items": { "type": "integer" } },
+        "reason": { "type": "string" },
+        "open_questions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "url", "role", "pr_numbers"],
+      "properties": {
+        "id": { "type": "string" },
+        "url": { "type": "string" },
+        "role": { "type": "string" },
+        "pr_numbers": { "type": "array", "items": { "type": "integer" } }
+      }
+    },
+    "evidence_file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "url", "size_bytes", "media_type", "preview", "truncated"],
+      "properties": {
+        "path": { "type": "string" },
+        "url": { "type": "string" },
+        "size_bytes": { "type": "integer" },
+        "media_type": { "type": "string" },
+        "preview": { "type": ["string", "null"], "description": "first <= 4096 bytes of text content" },
+        "truncated": { "type": "boolean" }
+      }
+    },
+    "evidence_bundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "path", "tickets", "files"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "enum": ["intake-evidence", "dependency-scenario"] },
+        "path": { "type": "string" },
+        "tickets": { "type": "array", "items": { "$ref": "#/$defs/ticket" } },
+        "summary": { "type": ["object", "null"], "description": "parsed summary.json when present" },
+        "files": { "type": "array", "items": { "$ref": "#/$defs/evidence_file" } }
+      }
+    },
+    "baseline_job": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "result", "expected", "match"],
+      "properties": {
+        "name": { "type": "string" },
+        "language": { "enum": ["python", "typescript", "java", "go", null] },
+        "result": { "enum": ["PASS", "FAIL", "ERROR"] },
+        "expected": { "enum": ["PASS", "FAIL", null] },
+        "match": { "type": "boolean" }
+      }
+    },
+    "baselines": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "command", "exit_code", "jobs", "summary_line", "raw", "captured_at"],
+      "properties": {
+        "source": { "enum": ["run_baselines.py", "baseline-results.txt"] },
+        "command": { "type": "string" },
+        "exit_code": { "type": ["integer", "null"] },
+        "jobs": { "type": "array", "items": { "$ref": "#/$defs/baseline_job" } },
+        "summary_line": { "type": ["string", "null"] },
+        "raw": { "type": "string" },
+        "captured_at": { "$ref": "#/$defs/datetime_or_null" }
+      }
+    },
+    "command_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command", "exit_code", "stdout", "passed"],
+      "properties": {
+        "command": { "type": "string" },
+        "exit_code": { "type": "integer" },
+        "stdout": { "type": "string" },
+        "stderr": { "type": "string" },
+        "passed": { "type": "boolean" }
+      }
+    },
+    "workflow_run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "status", "conclusion", "html_url", "head_sha", "event", "created_at"],
+      "properties": {
+        "name": { "type": "string" },
+        "status": { "type": "string" },
+        "conclusion": { "type": ["string", "null"] },
+        "html_url": { "type": "string" },
+        "head_sha": { "type": "string" },
+        "event": { "type": "string" },
+        "created_at": { "type": "string" }
+      }
+    },
+    "history_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["at", "type", "summary", "ref"],
+      "properties": {
+        "at": { "type": "string" },
+        "type": { "enum": ["pr-opened", "pr-merged", "pr-closed", "finding-reported", "advisory-retrieved", "evidence-captured", "ci-run"] },
+        "summary": { "type": "string" },
+        "ref": { "type": ["string", "null"], "description": "ticket, PR number as '#N', advisory id, or URL" },
+        "url": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

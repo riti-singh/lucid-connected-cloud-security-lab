@@ -1,0 +1,457 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "description": "Structured remediation and pull-request history for the synthetic lab, migrated from docs/lab-context-status.md (main 6ddcf95, 2026-10-16). Holds curated facts GitHub does not expose (tickets, root cause, validation evidence, sessions, blocked reasons). At dashboard build time, live GitHub state (open/merged, head, checks) is authoritative over recorded_state.",
+  "repository": "riti-singh/lucid-connected-cloud-security-lab",
+  "pull_requests": [
+    {
+      "number": 1,
+      "title": "LAB-201: enforce tenant scoping in getChargingSession (CWE-639)",
+      "category": "remediation",
+      "tickets": [
+        "LAB-201"
+      ],
+      "root_cause_group": "tenant-authorization",
+      "service": "charging-session-api",
+      "fixed_language": "typescript",
+      "recorded_state": "open",
+      "review_state": "human-review",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:06:18Z",
+      "merged_at": null,
+      "session_id": "274b2e98c78a4e538521527e0e1aa568",
+      "depends_on": [],
+      "validation": {
+        "validated_head": "bf08dc1",
+        "runner_args": "--fixed typescript",
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941309127/job/117109353086",
+        "notes": "Revalidated after merging main into the branch; CI printed 6/6 MATCH plus the 14-finding audit PASS line."
+      },
+      "summary": "Fix for LAB-201 (TypeScript tenant scoping); awaiting human review."
+    },
+    {
+      "number": 2,
+      "title": "[Session B] Split engineering policies into secure-coding, SLA, and PR/approval policy docs (synthetic)",
+      "category": "policy",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "recorded_state": "merged",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:26:47Z",
+      "merged_at": "2026-10-16T16:53:28Z",
+      "session_id": "eefa585ecfa44f6fbd50cfdaa0e5cde8",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Policy corpus: secure-coding, vulnerability SLA, PR/approval policies."
+    },
+    {
+      "number": 3,
+      "title": "Session A: synthetic service context docs, CODEOWNERS, CONTRIBUTING",
+      "category": "docs",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "recorded_state": "merged",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:27:42Z",
+      "merged_at": "2026-10-16T16:53:33Z",
+      "session_id": "0b1da5974649439e8923bcbfe25d31b6",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Service architecture/API/CONTRIBUTING docs; root .github/CODEOWNERS."
+    },
+    {
+      "number": 4,
+      "title": "SESSION D phase 1: synthetic pinned-vulnerable dependency manifests with OSV evidence",
+      "category": "dependency-evidence",
+      "tickets": [
+        "DEP-101",
+        "DEP-201",
+        "DEP-202",
+        "DEP-301"
+      ],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "recorded_state": "merged",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:29:42Z",
+      "merged_at": "2026-10-16T16:59:42Z",
+      "session_id": "c0b2a13ec74545f483f4deb25a691f00",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Pinned vulnerable dependency manifests, OSV evidence, executable PyYAML scenario (5.3.1 -> 5.4), README."
+    },
+    {
+      "number": 5,
+      "title": "Add auto-discoverable Devin skills under .agents/skills",
+      "category": "devin-capabilities",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "recorded_state": "merged",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:53:13Z",
+      "merged_at": "2026-10-16T16:53:57Z",
+      "session_id": "0a3acf3d3c6246d7b907e705aa96e670",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Repo skills under .agents/skills/."
+    },
+    {
+      "number": 6,
+      "title": "Add synthetic LAB-501..504 intake tickets with evidence (append-only)",
+      "category": "intake-data",
+      "tickets": [
+        "LAB-501",
+        "LAB-502",
+        "LAB-503",
+        "LAB-504"
+      ],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "recorded_state": "merged",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:59:37Z",
+      "merged_at": "2026-10-16T17:01:25Z",
+      "session_id": "307dfd4633ac4e298224ca8f49fb916d",
+      "depends_on": [
+        3
+      ],
+      "validation": null,
+      "summary": "LAB-501..504 intake tickets with evidence; classifications deliberately not committed."
+    },
+    {
+      "number": 7,
+      "title": "LAB-301: require release-manager role for OTA release approval (synthetic, CWE-862)",
+      "category": "remediation",
+      "tickets": [
+        "LAB-301"
+      ],
+      "root_cause_group": "ota-release-rbac",
+      "service": "ota-release-gateway",
+      "fixed_language": "java",
+      "recorded_state": "open",
+      "review_state": "human-review",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:59:57Z",
+      "merged_at": null,
+      "session_id": "f1993936c07440fa9000c2cd8bd3ee29",
+      "depends_on": [],
+      "validation": {
+        "validated_head": "3dd5856",
+        "runner_args": "--fixed java",
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941253088/job/117109163079",
+        "notes": "Revalidated after merging main into the branch; CI printed 6/6 MATCH plus the 14-finding audit PASS line."
+      },
+      "summary": "Fix for LAB-301 (Java release-manager check); awaiting human review."
+    },
+    {
+      "number": 8,
+      "title": "LAB-401: redact vehicle-linked fields from telemetry-exporter logs (owner escalation required)",
+      "category": "remediation",
+      "tickets": [
+        "LAB-401"
+      ],
+      "root_cause_group": "telemetry-log-redaction",
+      "service": "telemetry-exporter",
+      "fixed_language": "go",
+      "recorded_state": "open",
+      "review_state": "blocked-owner-assignment",
+      "blocked_reason": "telemetry-exporter owner is 'unassigned' in data/inventory.json; a human must assign an owner and reviewer before merge.",
+      "created_at": "2026-10-16T16:59:58Z",
+      "merged_at": null,
+      "session_id": "0f0dc5c258304212b770e18474293481",
+      "depends_on": [],
+      "validation": {
+        "validated_head": "aae7972",
+        "runner_args": "--fixed go",
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941260924/job/117109189400",
+        "notes": "Revalidated after merging main into the branch; CI printed 6/6 MATCH plus the 14-finding audit PASS line."
+      },
+      "summary": "Fix for LAB-401 (Go log redaction); blocked on owner assignment."
+    },
+    {
+      "number": 9,
+      "title": "LAB-101/102/103: enforce path containment in read_diagnostic_document (CWE-22, synthetic)",
+      "category": "remediation",
+      "tickets": [
+        "LAB-101",
+        "LAB-102",
+        "LAB-103"
+      ],
+      "root_cause_group": "shared-root-path-validation",
+      "service": "diagnostics-document-api",
+      "fixed_language": "python",
+      "recorded_state": "open",
+      "review_state": "human-review",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T17:00:57Z",
+      "merged_at": null,
+      "session_id": "b5a9af4d306f457bb89d25c0f08840c9",
+      "depends_on": [],
+      "validation": {
+        "validated_head": "edbabd0",
+        "runner_args": "--fixed python",
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941262113/job/117109192771",
+        "notes": "Revalidated after merging main into the branch; CI printed 6/6 MATCH plus the 14-finding audit PASS line. Edits documents.py at the service root (no src/); TOCTOU and hard-link cases out of scope."
+      },
+      "summary": "One fix for the shared root cause of LAB-101/102/103 (Python path containment); awaiting human review."
+    },
+    {
+      "number": 10,
+      "title": "CI: lab-validation workflow, ERROR on missing toolchain, --fixed <lang> runner mode",
+      "category": "ci-validation",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "recorded_state": "merged",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T17:01:10Z",
+      "merged_at": "2026-10-16T17:04:37Z",
+      "session_id": "72f30a5be47d4f5eaeab8d70c0018ff0",
+      "depends_on": [
+        4
+      ],
+      "validation": {
+        "validated_head": null,
+        "runner_args": null,
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": null,
+        "notes": "lab-validation succeeded on the pull_request run and on the push to main. With node stripped from PATH, run_baselines.py prints 'ERROR ... required toolchain not found on PATH: tsc' and exits 2."
+      },
+      "summary": "run_baselines.py prints ERROR for missing toolchains instead of a false MATCH; --fixed <lang>; lab-validation GitHub Actions workflow."
+    },
+    {
+      "number": 11,
+      "title": "Add DEP-* dependency tickets for OSV-pinned advisories; scope audit advisory_id checks by prefix",
+      "category": "dependency-tickets",
+      "tickets": [
+        "DEP-101",
+        "DEP-201",
+        "DEP-202",
+        "DEP-301"
+      ],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "recorded_state": "merged",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T17:04:26Z",
+      "merged_at": "2026-10-16T17:05:21Z",
+      "session_id": "a0569ffb79bc468caf2139de6085ebc3",
+      "depends_on": [
+        4,
+        6
+      ],
+      "validation": {
+        "validated_head": null,
+        "runner_args": null,
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": null,
+        "notes": "Negative audit checks on the PR head: a LAB-* ticket with an advisory ID exits 1; a DEP-* ID without a data/osv/ record exits 1."
+      },
+      "summary": "DEP-* dependency tickets; audit scopes advisory IDs by ticket prefix."
+    },
+    {
+      "number": 12,
+      "title": "Add final lab context status report (docs/lab-context-status.md)",
+      "category": "report",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "recorded_state": "merged",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T17:08:08Z",
+      "merged_at": "2026-10-16T17:09:33Z",
+      "session_id": "0a3acf3d3c6246d7b907e705aa96e670",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Lab context status report (first version)."
+    },
+    {
+      "number": 13,
+      "title": "Status report: revalidated fix PR heads, session map, PR dependencies",
+      "category": "report",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "recorded_state": "merged",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T17:41:06Z",
+      "merged_at": "2026-10-16T17:42:25Z",
+      "session_id": "0a3acf3d3c6246d7b907e705aa96e670",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Status report update: revalidated fix PR heads, session map, PR dependencies."
+    }
+  ],
+  "demonstrated_remediations": [
+    {
+      "id": "DEMO-DEP-101-PYYAML-5.4",
+      "tickets": [
+        "DEP-101"
+      ],
+      "kind": "dependency-upgrade-scenario",
+      "status": "demonstrated-not-merged",
+      "summary": "pip-audit 2.10.1 (OSV) reports GHSA-8q59-q68h-6hv4 against PyYAML 5.3.1 and none at 5.4; the scenario tests pass on both. No upgrade PR has been opened.",
+      "reachability": "bundle_manifest.py uses yaml.safe_load, not the full_load / FullLoader path the advisory describes, so DEP-101 is version exposure, not a demonstrated exploit.",
+      "evidence": [
+        "data/evidence/dependency-scenario/summary.json",
+        "data/evidence/dependency-scenario/before/pip-audit.json",
+        "data/evidence/dependency-scenario/after/pip-audit.json",
+        "data/evidence/dependency-scenario/before/tests.txt",
+        "data/evidence/dependency-scenario/after/tests.txt"
+      ],
+      "tool": "tools/verify_dependency_scenario.py",
+      "pr_numbers": [
+        4
+      ]
+    }
+  ],
+  "combined_validations": [
+    {
+      "id": "all-fix-prs-expect-fixed",
+      "pr_numbers": [
+        1,
+        7,
+        8,
+        9
+      ],
+      "command": "python3 tools/run_baselines.py --expect-fixed",
+      "result": "6/6 'PASS; expected PASS; MATCH' and 'PASS all remediations verified' (exit 0)",
+      "context": "Local run with all four PRs' service directories applied together onto main; coordinator session 0a3acf3d.",
+      "session_id": "0a3acf3d3c6246d7b907e705aa96e670"
+    }
+  ],
+  "escalations": [
+    {
+      "id": "telemetry-exporter-owner",
+      "service": "telemetry-exporter",
+      "tickets": [
+        "LAB-401",
+        "LAB-503"
+      ],
+      "pr_numbers": [
+        8
+      ],
+      "reason": "telemetry-exporter has no owner (inventory owner 'unassigned'). Policy: unknown owner = escalation; the SLA clock still runs. PR #8 cannot merge until a human assigns an owner and reviewer.",
+      "open_questions": [
+        "Whether voltage counts as sensitive is still open."
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "0a3acf3d3c6246d7b907e705aa96e670",
+      "role": "Coordinator; integration, validation, status report",
+      "pr_numbers": [
+        5,
+        12,
+        13
+      ]
+    },
+    {
+      "id": "274b2e98c78a4e538521527e0e1aa568",
+      "role": "LAB-201 remediation",
+      "pr_numbers": [
+        1
+      ]
+    },
+    {
+      "id": "eefa585ecfa44f6fbd50cfdaa0e5cde8",
+      "role": "Policy corpus",
+      "pr_numbers": [
+        2
+      ]
+    },
+    {
+      "id": "0b1da5974649439e8923bcbfe25d31b6",
+      "role": "Service context docs, CODEOWNERS",
+      "pr_numbers": [
+        3
+      ]
+    },
+    {
+      "id": "c0b2a13ec74545f483f4deb25a691f00",
+      "role": "OSV evidence, PyYAML scenario",
+      "pr_numbers": [
+        4
+      ]
+    },
+    {
+      "id": "307dfd4633ac4e298224ca8f49fb916d",
+      "role": "LAB-501..504 enrichment",
+      "pr_numbers": [
+        6
+      ]
+    },
+    {
+      "id": "f1993936c07440fa9000c2cd8bd3ee29",
+      "role": "LAB-301 remediation",
+      "pr_numbers": [
+        7
+      ]
+    },
+    {
+      "id": "0f0dc5c258304212b770e18474293481",
+      "role": "LAB-401 remediation",
+      "pr_numbers": [
+        8
+      ]
+    },
+    {
+      "id": "b5a9af4d306f457bb89d25c0f08840c9",
+      "role": "LAB-101/102/103 remediation",
+      "pr_numbers": [
+        9
+      ]
+    },
+    {
+      "id": "72f30a5be47d4f5eaeab8d70c0018ff0",
+      "role": "CI/validation",
+      "pr_numbers": [
+        10
+      ]
+    },
+    {
+      "id": "a0569ffb79bc468caf2139de6085ebc3",
+      "role": "DEP-* tickets",
+      "pr_numbers": [
+        11
+      ]
+    }
+  ],
+  "known_risks": [
+    "After any remediation PR merges, push-to-main lab-validation runs in baseline mode and reports MISMATCH for that language until expected outcomes are updated.",
+    "express and snakeyaml exposure is manifest-only; transitive dependencies were not checked.",
+    "DEP-* cwe is a list (OSV cwe_ids) while LAB-* cwe is a string; DEP-* reported_at is the OSV retrieval date."
+  ]
+}
