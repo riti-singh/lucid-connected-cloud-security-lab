@@ -1,0 +1,236 @@
+# Builds the synthetic security-operations dashboard (dashboard/) and deploys
+# it to GitHub Pages.
+#
+# pull_request: build and validate only (no Pages artifact, no deploy).
+# push to main, workflow_dispatch on main, schedule: build, deploy, verify.
+# The schedule refreshes GitHub PR/CI state in data.json.
+#
+# Non-PR runs hold the `pages` concurrency group for the whole run, so verify
+# checks the deployment made by the same run. PR runs use a per-ref group.
+name: deploy-dashboard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "dashboard/**"
+      - "data/**"
+      - "tools/**"
+      - "baseline-results.txt"
+      - ".github/workflows/deploy-dashboard.yml"
+  pull_request:
+    paths:
+      - "dashboard/**"
+      - "data/**"
+      - "tools/**"
+      - "baseline-results.txt"
+      - ".github/workflows/deploy-dashboard.yml"
+  workflow_dispatch:
+  schedule:
+    - cron: "23 */4 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('deploy-dashboard-{0}', github.ref) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: read
+      checks: read
+      actions: read
+    outputs:
+      generated_at: ${{ steps.meta.outputs.generated_at }}
+      github_status: ${{ steps.meta.outputs.github_status }}
+      baseline_summary: ${{ steps.meta.outputs.baseline_summary }}
+      index_sha256: ${{ steps.meta.outputs.index_sha256 }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
+
+      - name: Install TypeScript
+        run: npm install --global typescript@5.9.3
+
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: "1.22.12"
+          cache: false
+
+      - name: Toolchain versions
+        run: |
+          python3 --version
+          tsc --version
+          node --version
+          npm --version
+          javac -version
+          java -version
+          go version
+
+      - name: Install Python dependencies
+        run: pip install -r dashboard/requirements.txt
+
+      - name: Build data.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 dashboard/build_data.py --run-baselines
+
+      - name: Validate data.json
+        run: python3 dashboard/validate_data.py dashboard/public/data.json
+
+      - name: Pipeline tests
+        run: python3 -m unittest discover -s dashboard/tests -v
+
+      - name: Frontend install
+        working-directory: dashboard
+        run: npm ci
+
+      - name: Frontend typecheck
+        working-directory: dashboard
+        run: npm run typecheck
+
+      - name: Frontend tests
+        working-directory: dashboard
+        run: npm test
+
+      - name: Frontend build
+        working-directory: dashboard
+        run: npm run build
+
+      - name: Record build metadata
+        id: meta
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib
+
+          dist = pathlib.Path("dashboard/dist")
+          data = json.loads((dist / "data.json").read_text())
+          index = (dist / "index.html").read_bytes()
+          generated_at = data["generated_at"]
+          github_status = data["sources"]["github"]["status"]
+          summary = data["baselines"]["summary_line"] or "(none)"
+          summary = " ".join(summary.split())
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"generated_at={generated_at}\n")
+              out.write(f"github_status={github_status}\n")
+              out.write(f"baseline_summary={summary}\n")
+              out.write(f"index_sha256={hashlib.sha256(index).hexdigest()}\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
+              s.write("### Dashboard build\n\n")
+              s.write(f"- generated_at: `{generated_at}`\n")
+              s.write(f"- GitHub enrichment: `{github_status}`\n")
+              s.write(f"- Baseline summary: `{summary}`\n")
+              s.write(f"- Findings: {len(data['findings'])}\n")
+          PY
+
+      - name: Configure Pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dashboard/dist
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+  verify:
+    needs: [build, deploy]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions: {}
+    steps:
+      - name: Verify deployed page and data.json
+        env:
+          PAGE_URL: ${{ needs.deploy.outputs.page_url }}
+          EXPECTED_GENERATED_AT: ${{ needs.build.outputs.generated_at }}
+          EXPECTED_INDEX_SHA256: ${{ needs.build.outputs.index_sha256 }}
+          GITHUB_STATUS: ${{ needs.build.outputs.github_status }}
+          BASELINE_SUMMARY: ${{ needs.build.outputs.baseline_summary }}
+        run: |
+          set -euo pipefail
+          base="${PAGE_URL%/}"
+          for attempt in $(seq 1 20); do
+            bust="run=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${attempt}"
+            if curl -fsS --retry 3 --retry-all-errors -o index.html "$base/?$bust" \
+              && curl -fsS --retry 3 --retry-all-errors -o data.json "$base/data.json?$bust" \
+              && python3 - <<'PY'
+          import hashlib, json, os, sys
+
+          html = open("index.html", "rb").read()
+          problems = []
+          if b'id="root"' not in html:
+              problems.append('index.html has no id="root" element')
+          if hashlib.sha256(html).hexdigest() != os.environ["EXPECTED_INDEX_SHA256"]:
+              problems.append("index.html differs from this run's build")
+          try:
+              data = json.load(open("data.json"))
+          except ValueError as exc:
+              problems.append(f"data.json does not parse: {exc}")
+          else:
+              got = data.get("generated_at")
+              if got != os.environ["EXPECTED_GENERATED_AT"]:
+                  problems.append(f"generated_at {got!r} != {os.environ['EXPECTED_GENERATED_AT']!r}")
+              if len(data.get("findings", [])) != 14:
+                  problems.append(f"expected 14 findings, got {len(data.get('findings', []))}")
+          for p in problems:
+              print(p)
+          sys.exit(1 if problems else 0)
+          PY
+            then
+              echo "Verified on attempt $attempt"
+              {
+                echo "### Dashboard deployment"
+                echo
+                echo "- Page: $base/"
+                echo "- generated_at: \`$EXPECTED_GENERATED_AT\` (matches deployed data.json, 14 findings)"
+                echo "- GitHub enrichment: \`$GITHUB_STATUS\`"
+                echo "- Baseline summary: \`$BASELINE_SUMMARY\`"
+              } >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "Attempt $attempt: deployment not verified yet; retrying in 15s"
+            sleep 15
+          done
+          echo "::error::Deployed dashboard did not match this run's build"
+          exit 1
