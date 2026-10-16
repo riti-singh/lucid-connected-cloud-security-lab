@@ -1,0 +1,11 @@
+{
+  "status": "not_pinned",
+  "explanation": "No vulnerability ID, affected version, or fixed version is claimed until checked directly in OSV. Select an advisory and use tools/fetch_osv.py to capture JSON and timestamp. Never assign a CVE to synthetic code-level CWE findings.",
+  "candidate_ecosystems": [
+    "npm",
+    "PyPI",
+    "Maven",
+    "Go"
+  ],
+  "reference": "https://google.github.io/osv.dev/api/"
+}

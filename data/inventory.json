@@ -1,0 +1,37 @@
+{
+  "environment": "fictional connected-vehicle cloud illustration",
+  "repositories": [
+    {
+      "repo": "diagnostics-document-api",
+      "owner": "support-cloud",
+      "criticality": "medium",
+      "deployment": "hypothetical Kubernetes workload",
+      "source_control": "scenario GitLab (demo can use GitHub)",
+      "data_classification": "synthetic diagnostics"
+    },
+    {
+      "repo": "charging-session-api",
+      "owner": "connected-cloud",
+      "criticality": "high",
+      "deployment": "hypothetical Kubernetes workload",
+      "source_control": "scenario GitLab (demo can use GitHub)",
+      "data_classification": "synthetic charging/customer account"
+    },
+    {
+      "repo": "ota-release-gateway",
+      "owner": "release-platform",
+      "criticality": "high",
+      "deployment": "hypothetical Kubernetes workload",
+      "source_control": "scenario GitLab (demo can use GitHub)",
+      "data_classification": "synthetic staged OTA release metadata"
+    },
+    {
+      "repo": "telemetry-exporter",
+      "owner": "unassigned",
+      "criticality": "high",
+      "deployment": "hypothetical Kubernetes workload",
+      "source_control": "scenario GitLab (demo can use GitHub)",
+      "data_classification": "synthetic asset-location metadata"
+    }
+  ]
+}

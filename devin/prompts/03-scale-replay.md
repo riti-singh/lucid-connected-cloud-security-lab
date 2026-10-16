@@ -1,0 +1,2 @@
+# Second remediation using the playbook
+Read devin/playbooks/security-remediation-v1.md, devin/knowledge/*, and devin/skills/security-validation/SKILL.md. Choose a distinct non-Python repo, explain why, then carry out the playbook on its finding. Preserve baseline evidence, implement minimum viable safe fix, add regression proof, and prepare an unmerged PR with verification results. Do not silently change external interfaces. Escalate any ambiguity, and distinguish this toy service from a real automotive production release.

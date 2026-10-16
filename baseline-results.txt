@@ -1,0 +1,7 @@
+Python: FAIL; expected FAIL; MATCH
+TypeScript compile: PASS; expected PASS; MATCH
+TypeScript tests: FAIL; expected FAIL; MATCH
+Java compile: PASS; expected PASS; MATCH
+Java tests: FAIL; expected FAIL; MATCH
+Go: FAIL; expected FAIL; MATCH
+PASS all expected outcomes; baseline weaknesses remain

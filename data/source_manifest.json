@@ -1,0 +1,46 @@
+{
+  "customer_identity": "Lucid Motors only in hypothetical Cognition interview scenario",
+  "source_categories": [
+    {
+      "type": "scenario-provided",
+      "claims": [
+        "GitLab portfolio of ~2,000 repositories",
+        "Java, TypeScript, Python, Go",
+        "Jira queue",
+        "several scanners",
+        "SLAs",
+        "safe remediation evidence"
+      ],
+      "citation": "Onsite Guide - Deployed Engineer.pdf supplied by candidate"
+    },
+    {
+      "type": "public-source",
+      "claims": [
+        "OSV advisory schema/API",
+        "CISA KEV catalog"
+      ],
+      "urls": [
+        "https://ossf.github.io/osv-schema/",
+        "https://google.github.io/osv.dev/api/",
+        "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+      ]
+    },
+    {
+      "type": "inference",
+      "claims": [
+        "diagnostics API",
+        "charging session API",
+        "OTA approval service",
+        "telemetry log exporter"
+      ],
+      "disclaimer": "These systems are illustrative and are not asserted to exist at Lucid."
+    },
+    {
+      "type": "synthetic",
+      "claims": [
+        "all tickets, owners, priorities, timestamps, sample assets, rules and code"
+      ],
+      "disclaimer": "Created for demo; not real incidents or actual Lucid data."
+    }
+  ]
+}
