@@ -1,11 +1,126 @@
 {
-  "status": "not_pinned",
-  "explanation": "No vulnerability ID, affected version, or fixed version is claimed until checked directly in OSV. Select an advisory and use tools/fetch_osv.py to capture JSON and timestamp. Never assign a CVE to synthetic code-level CWE findings.",
-  "candidate_ecosystems": [
-    "npm",
-    "PyPI",
-    "Maven",
-    "Go"
+  "status": "pinned",
+  "synthetic": true,
+  "explanation": "Synthetic lab data. Each pin below is a deliberately vulnerable third-party dependency in a manifest. tools/run_baselines.py never installs these packages. Only the PyYAML pin has an executable scenario (see scenario), which tools/verify_dependency_scenario.py installs into throwaway venvs; the express and snakeyaml pins are manifest-only. Vulnerability IDs, aliases, CWEs, and fixed versions are copied from OSV records captured with tools/fetch_osv.py (see evidence paths and retrieved_utc). These dependency advisories are separate from and unrelated to the synthetic LAB-* code findings; never assign a CVE to a synthetic code-level CWE finding.",
+  "pins": [
+    {
+      "repository": "diagnostics-document-api",
+      "ecosystem": "PyPI",
+      "package": "PyYAML",
+      "pinned_version": "5.3.1",
+      "manifest": "repos/diagnostics-document-api/requirements.txt",
+      "query_evidence": "data/osv/pypi-PyYAML-5.3.1.query.json",
+      "query_retrieved_utc": "2026-10-16T16:26:38.340544+00:00",
+      "advisories": [
+        {
+          "id": "GHSA-8q59-q68h-6hv4",
+          "aliases": [
+            "CVE-2020-14343",
+            "PYSEC-2021-142"
+          ],
+          "cwe_ids": [
+            "CWE-20"
+          ],
+          "summary": "Improper Input Validation in PyYAML",
+          "fixed_version": "5.4",
+          "evidence": "data/osv/GHSA-8q59-q68h-6hv4.json",
+          "retrieved_utc": "2026-10-16T16:26:38.727390+00:00"
+        },
+        {
+          "id": "PYSEC-2021-142",
+          "aliases": [
+            "CVE-2020-14343",
+            "GHSA-8q59-q68h-6hv4"
+          ],
+          "cwe_ids": [],
+          "summary": null,
+          "fixed_version": "5.4",
+          "evidence": "data/osv/PYSEC-2021-142.json",
+          "retrieved_utc": "2026-10-16T16:26:38.897527+00:00"
+        }
+      ],
+      "scenario": {
+        "executable": true,
+        "module": "repos/diagnostics-document-api/bundle_manifest.py",
+        "tests": "repos/diagnostics-document-api/dependency_tests/",
+        "upgrade_manifest": "repos/diagnostics-document-api/requirements-upgrade.txt",
+        "upgrade_version": "5.4",
+        "verify_script": "tools/verify_dependency_scenario.py",
+        "evidence": "data/evidence/dependency-scenario/"
+      }
+    },
+    {
+      "repository": "charging-session-api",
+      "ecosystem": "npm",
+      "package": "express",
+      "pinned_version": "4.18.2",
+      "manifest": "repos/charging-session-api/package.json",
+      "query_evidence": "data/osv/npm-express-4.18.2.query.json",
+      "query_retrieved_utc": "2026-10-16T16:26:00.187663+00:00",
+      "advisories": [
+        {
+          "id": "GHSA-rv95-896h-c2vc",
+          "aliases": [
+            "CVE-2024-29041"
+          ],
+          "cwe_ids": [
+            "CWE-1286",
+            "CWE-601"
+          ],
+          "summary": "Express.js Open Redirect in malformed URLs",
+          "fixed_version": "4.19.2",
+          "evidence": "data/osv/GHSA-rv95-896h-c2vc.json",
+          "retrieved_utc": "2026-10-16T16:26:39.225773+00:00"
+        },
+        {
+          "id": "GHSA-qw6h-vgh9-j6wx",
+          "aliases": [
+            "CVE-2024-43796"
+          ],
+          "cwe_ids": [
+            "CWE-79"
+          ],
+          "summary": "express vulnerable to XSS via response.redirect()",
+          "fixed_version": "4.20.0",
+          "evidence": "data/osv/GHSA-qw6h-vgh9-j6wx.json",
+          "retrieved_utc": "2026-10-16T16:26:39.075603+00:00"
+        }
+      ],
+      "scenario": null
+    },
+    {
+      "repository": "ota-release-gateway",
+      "ecosystem": "Maven",
+      "package": "org.yaml:snakeyaml",
+      "pinned_version": "1.33",
+      "manifest": "repos/ota-release-gateway/pom.xml",
+      "query_evidence": "data/osv/maven-org.yaml-snakeyaml-1.33.query.json",
+      "query_retrieved_utc": "2026-10-16T16:26:38.560657+00:00",
+      "advisories": [
+        {
+          "id": "GHSA-mjmj-j48q-9wg2",
+          "aliases": [
+            "CVE-2022-1471"
+          ],
+          "cwe_ids": [
+            "CWE-20",
+            "CWE-502"
+          ],
+          "summary": "SnakeYaml Constructor Deserialization Remote Code Execution",
+          "fixed_version": "2.0",
+          "evidence": "data/osv/GHSA-mjmj-j48q-9wg2.json",
+          "retrieved_utc": "2026-10-16T16:26:39.392895+00:00"
+        }
+      ],
+      "scenario": null
+    }
+  ],
+  "not_pinned": [
+    {
+      "repository": "telemetry-exporter",
+      "ecosystem": "Go",
+      "reason": "go.mod intentionally left without dependencies; adding requires without go.sum would break go test."
+    }
   ],
   "reference": "https://google.github.io/osv.dev/api/"
 }

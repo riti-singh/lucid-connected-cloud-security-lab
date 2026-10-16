@@ -1,0 +1,19 @@
+{
+  "synthetic": true,
+  "actual_lucid_finding": false,
+  "disclaimer": "Synthetic lab evidence. Fictional scanner and rule; not a real Lucid finding.",
+  "tool": {"name": "synthetic-sast-nightly", "version": "2.3.0-lab"},
+  "scanned_at": "2026-10-13T03:00:00Z",
+  "results": [
+    {
+      "rule_id": "py-unbounded-file-read",
+      "message": "Whole-file read with no size bound on a file selected by request input.",
+      "file": "repos/diagnostics-document-api/documents.py",
+      "line": 6,
+      "cwe": "CWE-400",
+      "scanner_severity": "low",
+      "scanner_rationale": "Rule default: resource consumption in an internal-only service.",
+      "confidence": "high"
+    }
+  ]
+}

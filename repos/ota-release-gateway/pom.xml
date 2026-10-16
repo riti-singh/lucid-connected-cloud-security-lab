@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SYNTHETIC / FICTIONAL lab manifest. The snakeyaml pin is deliberately vulnerable (OSV evidence in data/osv/).
+  Not used by the javac baseline; dependencies are not resolved or executed by the lab; unrelated to the LAB-* code findings.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>example.connectedcloud</groupId>
+  <artifactId>ota-release-gateway</artifactId>
+  <version>0.0.0-synthetic</version>
+  <packaging>jar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.33</version>
+    </dependency>
+  </dependencies>
+</project>

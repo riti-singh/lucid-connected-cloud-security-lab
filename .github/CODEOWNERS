@@ -1,0 +1,21 @@
+# Synthetic / fictional connected-vehicle cloud lab. Not real Lucid code, data, or teams.
+# Team names in comments below are synthetic owning teams from data/inventory.json.
+# @riti-singh is the functional reviewer for every owned path.
+# If services are exported as standalone repos via tools/split_repos.py, this file is
+# not carried over: re-derive ownership for each exported repo from data/inventory.json.
+
+* @riti-singh
+
+# Synthetic owning team: support-cloud
+/repos/diagnostics-document-api/ @riti-singh
+
+# Synthetic owning team: connected-cloud
+/repos/charging-session-api/ @riti-singh
+
+# Synthetic owning team: release-platform
+/repos/ota-release-gateway/ @riti-singh
+
+# Owner "unassigned" in data/inventory.json and data/findings.json.
+# Per devin/knowledge/engineering-policies.md ("Unknown owner = escalation"), escalate
+# to a human to assign an owner. Do not invent one. Explicitly unowned until then.
+/repos/telemetry-exporter/
