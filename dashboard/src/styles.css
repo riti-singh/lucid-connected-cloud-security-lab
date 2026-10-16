@@ -30,8 +30,8 @@ p { margin: 0 0 6px; }
 .skip-link:focus { left: 8px; }
 .boot { padding: 40px; }
 
-.layout { display: flex; min-height: 100vh; }
-.sidebar { width: 232px; flex: none; background: var(--sidebar); border-right: 1px solid var(--border); padding: 16px 8px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+.layout { display: flex; min-height: 100vh; background: var(--sidebar); }
+.sidebar { width: 232px; flex: none; background: var(--sidebar); padding: 16px 8px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
 .sidebar-title { display: flex; gap: 10px; align-items: center; padding: 0 8px 16px; }
 .project-mark { width: 32px; height: 32px; border-radius: 4px; background: var(--brand); color: #fff; display: grid; place-items: center; font-weight: 700; }
 .project-name { font-weight: 600; font-size: 13px; word-break: break-word; }
@@ -41,7 +41,7 @@ p { margin: 0 0 6px; }
 .sidebar a:hover { background: #ebecf0; text-decoration: none; }
 .sidebar a.active { background: var(--inprog-bg); color: var(--inprog-fg); box-shadow: inset 2px 0 0 var(--brand); }
 
-.main-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.main-col { flex: 1; min-width: 0; background: var(--bg); border-left: 1px solid var(--border); display: flex; flex-direction: column; }
 .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 24px; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
 .topbar-left, .topbar-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .repo-link { font-weight: 600; color: var(--text); }
@@ -62,7 +62,7 @@ p { margin: 0 0 6px; }
 .btn-primary:hover { background: var(--brand-hover); }
 .btn:disabled { opacity: .6; cursor: default; }
 .link-button { background: none; border: 0; padding: 0; color: var(--link); cursor: pointer; font: inherit; }
-.link-button.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; font-weight: 600; }
+.link-button.mono { white-space: nowrap; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; font-weight: 600; }
 .link-button:hover { text-decoration: underline; }
 
 .lozenge { display: inline-block; padding: 0 4px; border-radius: 3px; font-size: 11px; font-weight: 700; text-transform: uppercase; line-height: 16px; white-space: nowrap; vertical-align: middle; }
