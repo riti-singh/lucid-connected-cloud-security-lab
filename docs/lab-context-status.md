@@ -1,6 +1,6 @@
 # Lab context status (final report)
 
-Synthetic / fictional lab. LAB-* and DEP-* tickets are not real Lucid findings. Status as of main `73b87ee` (2026-10-16).
+Synthetic / fictional lab. LAB-* and DEP-* tickets are not real Lucid findings. Status as of main `121aa96` (2026-10-16). Open fix PRs have latest main merged in, and CI was rerun on their current heads.
 
 ## Pull requests
 
@@ -13,12 +13,13 @@ Synthetic / fictional lab. LAB-* and DEP-* tickets are not real Lucid findings. 
 | [#6](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/6) | LAB-501..504 intake tickets with evidence | merged |
 | [#10](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/10) | `run_baselines.py` toolchain ERRORs and `--fixed <lang>`; `lab-validation` GitHub Actions workflow | merged |
 | [#11](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/11) | DEP-* dependency tickets; audit scopes advisory IDs by ticket prefix | merged |
+| [#12](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/12) | This report (first version) | merged |
 | [#1](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/1) | LAB-201 fix (TypeScript tenant scoping) | open, human review |
 | [#7](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/7) | LAB-301 fix (Java release-manager check) | open, human review |
 | [#8](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/8) | LAB-401 fix (Go log redaction) | open, blocked on owner assignment |
 | [#9](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/9) | LAB-101/102/103 fix (Python path containment, one root cause) | open, human review |
 
-## Validation on main `73b87ee`
+## Validation on main `73b87ee` (later commits on main are docs only)
 
 ```
 $ python3 tools/run_baselines.py; echo "exit=$?"
@@ -46,15 +47,16 @@ dependency-snakeyaml: DEP-301; source=synthetic-dependency-pin-osv-match; group 
 exit=0
 ```
 
-Remediation PRs, checked against main's runner (each PR's service directory applied onto main):
+Fix PRs, revalidated after merging main into each branch. CI derives `--fixed <lang>` from the changed service source files. Each CI run printed 6/6 `MATCH` plus the 14-finding audit PASS line.
 
-| Check | Exit |
-|---|---|
-| PR #1 `--fixed typescript` | 0 |
-| PR #7 `--fixed java` | 0 |
-| PR #8 `--fixed go` | 0 |
-| PR #9 `--fixed python` | 0 |
-| All four together, `--expect-fixed` (6/6 `PASS; expected PASS; MATCH`, "PASS all remediations verified") | 0 |
+| PR | Head | CI runner args | `lab-validation` |
+|---|---|---|---|
+| [#1](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/1) | `bf08dc1` | `--fixed typescript` | [success](https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941309127/job/117109353086) |
+| [#7](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/7) | `3dd5856` | `--fixed java` | [success](https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941253088/job/117109163079) |
+| [#8](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/8) | `aae7972` | `--fixed go` | [success](https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941260924/job/117109189400) |
+| [#9](https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/9) | `edbabd0` | `--fixed python` | [success](https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941262113/job/117109192771) |
+
+Locally, with all four PRs' service directories applied together onto main, `python3 tools/run_baselines.py --expect-fixed` printed 6/6 `PASS; expected PASS; MATCH` and "PASS all remediations verified" (exit 0).
 
 Negative audit checks (on #11's head): a LAB-* ticket with an advisory ID exits 1; a DEP-* ID without a `data/osv/` record exits 1. With PATH stripped of node, `run_baselines.py` prints `ERROR ... required toolchain not found on PATH: tsc` and exits 2 instead of a false MATCH.
 
@@ -84,6 +86,24 @@ Only PyYAML is installed and exercised (`bundle_manifest.py`, `tools/verify_depe
 
 SLA note: LAB-201 and LAB-301 (critical, reported 2026-10-01) were due 2026-10-08. LAB-101..103 and LAB-401 (high) were due 2026-10-15. All are past due on the synthetic calendar.
 
+## Sessions
+
+| Session | Role | PR |
+|---|---|---|
+| [0a3acf3d](https://app.devin.ai/sessions/0a3acf3d3c6246d7b907e705aa96e670) | Coordinator; integration, validation, this report | #5, #12 |
+| [274b2e98](https://app.devin.ai/sessions/274b2e98c78a4e538521527e0e1aa568) | LAB-201 remediation | #1 |
+| [eefa585e](https://app.devin.ai/sessions/eefa585ecfa44f6fbd50cfdaa0e5cde8) | Policy corpus | #2 |
+| [0b1da597](https://app.devin.ai/sessions/0b1da5974649439e8923bcbfe25d31b6) | Service context docs, CODEOWNERS | #3 |
+| [c0b2a13e](https://app.devin.ai/sessions/c0b2a13ec74545f483f4deb25a691f00) | OSV evidence, PyYAML scenario | #4 |
+| [307dfd46](https://app.devin.ai/sessions/307dfd4633ac4e298224ca8f49fb916d) | LAB-501..504 enrichment | #6 |
+| [f1993936](https://app.devin.ai/sessions/f1993936c07440fa9000c2cd8bd3ee29) | LAB-301 remediation | #7 |
+| [0f0dc5c2](https://app.devin.ai/sessions/0f0dc5c258304212b770e18474293481) | LAB-401 remediation | #8 |
+| [b5a9af4d](https://app.devin.ai/sessions/b5a9af4d306f457bb89d25c0f08840c9) | LAB-101/102/103 remediation | #9 |
+| [72f30a5b](https://app.devin.ai/sessions/72f30a5be47d4f5eaeab8d70c0018ff0) | CI/validation | #10 |
+| [a0569ffb](https://app.devin.ai/sessions/a0569ffb79bc468caf2139de6085ebc3) | DEP-* tickets | #11 |
+
+PR dependencies: #6 was built on #3; #11 on #4 and #6; #10's `--fixed` derivation ignores the manifests added in #4. Fix PRs #1, #7, #8 and #9 touch disjoint service directories and can merge in any order. Merging one makes main's push CI report MISMATCH for that language (see risks).
+
 ## Reusable Devin capabilities and evidence of use
 
 | Capability | Where | Evidence of use |
@@ -99,7 +119,6 @@ SLA note: LAB-201 and LAB-301 (critical, reported 2026-10-01) were due 2026-10-0
 
 - telemetry-exporter has no owner. PR #8 cannot merge until a human assigns one. Whether voltage counts as sensitive is still open.
 - After any remediation PR merges, push-to-main CI runs in baseline mode and reports MISMATCH for that language. `expected_outcomes` must be updated in the same change, or the workflow taught which languages are fixed.
-- PRs #1 and #7–#9 were opened before the workflow existed. CI runs on them only after a new push or reopen.
 - PR #9 edits `documents.py` at the service root because diagnostics-document-api has no `src/`. TOCTOU and hard-link cases are out of scope.
 - express and snakeyaml exposure is manifest-only. Dependency checks used OSV queries on the direct packages only; transitive dependencies were not checked.
 - DEP-* `cwe` is a list (OSV `cwe_ids`) while LAB-* `cwe` is a string. DEP-* `reported_at` is the OSV retrieval date.
