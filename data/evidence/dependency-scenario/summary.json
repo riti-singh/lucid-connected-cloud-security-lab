@@ -1,0 +1,82 @@
+{
+  "synthetic": true,
+  "repository": "diagnostics-document-api",
+  "started_utc": "2026-10-16T16:55:25.864872+00:00",
+  "python": "3.10.12",
+  "scanner_requirements": [
+    "pip==25.2",
+    "pip-audit==2.10.1"
+  ],
+  "build_constraints": "Cython<3",
+  "expected_advisory_ids": [
+    "GHSA-8q59-q68h-6hv4",
+    "PYSEC-2021-142"
+  ],
+  "phases": {
+    "before": {
+      "manifest": "repos/diagnostics-document-api/requirements.txt",
+      "installed": "PyYAML==5.3.1",
+      "scanner_exit": 1,
+      "scanner_ids_and_aliases": [
+        "CVE-2020-14343",
+        "GHSA-8q59-q68h-6hv4",
+        "PYSEC-2021-142"
+      ],
+      "tests_exit": 0,
+      "evidence": "data/evidence/dependency-scenario/before"
+    },
+    "after": {
+      "manifest": "repos/diagnostics-document-api/requirements-upgrade.txt",
+      "installed": "PyYAML==5.4",
+      "scanner_exit": 0,
+      "scanner_ids_and_aliases": [],
+      "tests_exit": 0,
+      "evidence": "data/evidence/dependency-scenario/after"
+    }
+  },
+  "scanner_version": "pip-audit 2.10.1",
+  "finished_utc": "2026-10-16T16:55:34.828290+00:00",
+  "checks": [
+    {
+      "check": "before manifest matches recorded pin",
+      "passed": true,
+      "detail": "('PyYAML', '5.3.1') vs ('PyYAML', '5.3.1')"
+    },
+    {
+      "check": "upgrade manifest pins the OSV fixed version",
+      "passed": true,
+      "detail": "5.4 vs ['5.4']"
+    },
+    {
+      "check": "before: installed version",
+      "passed": true,
+      "detail": "PyYAML 5.3.1"
+    },
+    {
+      "check": "before: scanner reports recorded advisories",
+      "passed": true,
+      "detail": "missing=[] scanner_exit=1"
+    },
+    {
+      "check": "before: scenario tests pass",
+      "passed": true,
+      "detail": "exit=0"
+    },
+    {
+      "check": "after: installed version",
+      "passed": true,
+      "detail": "PyYAML 5.4"
+    },
+    {
+      "check": "after: recorded advisories absent",
+      "passed": true,
+      "detail": "present=[] scanner_exit=0"
+    },
+    {
+      "check": "after: scenario tests pass",
+      "passed": true,
+      "detail": "exit=0"
+    }
+  ],
+  "result": "PASS"
+}

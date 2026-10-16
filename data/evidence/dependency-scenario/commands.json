@@ -1,0 +1,190 @@
+[
+  {
+    "command": "/usr/bin/python3 -m venv $WORKDIR/scanner",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:25.864898+00:00",
+    "finished_utc": "2026-10-16T16:55:27.815355+00:00",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/scanner/bin/python -m pip install -q --disable-pip-version-check pip==25.2 pip-audit==2.10.1",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:27.815398+00:00",
+    "finished_utc": "2026-10-16T16:55:31.241170+00:00",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/scanner/bin/pip-audit --version",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:31.241220+00:00",
+    "finished_utc": "2026-10-16T16:55:31.534225+00:00",
+    "returncode": 0,
+    "stdout": "pip-audit 2.10.1\n",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/scanner/bin/python -m pip freeze --all",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:31.534272+00:00",
+    "finished_utc": "2026-10-16T16:55:31.682514+00:00",
+    "returncode": 0,
+    "stdout": "boolean.py==5.0\nCacheControl==0.14.4\ncertifi==2026.7.22\ncharset-normalizer==3.5.2\ncyclonedx-python-lib==11.12.0\ndefusedxml==0.7.1\nfilelock==4.1.0\nidna==3.20\nlicense-expression==30.4.4\nmarkdown-it-py==4.2.0\nmdurl==0.1.2\nmsgpack==1.2.3\npackageurl-python==0.17.6\npackaging==26.3\npip==25.2\npip-requirements-parser==32.0.1\npip_api==0.0.35\npip_audit==2.10.1\nplatformdirs==4.12.4\npy-serializable==2.1.0\nPygments==2.21.0\npyparsing==3.3.3\nrequests==2.34.2\nrich==15.0.0\nsetuptools==59.6.0\nsortedcontainers==2.4.0\ntomli==2.5.0\ntomli_w==1.2.0\ntyping_extensions==4.16.0\nurllib3==2.8.0\n",
+    "stderr": ""
+  },
+  {
+    "command": "/usr/bin/python3 -m venv --without-pip $WORKDIR/before",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:31.682779+00:00",
+    "finished_utc": "2026-10-16T16:55:31.706449+00:00",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/scanner/bin/python -m pip --python $WORKDIR/before/bin/python install -q --disable-pip-version-check -r $REPO/repos/diagnostics-document-api/requirements.txt",
+    "cwd": "$REPO",
+    "env": {
+      "PIP_CONSTRAINT": "$WORKDIR/build-constraints.txt"
+    },
+    "started_utc": "2026-10-16T16:55:31.706479+00:00",
+    "finished_utc": "2026-10-16T16:55:32.208891+00:00",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/scanner/bin/python -m pip --python $WORKDIR/before/bin/python freeze --all",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:32.208933+00:00",
+    "finished_utc": "2026-10-16T16:55:32.488779+00:00",
+    "returncode": 0,
+    "stdout": "PyYAML==5.3.1\n",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/before/bin/python -c import importlib.metadata as m; print(m.version('PyYAML'))",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:32.488925+00:00",
+    "finished_utc": "2026-10-16T16:55:32.524627+00:00",
+    "returncode": 0,
+    "stdout": "5.3.1\n",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/before/bin/python -c import sysconfig; print(sysconfig.get_paths()['purelib'])",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:32.524642+00:00",
+    "finished_utc": "2026-10-16T16:55:32.534430+00:00",
+    "returncode": 0,
+    "stdout": "$WORKDIR/before/lib/python3.10/site-packages\n",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/scanner/bin/pip-audit --path $WORKDIR/before/lib/python3.10/site-packages --vulnerability-service osv --format json --output $REPO/data/evidence/dependency-scenario/before/pip-audit.json --progress-spinner off",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:32.534470+00:00",
+    "finished_utc": "2026-10-16T16:55:33.248009+00:00",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Found 2 known vulnerabilities in 1 package\n"
+  },
+  {
+    "command": "$WORKDIR/before/bin/python -m unittest discover -s dependency_tests -v",
+    "cwd": "$REPO/repos/diagnostics-document-api",
+    "env": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "started_utc": "2026-10-16T16:55:33.248147+00:00",
+    "finished_utc": "2026-10-16T16:55:33.284317+00:00",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "test_parses_valid_manifest (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_invalid_artifact_count (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_malformed_yaml (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_missing_fields (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_non_mapping (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_unknown_tag (test_bundle_manifest.BundleManifestTests) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n"
+  },
+  {
+    "command": "/usr/bin/python3 -m venv --without-pip $WORKDIR/after",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:33.284540+00:00",
+    "finished_utc": "2026-10-16T16:55:33.310828+00:00",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/scanner/bin/python -m pip --python $WORKDIR/after/bin/python install -q --disable-pip-version-check -r $REPO/repos/diagnostics-document-api/requirements-upgrade.txt",
+    "cwd": "$REPO",
+    "env": {
+      "PIP_CONSTRAINT": "$WORKDIR/build-constraints.txt"
+    },
+    "started_utc": "2026-10-16T16:55:33.310855+00:00",
+    "finished_utc": "2026-10-16T16:55:33.822100+00:00",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/scanner/bin/python -m pip --python $WORKDIR/after/bin/python freeze --all",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:33.822154+00:00",
+    "finished_utc": "2026-10-16T16:55:34.101940+00:00",
+    "returncode": 0,
+    "stdout": "PyYAML==5.4\n",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/after/bin/python -c import importlib.metadata as m; print(m.version('PyYAML'))",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:34.102088+00:00",
+    "finished_utc": "2026-10-16T16:55:34.133353+00:00",
+    "returncode": 0,
+    "stdout": "5.4\n",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/after/bin/python -c import sysconfig; print(sysconfig.get_paths()['purelib'])",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:34.133367+00:00",
+    "finished_utc": "2026-10-16T16:55:34.142035+00:00",
+    "returncode": 0,
+    "stdout": "$WORKDIR/after/lib/python3.10/site-packages\n",
+    "stderr": ""
+  },
+  {
+    "command": "$WORKDIR/scanner/bin/pip-audit --path $WORKDIR/after/lib/python3.10/site-packages --vulnerability-service osv --format json --output $REPO/data/evidence/dependency-scenario/after/pip-audit.json --progress-spinner off",
+    "cwd": "$REPO",
+    "env": {},
+    "started_utc": "2026-10-16T16:55:34.142077+00:00",
+    "finished_utc": "2026-10-16T16:55:34.791689+00:00",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "No known vulnerabilities found\n"
+  },
+  {
+    "command": "$WORKDIR/after/bin/python -m unittest discover -s dependency_tests -v",
+    "cwd": "$REPO/repos/diagnostics-document-api",
+    "env": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "started_utc": "2026-10-16T16:55:34.791828+00:00",
+    "finished_utc": "2026-10-16T16:55:34.828112+00:00",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "test_parses_valid_manifest (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_invalid_artifact_count (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_malformed_yaml (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_missing_fields (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_non_mapping (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_unknown_tag (test_bundle_manifest.BundleManifestTests) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n"
+  }
+]

@@ -38,8 +38,9 @@ The initial security tests are designed to FAIL while functional tests PASS. The
 - `data/findings.json`: entirely synthetic Jira-like tickets, never real Lucid vulnerabilities.
 - `data/inventory.json`: fictional ownership and criticality metadata.
 - `data/source_manifest.json`: exact category/sourcing assumptions.
-- `data/advisory_candidates.json`: candidate ecosystem examples only; no pinned CVE claims made without a fetched OSV record.
+- `data/advisory_candidates.json`: deliberately vulnerable, synthetic third-party dependency pins backed by OSV records in `data/osv/`: PyYAML 5.3.1 in diagnostics-document-api (GHSA-8q59-q68h-6hv4 / PYSEC-2021-142, CVE-2020-14343), express 4.18.2 in charging-session-api (GHSA-rv95-896h-c2vc, GHSA-qw6h-vgh9-j6wx), and snakeyaml 1.33 in ota-release-gateway (GHSA-mjmj-j48q-9wg2). They are unrelated to the LAB-* code findings, which carry no CVEs. See `docs/synthetic-dependency-scenario.md`.
 - `tools/fetch_osv.py`: fetches a current public OSV advisory by explicit advisory ID or queries a package/version, stores source JSON locally for a reproducible evidence trail. Requires network access and deliberate selection.
+- `tools/verify_dependency_scenario.py`: installs the PyYAML pin and then its OSV fixed version into throwaway venvs, scans each with pinned pip-audit, runs `repos/diagnostics-document-api/dependency_tests/`, and writes evidence to `data/evidence/dependency-scenario/`. Requires network access.
 
 ## Safety and engineering scope
 All fixtures are synthetic. No network server is started by the test commands. No vehicle control/ECU/production OTA systems are involved. There is no deployed cloud stack. Security tests are defensive and local. Do not auto-merge PRs. A passing unit test suite is not proof of production safety.

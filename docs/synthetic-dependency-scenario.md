@@ -16,16 +16,42 @@ Three services carry a minimal dependency manifest that deliberately pins a real
 
 ## Scope and limits
 
-- The pins are deliberate and synthetic. The lab never installs, resolves, imports, or executes these packages. No source file references them, and `tools/run_baselines.py` does not read the manifests (`tsc`, `javac`, and `unittest` run as before).
+- The pins are deliberate and synthetic. `tools/run_baselines.py` never installs these packages or reads the manifests (`tsc`, `javac`, and `unittest discover -s tests` run as before, with or without PyYAML installed).
+- Only the PyYAML pin is exercised (see below). The express and snakeyaml pins are manifest-only: no source file imports them, and nothing installs or resolves them.
 - `package.json` has no `type` field and no scripts, so it does not change TypeScript compile or Node runtime behavior. No lockfile or `node_modules/` is committed.
 - These dependency advisories are separate from and unrelated to the LAB-* code findings. Their CWEs were chosen not to overlap the code findings. No CVE is assigned to any LAB-* finding.
 - Only the direct package was queried. Transitive dependencies were not evaluated.
 - The evidence is a point-in-time snapshot. OSV can add or amend records later.
 - `repos/telemetry-exporter/go.mod` was intentionally left without dependencies. Adding `require` lines without a matching `go.sum` would break `go test`, which would make the Go baseline fail for the wrong reason.
 
+## Executable scenario: PyYAML in diagnostics-document-api
+
+- `repos/diagnostics-document-api/bundle_manifest.py` parses a synthetic diagnostic bundle manifest with `yaml.safe_load`. The baseline tests do not import it.
+- `repos/diagnostics-document-api/dependency_tests/` holds the scenario tests. The baseline only discovers `tests/`, so these never run there.
+- `repos/diagnostics-document-api/requirements-upgrade.txt` pins `PyYAML==5.4`, the OSV fixed version. `requirements.txt` keeps the vulnerable pin as lab state. The upgrade is only demonstrated, not applied.
+
+`tools/verify_dependency_scenario.py` needs network access and Python 3.10+ with `venv`. It:
+
+1. Creates a scanner venv in a temp dir with `pip==25.2` and `pip-audit==2.10.1`.
+2. Before: installs `requirements.txt` into a separate `--without-pip` venv. It then runs `pip-audit --path <site-packages> --vulnerability-service osv` and expects every advisory ID recorded for this pin in `data/advisory_candidates.json` to appear. Finally it runs `python -m unittest discover -s dependency_tests -v` and expects it to pass.
+3. After: repeats step 2 with `requirements-upgrade.txt`. It expects none of those advisory IDs, and the tests must still pass. It also checks that the upgrade pin equals the OSV `fixed_version`.
+4. Writes evidence to `data/evidence/dependency-scenario/`, replacing any previous run:
+   - `summary.json`: checks, scanner version, UTC timestamps, and result.
+   - `commands.json`: exact commands, environment overrides, exit codes, timestamps, and output. Temp paths are shown as `$WORKDIR` and repo paths as `$REPO`.
+   - `scanner-freeze.txt`.
+   - `before/` and `after/`: raw `pip-audit.json`, `pip-freeze.txt`, and `tests.txt` for each phase.
+5. Deletes the temp dir (`--keep-workdir` keeps it) and exits non-zero if any check fails.
+
+Nothing is installed globally or into the repo. PyYAML 5.x sdists do not build with Cython 3, so the installs set `PIP_CONSTRAINT` to a temp file containing `Cython<3`. That constraint applies only to the isolated build environment.
+
+```sh
+python3 tools/verify_dependency_scenario.py ; echo "exit=$?"
+python3 tools/run_baselines.py ; echo "exit=$?"   # unaffected
+```
+
 ## Evidence files
 
-`data/osv/` holds raw `tools/fetch_osv.py` output, including its `retrieved_utc` field:
+`data/osv/` holds the raw `tools/fetch_osv.py` output, including its `retrieved_utc` field:
 
 - `<ecosystem>-<package>-<version>.query.json`: the package/version query (`/v1/query`). For Maven, `:` in the coordinate is written as `-`.
 - `<ADVISORY_ID>.json`: the full advisory record (`/v1/vulns/<id>`).

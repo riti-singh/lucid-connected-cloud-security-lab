@@ -1,7 +1,7 @@
 {
   "status": "pinned",
   "synthetic": true,
-  "explanation": "Synthetic lab data. Each pin below is a deliberately vulnerable third-party dependency in a manifest that the lab never installs or executes. Vulnerability IDs, aliases, CWEs, and fixed versions are copied from OSV records captured with tools/fetch_osv.py (see evidence paths and retrieved_utc). These dependency advisories are separate from and unrelated to the synthetic LAB-* code findings; never assign a CVE to a synthetic code-level CWE finding.",
+  "explanation": "Synthetic lab data. Each pin below is a deliberately vulnerable third-party dependency in a manifest. tools/run_baselines.py never installs these packages. Only the PyYAML pin has an executable scenario (see scenario), which tools/verify_dependency_scenario.py installs into throwaway venvs; the express and snakeyaml pins are manifest-only. Vulnerability IDs, aliases, CWEs, and fixed versions are copied from OSV records captured with tools/fetch_osv.py (see evidence paths and retrieved_utc). These dependency advisories are separate from and unrelated to the synthetic LAB-* code findings; never assign a CVE to a synthetic code-level CWE finding.",
   "pins": [
     {
       "repository": "diagnostics-document-api",
@@ -38,7 +38,16 @@
           "evidence": "data/osv/PYSEC-2021-142.json",
           "retrieved_utc": "2026-10-16T16:26:38.897527+00:00"
         }
-      ]
+      ],
+      "scenario": {
+        "executable": true,
+        "module": "repos/diagnostics-document-api/bundle_manifest.py",
+        "tests": "repos/diagnostics-document-api/dependency_tests/",
+        "upgrade_manifest": "repos/diagnostics-document-api/requirements-upgrade.txt",
+        "upgrade_version": "5.4",
+        "verify_script": "tools/verify_dependency_scenario.py",
+        "evidence": "data/evidence/dependency-scenario/"
+      }
     },
     {
       "repository": "charging-session-api",
@@ -76,7 +85,8 @@
           "evidence": "data/osv/GHSA-qw6h-vgh9-j6wx.json",
           "retrieved_utc": "2026-10-16T16:26:39.075603+00:00"
         }
-      ]
+      ],
+      "scenario": null
     },
     {
       "repository": "ota-release-gateway",
@@ -101,7 +111,8 @@
           "evidence": "data/osv/GHSA-mjmj-j48q-9wg2.json",
           "retrieved_utc": "2026-10-16T16:26:39.392895+00:00"
         }
-      ]
+      ],
+      "scenario": null
     }
   ],
   "not_pinned": [
