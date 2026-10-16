@@ -42,7 +42,15 @@ Three services carry a minimal dependency manifest that deliberately pins a real
    - `before/` and `after/`: raw `pip-audit.json`, `pip-freeze.txt`, and `tests.txt` for each phase.
 5. Deletes the temp dir (`--keep-workdir` keeps it) and exits non-zero if any check fails.
 
-Nothing is installed globally or into the repo. PyYAML 5.x sdists do not build with Cython 3, so the installs set `PIP_CONSTRAINT` to a temp file containing `Cython<3`. That constraint applies only to the isolated build environment.
+Nothing is installed globally or into the repo.
+
+### Build constraint
+
+PyYAML 5.4 is the exact OSV fixed version. It has no prebuilt wheel for Python 3.10, and its sdist fails to build with Cython 3. The script therefore sets `PIP_CONSTRAINT` to a temp file containing `Cython<3` for both installs. That constraint affects only the build of the throwaway venv. It does not change the pinned versions or anything outside the temp dir.
+
+### Reachability
+
+The scan is version-based: pip-audit matches the installed PyYAML version against OSV. GHSA-8q59-q68h-6hv4 / PYSEC-2021-142 is reported because 5.3.1 falls inside the affected range. According to the OSV text, the flaw is reached through `full_load` / `FullLoader`. `bundle_manifest.py` uses `yaml.safe_load`, which is not that loader. This is a dependency-hygiene finding (a vulnerable version is pinned), not a demonstrated exploitable path. The lab contains no exploit code.
 
 ```sh
 python3 tools/verify_dependency_scenario.py ; echo "exit=$?"
