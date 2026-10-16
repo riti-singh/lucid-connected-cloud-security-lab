@@ -1,0 +1,3 @@
+# SYNTHETIC / FICTIONAL lab manifest. This pin is deliberately vulnerable (OSV evidence in data/osv/).
+# Not installed or imported by the lab; unrelated to the LAB-* code findings.
+PyYAML==5.3.1
