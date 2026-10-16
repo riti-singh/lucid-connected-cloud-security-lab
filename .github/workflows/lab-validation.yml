@@ -1,0 +1,110 @@
+# Runs the lab's baseline runner, findings audit, and triage summary.
+#
+# Default mode expects every intentional weakness to still be present, so a
+# remediation PR would MISMATCH. On pull_request the runner instead gets one
+# `--fixed <lang>` per service whose source files the PR changes (diff against
+# the merge base). Only files with that service's language extension count, so
+# docs, CONTRIBUTING, and dependency manifests (package.json, pom.xml,
+# requirements.txt, go.mod) do not mark a language as fixed:
+#
+#   repos/diagnostics-document-api/**.py   -> --fixed python
+#   repos/charging-session-api/**.ts       -> --fixed typescript
+#   repos/ota-release-gateway/**.java      -> --fixed java
+#   repos/telemetry-exporter/**.go         -> --fixed go
+#
+# Pushes to main always run default (baseline) mode.
+name: lab-validation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lab-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+
+      - name: Install TypeScript
+        run: npm install --global typescript@5.9.3
+
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: "1.22.12"
+          cache: false
+
+      - name: Toolchain versions
+        run: |
+          python3 --version
+          tsc --version
+          node --version
+          javac -version
+          java -version
+          go version
+
+      - name: Derive --fixed languages from changed services
+        id: fixed
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          changed=$(git diff --name-only "$BASE_SHA...$HEAD_SHA")
+          args=""
+          while read -r svc ext lang; do
+            if printf '%s\n' "$changed" | awk -v p="repos/$svc/" -v e=".$ext" 'index($0, p) == 1 && substr($0, length($0) - length(e) + 1) == e { f = 1 } END { exit !f }'; then
+              args="$args --fixed $lang"
+            fi
+          done <<'MAP'
+          diagnostics-document-api py python
+          charging-session-api ts typescript
+          ota-release-gateway java java
+          telemetry-exporter go go
+          MAP
+          args="${args# }"
+          echo "Changed files:"
+          sed 's/^/  /' <<<"$changed"
+          echo "Runner args: ${args:-<none, baseline mode>}"
+          echo "args=$args" >> "$GITHUB_OUTPUT"
+          echo "run_baselines.py args: \`${args:-<none, baseline mode>}\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Baseline runner
+        env:
+          FIXED_ARGS: ${{ steps.fixed.outputs.args }}
+        run: |
+          # shellcheck disable=SC2086 # FIXED_ARGS is a list of --fixed <lang> words from the step above
+          python3 tools/run_baselines.py $FIXED_ARGS
+
+      - name: Findings audit
+        if: success() || failure()
+        run: python3 tools/audit_findings.py
+
+      - name: Triage summary
+        if: success() || failure()
+        run: python3 tools/triage.py

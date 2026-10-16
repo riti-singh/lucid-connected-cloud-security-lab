@@ -1,0 +1,28 @@
+{
+  "synthetic": true,
+  "actual_lucid_finding": false,
+  "disclaimer": "Synthetic lab evidence in a SARIF-like shape. Fictional scanner and rule; not a real Lucid finding.",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {"driver": {"name": "synthetic-sast-nightly", "version": "2.3.0-lab", "rules": [
+        {"id": "java-taint-os-command", "shortDescription": {"text": "Caller-controlled data reaches an OS process execution sink"}, "properties": {"cwe": "CWE-78", "scanner_severity": "critical"}}
+      ]}},
+      "invocation": {"startTimeUtc": "2026-10-09T03:00:00Z", "properties": {"scanned_revision": "not recorded by importer"}},
+      "results": [
+        {
+          "ruleId": "java-taint-os-command",
+          "level": "error",
+          "message": {"text": "Release.stage() from the approval request flows into java.lang.Runtime.exec(String) without neutralization."},
+          "locations": [{"physicalLocation": {"artifactLocation": {"uri": "repos/ota-release-gateway/src/OtaReleaseService.java"}, "region": {"startLine": 7}}}],
+          "codeFlows": [{"threadFlows": [{"locations": [
+            {"location": {"physicalLocation": {"artifactLocation": {"uri": "repos/ota-release-gateway/src/OtaReleaseService.java"}, "region": {"startLine": 5}}, "message": {"text": "source: parameter 'release' of approve(Operator, Release)"}}},
+            {"location": {"physicalLocation": {"artifactLocation": {"uri": "repos/ota-release-gateway/src/OtaReleaseService.java"}, "region": {"startLine": 7}}, "message": {"text": "propagation: release.stage()"}}},
+            {"location": {"physicalLocation": {"artifactLocation": {"uri": "repos/ota-release-gateway/src/OtaReleaseService.java"}, "region": {"startLine": 7}}, "message": {"text": "sink: java.lang.Runtime.exec(String) (stage-specific rollout script)"}}}
+          ]}]}],
+          "properties": {"confidence": "medium"}
+        }
+      ]
+    }
+  ]
+}

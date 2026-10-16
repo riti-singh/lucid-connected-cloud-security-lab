@@ -1,0 +1,4 @@
+# SYNTHETIC / FICTIONAL lab manifest. This pin is deliberately vulnerable (OSV evidence in data/osv/).
+# Not installed by tools/run_baselines.py. tools/verify_dependency_scenario.py installs it into a throwaway venv.
+# Unrelated to the LAB-* code findings.
+PyYAML==5.3.1

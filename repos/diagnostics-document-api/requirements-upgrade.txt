@@ -1,0 +1,4 @@
+# SYNTHETIC / FICTIONAL lab manifest. Upgrade target for the deliberately vulnerable pin in requirements.txt:
+# the fixed version reported by OSV for GHSA-8q59-q68h-6hv4 / PYSEC-2021-142.
+# Used only by tools/verify_dependency_scenario.py; requirements.txt keeps the vulnerable pin as lab state.
+PyYAML==5.4
