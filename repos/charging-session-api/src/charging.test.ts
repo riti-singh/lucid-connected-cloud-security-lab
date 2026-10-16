@@ -9,4 +9,15 @@ test("same-account-access", () => {
 test("cross-account-denied", () => {
   assert(getChargingSession({accountId:"fleet-alpha"}, "session-b") === undefined, "cross-account record was exposed");
 });
+test("nonexistent-session-denied", () => {
+  assert(getChargingSession({accountId:"fleet-alpha"}, "session-missing") === undefined, "nonexistent session returned a record");
+});
+test("unknown-account-denied", () => {
+  assert(getChargingSession({accountId:"fleet-gamma"}, "session-a") === undefined, "unknown account read session-a");
+  assert(getChargingSession({accountId:"fleet-gamma"}, "session-b") === undefined, "unknown account read session-b");
+});
+test("empty-account-denied", () => {
+  assert(getChargingSession({accountId:""}, "session-a") === undefined, "empty account read session-a");
+  assert(getChargingSession({accountId:""}, "session-b") === undefined, "empty account read session-b");
+});
 if (fails) { throw new Error(`${fails} test(s) failed`); }
