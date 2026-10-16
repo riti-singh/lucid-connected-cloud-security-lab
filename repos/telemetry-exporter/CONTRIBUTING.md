@@ -12,7 +12,7 @@ cd repos/telemetry-exporter && go test ./... -v
 In a standalone export of this folder, run `go test ./... -v` from the folder root. Requires Go 1.22+. Some tests are expected to fail at the lab baseline; `python3 tools/run_baselines.py` (lab workspace root) checks results against the expected baseline.
 
 ## Ownership
-Owner is unassigned (see `CODEOWNERS`). Escalate to a human for an owner before requesting review.
+Owner is unassigned in `data/inventory.json`, and this path is explicitly unowned in the monorepo root `.github/CODEOWNERS`. Escalate to a human for an owner before requesting review.
 
 ## Norms
 - Open a PR; do not merge your own PR. A human reviewer approves and merges.

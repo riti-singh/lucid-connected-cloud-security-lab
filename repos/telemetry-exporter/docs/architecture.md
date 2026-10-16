@@ -23,4 +23,4 @@ No caller authentication is in scope; the exporter is invoked in-process. Loggin
 - A future telemetry sink (not implemented).
 
 ## Data classification
-Synthetic asset-location metadata (`data/inventory.json`). Owner: unassigned; see `CODEOWNERS`.
+Synthetic asset-location metadata (`data/inventory.json`). Owner: unassigned; see the root `.github/CODEOWNERS`.

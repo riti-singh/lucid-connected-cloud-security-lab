@@ -19,4 +19,6 @@ interface Caller  { accountId: string }
 
 **Returns:** a `Session`, or `undefined` when no session matches.
 
-**Contract:** a caller must not read another account's records.
+**Contract:**
+- A caller must not read another account's records.
+- Returns `undefined` when the session is not visible to the caller's account, the same as when it is not found.

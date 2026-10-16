@@ -19,4 +19,7 @@ record Release(String id, String stage, boolean approved)
 
 **Returns:** a new `Release` with the same `id` and `stage` and `approved == true`. The input record is not modified.
 
-**Contract:** only release managers may approve. Approval does not grant vehicle access.
+**Contract:**
+- Only release managers may approve.
+- Throws `SecurityException` when the actor's role is not `"release-manager"`.
+- Approval does not grant vehicle access.

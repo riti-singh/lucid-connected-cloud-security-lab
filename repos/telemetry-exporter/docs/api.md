@@ -18,4 +18,6 @@ type Event struct { AssetID string; LocationZone string; Voltage float64 }
 
 **Returns:** `"accepted"`.
 
-**Contract:** output written to `w` is operational logging and must not expose vehicle-linked identifiers or location fields.
+**Contract:**
+- Output written to `w` is operational logging and must not expose vehicle-linked identifiers or location fields.
+- Log output must not contain the event's `AssetID` or `LocationZone` values.

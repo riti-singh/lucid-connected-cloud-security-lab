@@ -11,6 +11,9 @@ cd repos/charging-session-api && tsc -p tsconfig.json && node dist/charging.test
 
 In a standalone export of this folder, run the part after the first `&&` from the folder root. Requires `tsc` and Node.js. Confirm the compile step succeeds and `dist/` exists before reading test results. Some tests are expected to fail at the lab baseline; `python3 tools/run_baselines.py` (lab workspace root) checks results against the expected baseline.
 
+## Ownership
+Synthetic owning team: `connected-cloud` (`data/inventory.json`). Review routing is defined in the monorepo root `.github/CODEOWNERS`.
+
 ## Norms
 - Open a PR; do not merge your own PR. A human reviewer approves and merges.
 - Record test output before and after a code change in the PR.

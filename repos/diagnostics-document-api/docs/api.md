@@ -15,4 +15,5 @@ Python module `documents.py` (no HTTP layer is implemented).
 
 **Contract:**
 - Only files under the approved diagnostic root may be read.
+- Raises `ValueError` if `document_name` resolves to a location outside the approved diagnostic root.
 - If the document cannot be read, an exception is raised; no partial content is returned.
