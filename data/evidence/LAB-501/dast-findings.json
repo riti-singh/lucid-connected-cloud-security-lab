@@ -1,0 +1,23 @@
+{
+  "synthetic": true,
+  "actual_lucid_finding": false,
+  "disclaimer": "Synthetic lab evidence. Fictional scanner, fictional portal, synthetic data; not a real Lucid finding.",
+  "tool": {"name": "synthetic-dast-runner", "version": "0.4.2-lab"},
+  "scan": {
+    "started_at": "2026-10-08T02:10:00Z",
+    "target": "hypothetical fleet billing portal (nonproduction) -> charging-session-api getChargingSession",
+    "authenticated_as": {"accountId": "fleet-alpha"}
+  },
+  "results": [
+    {
+      "rule_id": "DAST-RESP-FOREIGN-OWNER",
+      "name": "Response contains a record owned by a different account than the authenticated principal",
+      "scanner_severity": "high",
+      "cwe": "CWE-200",
+      "request": {"caller": {"accountId": "fleet-alpha"}, "sessionId": "session-b"},
+      "response": {"id": "session-b", "accountId": "fleet-beta", "kwh": 29.4, "locationZone": "synthetic-zone-east"},
+      "observation": "Response accountId 'fleet-beta' does not equal caller accountId 'fleet-alpha'. Identifier was taken from a billing line item, not enumerated.",
+      "confidence": "firm"
+    }
+  ]
+}

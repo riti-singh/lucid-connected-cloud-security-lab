@@ -1,0 +1,9 @@
+{
+  "name": "charging-session-api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "SYNTHETIC / FICTIONAL lab manifest. express is deliberately pinned to a vulnerable version (OSV evidence in data/osv/). Not installed or executed by the lab; unrelated to the LAB-* code findings.",
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
