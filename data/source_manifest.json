@@ -41,6 +41,52 @@
         "all tickets, owners, priorities, timestamps, sample assets, rules and code"
       ],
       "disclaimer": "Created for demo; not real incidents or actual Lucid data."
+    },
+    {
+      "type": "synthetic",
+      "claims": [
+        "LAB-501..LAB-504 intake tickets in data/findings.json",
+        "scanner output, SARIF-like results, crash log, and reporter notes under data/evidence/LAB-501..LAB-504/"
+      ],
+      "files": [
+        "data/evidence/LAB-501/",
+        "data/evidence/LAB-502/",
+        "data/evidence/LAB-503/",
+        "data/evidence/LAB-504/"
+      ],
+      "conventions": [
+        "LAB-5xx tickets are untriaged intake: root_cause_group is 'intake-unclassified' and source is 'synthetic-intake-queue' until triage confirms them against code",
+        "test_name is null when no existing test is linked to the ticket; it is never an empty string or a placeholder name",
+        "verification_status 'unverified_pending_triage' means not yet reviewed; 'not_reproduced_no_failing_test' means reported but no test reproduces it",
+        "severity is the tracked intake severity per devin/knowledge/vulnerability-sla-policy.md; scanner and reporter severities are recorded in the evidence files",
+        "every LAB-5xx ticket has an evidence directory data/evidence/<ticket>/ (checked by tools/audit_findings.py)"
+      ],
+      "disclaimer": "Fictional scanners, reporters, workers, and incidents created for triage practice; not real findings, tools, or actual Lucid data. Evidence does not describe remediation."
+    },
+    {
+      "type": "public-source+synthetic",
+      "claims": [
+        "DEP-101, DEP-201, DEP-202, DEP-301 dependency tickets in data/findings.json",
+        "advisory IDs, aliases, CWEs, summaries, fixed versions, and severity ratings copied from public OSV records"
+      ],
+      "files": [
+        "data/advisory_candidates.json",
+        "data/osv/",
+        "data/evidence/dependency-scenario/"
+      ],
+      "urls": [
+        "https://google.github.io/osv.dev/api/"
+      ],
+      "conventions": [
+        "one DEP-* ticket per (package, advisory) pinned in data/advisory_candidates.json; advisory_id is the GHSA ID and aliases (CVE, PYSEC) are kept in a separate aliases field",
+        "advisory_id, title, cwe, and aliases come from data/osv/<advisory_id>.json; cwe is the OSV database_specific.cwe_ids list",
+        "severity maps the OSV database_specific.severity (GitHub-reviewed rating: CRITICAL, HIGH, MODERATE, LOW) to critical/high/medium/low; sla_days follows devin/knowledge/vulnerability-sla-policy.md; severity_source names the record",
+        "reported_at is the UTC date of the OSV package/version query evidence (query_retrieved_utc in data/advisory_candidates.json)",
+        "language, repository, and owner come from the service (data/inventory.json); root_cause_group is dependency-<package>; test_name is null",
+        "verification_status for PyYAML is scanner-confirmed (pip-audit via OSV in data/evidence/dependency-scenario/) with reachability not demonstrated (yaml.safe_load is used; the advisory concerns full_load); express and snakeyaml are manifest pins matched to OSV records, not installed or scanned, reachability not assessed",
+        "tools/audit_findings.py requires every DEP-* advisory_id to have data/osv/<advisory_id>.json with a matching id; LAB-* tickets keep advisory_id null"
+      ],
+      "disclaimer": "The pins are deliberate synthetic lab state in fictional services; the advisories are real public records about the upstream packages. Not real Lucid findings or actual Lucid data. Transitive dependencies were not evaluated."
     }
   ]
 }
