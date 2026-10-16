@@ -1,0 +1,2378 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-16T18:06:40Z",
+  "synthetic": true,
+  "disclaimer": "All tickets, services, owners, and findings are synthetic lab data; LAB-* and DEP-* tickets are not real Lucid findings.",
+  "repository": {
+    "owner": "riti-singh",
+    "name": "lucid-connected-cloud-security-lab",
+    "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab",
+    "default_branch": "main",
+    "commit_sha": "c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc",
+    "pages_url": "https://riti-singh.github.io/lucid-connected-cloud-security-lab/"
+  },
+  "sources": {
+    "github": {
+      "status": "skipped",
+      "authenticated": false,
+      "fetched_at": null,
+      "error": null,
+      "rate_limit_remaining": null
+    },
+    "baselines": {
+      "source": "baseline-results.txt",
+      "note": "Parsed from the committed baseline-results.txt; the runner was not executed in this build."
+    },
+    "inputs": [
+      "baseline-results.txt",
+      "data/evidence/",
+      "data/findings.json",
+      "data/inventory.json",
+      "data/osv/GHSA-8q59-q68h-6hv4.json",
+      "data/osv/GHSA-mjmj-j48q-9wg2.json",
+      "data/osv/GHSA-qw6h-vgh9-j6wx.json",
+      "data/osv/GHSA-rv95-896h-c2vc.json",
+      "data/osv/PYSEC-2021-142.json",
+      "data/osv/maven-org.yaml-snakeyaml-1.33.query.json",
+      "data/osv/npm-express-4.18.2.query.json",
+      "data/osv/pypi-PyYAML-5.3.1.query.json",
+      "data/remediations.json",
+      "tools/audit_findings.py",
+      "tools/triage.py"
+    ]
+  },
+  "services": [
+    {
+      "repo": "charging-session-api",
+      "owner": "connected-cloud",
+      "owner_assigned": true,
+      "criticality": "high",
+      "deployment": "hypothetical Kubernetes workload",
+      "data_classification": "synthetic charging/customer account",
+      "language": "TypeScript",
+      "finding_ids": [
+        "DEP-201",
+        "DEP-202",
+        "LAB-201",
+        "LAB-501"
+      ],
+      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/charging-session-api"
+    },
+    {
+      "repo": "diagnostics-document-api",
+      "owner": "support-cloud",
+      "owner_assigned": true,
+      "criticality": "medium",
+      "deployment": "hypothetical Kubernetes workload",
+      "data_classification": "synthetic diagnostics",
+      "language": "Python",
+      "finding_ids": [
+        "DEP-101",
+        "LAB-101",
+        "LAB-102",
+        "LAB-103",
+        "LAB-504"
+      ],
+      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/diagnostics-document-api"
+    },
+    {
+      "repo": "ota-release-gateway",
+      "owner": "release-platform",
+      "owner_assigned": true,
+      "criticality": "high",
+      "deployment": "hypothetical Kubernetes workload",
+      "data_classification": "synthetic staged OTA release metadata",
+      "language": "Java",
+      "finding_ids": [
+        "DEP-301",
+        "LAB-301",
+        "LAB-502"
+      ],
+      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/ota-release-gateway"
+    },
+    {
+      "repo": "telemetry-exporter",
+      "owner": "unassigned",
+      "owner_assigned": false,
+      "criticality": "high",
+      "deployment": "hypothetical Kubernetes workload",
+      "data_classification": "synthetic asset-location metadata",
+      "language": "Go",
+      "finding_ids": [
+        "LAB-401",
+        "LAB-503"
+      ],
+      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/telemetry-exporter"
+    }
+  ],
+  "findings": [
+    {
+      "ticket": "DEP-101",
+      "kind": "dependency",
+      "repository": "diagnostics-document-api",
+      "language": "Python",
+      "cwe": [
+        "CWE-20"
+      ],
+      "title": "Improper Input Validation in PyYAML",
+      "severity": "critical",
+      "owner": "support-cloud",
+      "owner_assigned": true,
+      "sla_days": 7,
+      "reported_at": "2026-10-16",
+      "due_at": "2026-10-23",
+      "source": "synthetic-dependency-pin-osv-match",
+      "verification_status": "scanner_confirmed_version_match_reachability_not_demonstrated",
+      "verification_notes": "pip-audit 2.10.1 (OSV) reported this advisory against PyYAML 5.3.1 installed from requirements.txt in a throwaway venv and did not report it after upgrading to 5.4 (data/evidence/dependency-scenario/summary.json, result PASS). The scan is version-based. Per the OSV text the flaw is reached through full_load / FullLoader; bundle_manifest.py uses yaml.safe_load, so this is dependency hygiene, not a demonstrated exploitable path.",
+      "test_name": null,
+      "root_cause_group": "dependency-pyyaml",
+      "triage_state": "triaged",
+      "advisory_id": "GHSA-8q59-q68h-6hv4",
+      "aliases": [
+        "CVE-2020-14343",
+        "PYSEC-2021-142"
+      ],
+      "ecosystem": "PyPI",
+      "package": "PyYAML",
+      "pinned_version": "5.3.1",
+      "fixed_version": "5.4",
+      "severity_source": "OSV database_specific.severity 'CRITICAL' (GitHub-reviewed advisory rating) in data/osv/GHSA-8q59-q68h-6hv4.json, mapped per devin/knowledge/vulnerability-sla-policy.md",
+      "evidence": [
+        {
+          "path": "repos/diagnostics-document-api/requirements.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/diagnostics-document-api/requirements.txt",
+          "bundle_id": null
+        },
+        {
+          "path": "data/osv/pypi-PyYAML-5.3.1.query.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/pypi-PyYAML-5.3.1.query.json",
+          "bundle_id": null
+        },
+        {
+          "path": "data/osv/GHSA-8q59-q68h-6hv4.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/GHSA-8q59-q68h-6hv4.json",
+          "bundle_id": null
+        },
+        {
+          "path": "data/evidence/dependency-scenario/",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario",
+          "bundle_id": "dependency-scenario"
+        }
+      ],
+      "remediation_pr_numbers": [],
+      "status": "open",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "DEP-201",
+      "kind": "dependency",
+      "repository": "charging-session-api",
+      "language": "TypeScript",
+      "cwe": [
+        "CWE-1286",
+        "CWE-601"
+      ],
+      "title": "Express.js Open Redirect in malformed URLs",
+      "severity": "medium",
+      "owner": "connected-cloud",
+      "owner_assigned": true,
+      "sla_days": 30,
+      "reported_at": "2026-10-16",
+      "due_at": "2026-11-15",
+      "source": "synthetic-dependency-pin-osv-match",
+      "verification_status": "manifest_pin_matched_osv_record_not_scanned",
+      "verification_notes": "The repos/charging-session-api/package.json pin express 4.18.2 falls inside the affected range of the OSV record (fixed in 4.19.2). The package was not installed, resolved, or scanned, and no lab source imports it; reachability not assessed.",
+      "test_name": null,
+      "root_cause_group": "dependency-express",
+      "triage_state": "triaged",
+      "advisory_id": "GHSA-rv95-896h-c2vc",
+      "aliases": [
+        "CVE-2024-29041"
+      ],
+      "ecosystem": "npm",
+      "package": "express",
+      "pinned_version": "4.18.2",
+      "fixed_version": "4.19.2",
+      "severity_source": "OSV database_specific.severity 'MODERATE' (GitHub-reviewed advisory rating) in data/osv/GHSA-rv95-896h-c2vc.json, mapped per devin/knowledge/vulnerability-sla-policy.md",
+      "evidence": [
+        {
+          "path": "repos/charging-session-api/package.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/charging-session-api/package.json",
+          "bundle_id": null
+        },
+        {
+          "path": "data/osv/npm-express-4.18.2.query.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/npm-express-4.18.2.query.json",
+          "bundle_id": null
+        },
+        {
+          "path": "data/osv/GHSA-rv95-896h-c2vc.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/GHSA-rv95-896h-c2vc.json",
+          "bundle_id": null
+        }
+      ],
+      "remediation_pr_numbers": [],
+      "status": "open",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "DEP-202",
+      "kind": "dependency",
+      "repository": "charging-session-api",
+      "language": "TypeScript",
+      "cwe": [
+        "CWE-79"
+      ],
+      "title": "express vulnerable to XSS via response.redirect()",
+      "severity": "low",
+      "owner": "connected-cloud",
+      "owner_assigned": true,
+      "sla_days": 90,
+      "reported_at": "2026-10-16",
+      "due_at": "2027-01-14",
+      "source": "synthetic-dependency-pin-osv-match",
+      "verification_status": "manifest_pin_matched_osv_record_not_scanned",
+      "verification_notes": "The repos/charging-session-api/package.json pin express 4.18.2 falls inside the affected range of the OSV record (fixed in 4.20.0). The package was not installed, resolved, or scanned, and no lab source imports it; reachability not assessed.",
+      "test_name": null,
+      "root_cause_group": "dependency-express",
+      "triage_state": "triaged",
+      "advisory_id": "GHSA-qw6h-vgh9-j6wx",
+      "aliases": [
+        "CVE-2024-43796"
+      ],
+      "ecosystem": "npm",
+      "package": "express",
+      "pinned_version": "4.18.2",
+      "fixed_version": "4.20.0",
+      "severity_source": "OSV database_specific.severity 'LOW' (GitHub-reviewed advisory rating) in data/osv/GHSA-qw6h-vgh9-j6wx.json, mapped per devin/knowledge/vulnerability-sla-policy.md",
+      "evidence": [
+        {
+          "path": "repos/charging-session-api/package.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/charging-session-api/package.json",
+          "bundle_id": null
+        },
+        {
+          "path": "data/osv/npm-express-4.18.2.query.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/npm-express-4.18.2.query.json",
+          "bundle_id": null
+        },
+        {
+          "path": "data/osv/GHSA-qw6h-vgh9-j6wx.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/GHSA-qw6h-vgh9-j6wx.json",
+          "bundle_id": null
+        }
+      ],
+      "remediation_pr_numbers": [],
+      "status": "open",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "DEP-301",
+      "kind": "dependency",
+      "repository": "ota-release-gateway",
+      "language": "Java",
+      "cwe": [
+        "CWE-20",
+        "CWE-502"
+      ],
+      "title": "SnakeYaml Constructor Deserialization Remote Code Execution",
+      "severity": "high",
+      "owner": "release-platform",
+      "owner_assigned": true,
+      "sla_days": 14,
+      "reported_at": "2026-10-16",
+      "due_at": "2026-10-30",
+      "source": "synthetic-dependency-pin-osv-match",
+      "verification_status": "manifest_pin_matched_osv_record_not_scanned",
+      "verification_notes": "The repos/ota-release-gateway/pom.xml pin org.yaml:snakeyaml 1.33 falls inside the affected range of the OSV record (fixed in 2.0). The package was not installed, resolved, or scanned, and no lab source imports it; reachability not assessed.",
+      "test_name": null,
+      "root_cause_group": "dependency-snakeyaml",
+      "triage_state": "triaged",
+      "advisory_id": "GHSA-mjmj-j48q-9wg2",
+      "aliases": [
+        "CVE-2022-1471"
+      ],
+      "ecosystem": "Maven",
+      "package": "org.yaml:snakeyaml",
+      "pinned_version": "1.33",
+      "fixed_version": "2.0",
+      "severity_source": "OSV database_specific.severity 'HIGH' (GitHub-reviewed advisory rating) in data/osv/GHSA-mjmj-j48q-9wg2.json, mapped per devin/knowledge/vulnerability-sla-policy.md",
+      "evidence": [
+        {
+          "path": "repos/ota-release-gateway/pom.xml",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/ota-release-gateway/pom.xml",
+          "bundle_id": null
+        },
+        {
+          "path": "data/osv/maven-org.yaml-snakeyaml-1.33.query.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/maven-org.yaml-snakeyaml-1.33.query.json",
+          "bundle_id": null
+        },
+        {
+          "path": "data/osv/GHSA-mjmj-j48q-9wg2.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/GHSA-mjmj-j48q-9wg2.json",
+          "bundle_id": null
+        }
+      ],
+      "remediation_pr_numbers": [],
+      "status": "open",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "LAB-101",
+      "kind": "code",
+      "repository": "diagnostics-document-api",
+      "language": "Python",
+      "cwe": [
+        "CWE-22"
+      ],
+      "title": "Path traversal via parent segment",
+      "severity": "high",
+      "owner": "support-cloud",
+      "owner_assigned": true,
+      "sla_days": 14,
+      "reported_at": "2026-10-01",
+      "due_at": "2026-10-15",
+      "source": "synthetic-static-review",
+      "verification_status": "reproduced_by_expected_failing_test",
+      "verification_notes": null,
+      "test_name": "test_reject_parent_traversal",
+      "root_cause_group": "shared-root-path-validation",
+      "triage_state": "triaged",
+      "advisory_id": null,
+      "aliases": [],
+      "ecosystem": null,
+      "package": null,
+      "pinned_version": null,
+      "fixed_version": null,
+      "severity_source": null,
+      "evidence": [
+        {
+          "path": "repos/diagnostics-document-api/tests/test_documents.py",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/diagnostics-document-api/tests/test_documents.py",
+          "bundle_id": null
+        }
+      ],
+      "remediation_pr_numbers": [
+        9
+      ],
+      "status": "fix-in-review",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "LAB-102",
+      "kind": "code",
+      "repository": "diagnostics-document-api",
+      "language": "Python",
+      "cwe": [
+        "CWE-22"
+      ],
+      "title": "Absolute path bypasses document root",
+      "severity": "high",
+      "owner": "support-cloud",
+      "owner_assigned": true,
+      "sla_days": 14,
+      "reported_at": "2026-10-01",
+      "due_at": "2026-10-15",
+      "source": "synthetic-static-review",
+      "verification_status": "reproduced_by_expected_failing_test",
+      "verification_notes": null,
+      "test_name": "test_reject_absolute_path",
+      "root_cause_group": "shared-root-path-validation",
+      "triage_state": "triaged",
+      "advisory_id": null,
+      "aliases": [],
+      "ecosystem": null,
+      "package": null,
+      "pinned_version": null,
+      "fixed_version": null,
+      "severity_source": null,
+      "evidence": [
+        {
+          "path": "repos/diagnostics-document-api/tests/test_documents.py",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/diagnostics-document-api/tests/test_documents.py",
+          "bundle_id": null
+        }
+      ],
+      "remediation_pr_numbers": [
+        9
+      ],
+      "status": "fix-in-review",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "LAB-103",
+      "kind": "code",
+      "repository": "diagnostics-document-api",
+      "language": "Python",
+      "cwe": [
+        "CWE-22"
+      ],
+      "title": "Symlink resolves outside document root",
+      "severity": "high",
+      "owner": "support-cloud",
+      "owner_assigned": true,
+      "sla_days": 14,
+      "reported_at": "2026-10-01",
+      "due_at": "2026-10-15",
+      "source": "synthetic-static-review",
+      "verification_status": "reproduced_by_expected_failing_test",
+      "verification_notes": null,
+      "test_name": "test_reject_symlink_escape",
+      "root_cause_group": "shared-root-path-validation",
+      "triage_state": "triaged",
+      "advisory_id": null,
+      "aliases": [],
+      "ecosystem": null,
+      "package": null,
+      "pinned_version": null,
+      "fixed_version": null,
+      "severity_source": null,
+      "evidence": [
+        {
+          "path": "repos/diagnostics-document-api/tests/test_documents.py",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/diagnostics-document-api/tests/test_documents.py",
+          "bundle_id": null
+        }
+      ],
+      "remediation_pr_numbers": [
+        9
+      ],
+      "status": "fix-in-review",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "LAB-201",
+      "kind": "code",
+      "repository": "charging-session-api",
+      "language": "TypeScript",
+      "cwe": [
+        "CWE-639"
+      ],
+      "title": "Charging session visible cross-tenant",
+      "severity": "critical",
+      "owner": "connected-cloud",
+      "owner_assigned": true,
+      "sla_days": 7,
+      "reported_at": "2026-10-01",
+      "due_at": "2026-10-08",
+      "source": "synthetic-static-review",
+      "verification_status": "reproduced_by_expected_failing_test",
+      "verification_notes": null,
+      "test_name": "cross-account-denied",
+      "root_cause_group": "tenant-authorization",
+      "triage_state": "triaged",
+      "advisory_id": null,
+      "aliases": [],
+      "ecosystem": null,
+      "package": null,
+      "pinned_version": null,
+      "fixed_version": null,
+      "severity_source": null,
+      "evidence": [
+        {
+          "path": "repos/charging-session-api/src/charging.test.ts",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/charging-session-api/src/charging.test.ts",
+          "bundle_id": null
+        }
+      ],
+      "remediation_pr_numbers": [
+        1
+      ],
+      "status": "fix-in-review",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "LAB-301",
+      "kind": "code",
+      "repository": "ota-release-gateway",
+      "language": "Java",
+      "cwe": [
+        "CWE-862"
+      ],
+      "title": "Viewer can approve synthetic OTA release",
+      "severity": "critical",
+      "owner": "release-platform",
+      "owner_assigned": true,
+      "sla_days": 7,
+      "reported_at": "2026-10-01",
+      "due_at": "2026-10-08",
+      "source": "synthetic-static-review",
+      "verification_status": "reproduced_by_expected_failing_test",
+      "verification_notes": null,
+      "test_name": "viewer denied",
+      "root_cause_group": "ota-release-rbac",
+      "triage_state": "triaged",
+      "advisory_id": null,
+      "aliases": [],
+      "ecosystem": null,
+      "package": null,
+      "pinned_version": null,
+      "fixed_version": null,
+      "severity_source": null,
+      "evidence": [
+        {
+          "path": "repos/ota-release-gateway/src/OtaReleaseTests.java",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/ota-release-gateway/src/OtaReleaseTests.java",
+          "bundle_id": null
+        }
+      ],
+      "remediation_pr_numbers": [
+        7
+      ],
+      "status": "fix-in-review",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "LAB-401",
+      "kind": "code",
+      "repository": "telemetry-exporter",
+      "language": "Go",
+      "cwe": [
+        "CWE-532"
+      ],
+      "title": "Vehicle-linked location metadata in logs",
+      "severity": "high",
+      "owner": "unassigned",
+      "owner_assigned": false,
+      "sla_days": 14,
+      "reported_at": "2026-10-01",
+      "due_at": "2026-10-15",
+      "source": "synthetic-static-review",
+      "verification_status": "reproduced_by_expected_failing_test",
+      "verification_notes": null,
+      "test_name": "TestLogsExcludeSensitiveData",
+      "root_cause_group": "telemetry-log-redaction",
+      "triage_state": "triaged",
+      "advisory_id": null,
+      "aliases": [],
+      "ecosystem": null,
+      "package": null,
+      "pinned_version": null,
+      "fixed_version": null,
+      "severity_source": null,
+      "evidence": [
+        {
+          "path": "repos/telemetry-exporter/export_test.go",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/telemetry-exporter/export_test.go",
+          "bundle_id": null
+        }
+      ],
+      "remediation_pr_numbers": [
+        8
+      ],
+      "status": "fix-blocked",
+      "blocked_reason": "telemetry-exporter owner is 'unassigned' in data/inventory.json; a human must assign an owner and reviewer before merge.",
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "LAB-501",
+      "kind": "intake",
+      "repository": "charging-session-api",
+      "language": "TypeScript",
+      "cwe": [
+        "CWE-200"
+      ],
+      "title": "Billing summary includes charging energy from an unrelated fleet",
+      "severity": "high",
+      "owner": "connected-cloud",
+      "owner_assigned": true,
+      "sla_days": 14,
+      "reported_at": "2026-10-08",
+      "due_at": "2026-10-22",
+      "source": "synthetic-intake-queue",
+      "verification_status": "unverified_pending_triage",
+      "verification_notes": null,
+      "test_name": null,
+      "root_cause_group": "intake-unclassified",
+      "triage_state": "untriaged",
+      "advisory_id": null,
+      "aliases": [],
+      "ecosystem": null,
+      "package": null,
+      "pinned_version": null,
+      "fixed_version": null,
+      "severity_source": null,
+      "evidence": [
+        {
+          "path": "data/evidence/LAB-501/",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-501",
+          "bundle_id": "LAB-501"
+        }
+      ],
+      "remediation_pr_numbers": [],
+      "status": "open",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "LAB-502",
+      "kind": "intake",
+      "repository": "ota-release-gateway",
+      "language": "Java",
+      "cwe": [
+        "CWE-78"
+      ],
+      "title": "Release stage value reported to reach process execution",
+      "severity": "critical",
+      "owner": "release-platform",
+      "owner_assigned": true,
+      "sla_days": 7,
+      "reported_at": "2026-10-09",
+      "due_at": "2026-10-16",
+      "source": "synthetic-intake-queue",
+      "verification_status": "unverified_pending_triage",
+      "verification_notes": null,
+      "test_name": null,
+      "root_cause_group": "intake-unclassified",
+      "triage_state": "untriaged",
+      "advisory_id": null,
+      "aliases": [],
+      "ecosystem": null,
+      "package": null,
+      "pinned_version": null,
+      "fixed_version": null,
+      "severity_source": null,
+      "evidence": [
+        {
+          "path": "data/evidence/LAB-502/",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-502",
+          "bundle_id": "LAB-502"
+        }
+      ],
+      "remediation_pr_numbers": [],
+      "status": "open",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "LAB-503",
+      "kind": "intake",
+      "repository": "telemetry-exporter",
+      "language": "Go",
+      "cwe": [
+        "CWE-476"
+      ],
+      "title": "Export worker restarts with runtime panic during log sink rotation",
+      "severity": "medium",
+      "owner": "unassigned",
+      "owner_assigned": false,
+      "sla_days": 30,
+      "reported_at": "2026-10-12",
+      "due_at": "2026-11-11",
+      "source": "synthetic-intake-queue",
+      "verification_status": "not_reproduced_no_failing_test",
+      "verification_notes": null,
+      "test_name": null,
+      "root_cause_group": "intake-unclassified",
+      "triage_state": "untriaged",
+      "advisory_id": null,
+      "aliases": [],
+      "ecosystem": null,
+      "package": null,
+      "pinned_version": null,
+      "fixed_version": null,
+      "severity_source": null,
+      "evidence": [
+        {
+          "path": "data/evidence/LAB-503/",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-503",
+          "bundle_id": "LAB-503"
+        }
+      ],
+      "remediation_pr_numbers": [],
+      "status": "open",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    },
+    {
+      "ticket": "LAB-504",
+      "kind": "intake",
+      "repository": "diagnostics-document-api",
+      "language": "Python",
+      "cwe": [
+        "CWE-400"
+      ],
+      "title": "Large diagnostic bundle request restarts support pod",
+      "severity": "high",
+      "owner": "support-cloud",
+      "owner_assigned": true,
+      "sla_days": 14,
+      "reported_at": "2026-10-13",
+      "due_at": "2026-10-27",
+      "source": "synthetic-intake-queue",
+      "verification_status": "unverified_pending_triage",
+      "verification_notes": null,
+      "test_name": null,
+      "root_cause_group": "intake-unclassified",
+      "triage_state": "untriaged",
+      "advisory_id": null,
+      "aliases": [],
+      "ecosystem": null,
+      "package": null,
+      "pinned_version": null,
+      "fixed_version": null,
+      "severity_source": null,
+      "evidence": [
+        {
+          "path": "data/evidence/LAB-504/",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-504",
+          "bundle_id": "LAB-504"
+        }
+      ],
+      "remediation_pr_numbers": [],
+      "status": "open",
+      "blocked_reason": null,
+      "synthetic": true,
+      "actual_lucid_finding": false,
+      "requires_human_approval": true
+    }
+  ],
+  "root_cause_groups": [
+    {
+      "id": "shared-root-path-validation",
+      "classification": "code-root-cause",
+      "verified": true,
+      "finding_ids": [
+        "LAB-101",
+        "LAB-102",
+        "LAB-103"
+      ],
+      "source": "synthetic-static-review",
+      "triage_line": "shared-root-path-validation: LAB-101, LAB-102, LAB-103; source=synthetic-static-review; group requires code review",
+      "remediation_pr_numbers": [
+        9
+      ],
+      "advisory_ids": []
+    },
+    {
+      "id": "tenant-authorization",
+      "classification": "code-root-cause",
+      "verified": true,
+      "finding_ids": [
+        "LAB-201"
+      ],
+      "source": "synthetic-static-review",
+      "triage_line": "tenant-authorization: LAB-201; source=synthetic-static-review; group requires code review",
+      "remediation_pr_numbers": [
+        1
+      ],
+      "advisory_ids": []
+    },
+    {
+      "id": "ota-release-rbac",
+      "classification": "code-root-cause",
+      "verified": true,
+      "finding_ids": [
+        "LAB-301"
+      ],
+      "source": "synthetic-static-review",
+      "triage_line": "ota-release-rbac: LAB-301; source=synthetic-static-review; group requires code review",
+      "remediation_pr_numbers": [
+        7
+      ],
+      "advisory_ids": []
+    },
+    {
+      "id": "telemetry-log-redaction",
+      "classification": "code-root-cause",
+      "verified": true,
+      "finding_ids": [
+        "LAB-401"
+      ],
+      "source": "synthetic-static-review",
+      "triage_line": "telemetry-log-redaction: LAB-401; source=synthetic-static-review; group requires code review",
+      "remediation_pr_numbers": [
+        8
+      ],
+      "advisory_ids": []
+    },
+    {
+      "id": "intake-unclassified",
+      "classification": "untriaged-intake",
+      "verified": false,
+      "finding_ids": [
+        "LAB-501",
+        "LAB-502",
+        "LAB-503",
+        "LAB-504"
+      ],
+      "source": "synthetic-intake-queue",
+      "triage_line": "intake-unclassified: LAB-501, LAB-502, LAB-503, LAB-504; source=synthetic-intake-queue; group requires code review",
+      "remediation_pr_numbers": [],
+      "advisory_ids": []
+    },
+    {
+      "id": "dependency-pyyaml",
+      "classification": "dependency-advisory",
+      "verified": false,
+      "finding_ids": [
+        "DEP-101"
+      ],
+      "source": "synthetic-dependency-pin-osv-match",
+      "triage_line": "dependency-pyyaml: DEP-101; source=synthetic-dependency-pin-osv-match; group requires code review",
+      "remediation_pr_numbers": [],
+      "advisory_ids": [
+        "GHSA-8q59-q68h-6hv4"
+      ]
+    },
+    {
+      "id": "dependency-express",
+      "classification": "dependency-advisory",
+      "verified": false,
+      "finding_ids": [
+        "DEP-201",
+        "DEP-202"
+      ],
+      "source": "synthetic-dependency-pin-osv-match",
+      "triage_line": "dependency-express: DEP-201, DEP-202; source=synthetic-dependency-pin-osv-match; group requires code review",
+      "remediation_pr_numbers": [],
+      "advisory_ids": [
+        "GHSA-qw6h-vgh9-j6wx",
+        "GHSA-rv95-896h-c2vc"
+      ]
+    },
+    {
+      "id": "dependency-snakeyaml",
+      "classification": "dependency-advisory",
+      "verified": false,
+      "finding_ids": [
+        "DEP-301"
+      ],
+      "source": "synthetic-dependency-pin-osv-match",
+      "triage_line": "dependency-snakeyaml: DEP-301; source=synthetic-dependency-pin-osv-match; group requires code review",
+      "remediation_pr_numbers": [],
+      "advisory_ids": [
+        "GHSA-mjmj-j48q-9wg2"
+      ]
+    }
+  ],
+  "advisories": [
+    {
+      "id": "GHSA-8q59-q68h-6hv4",
+      "aliases": [
+        "CVE-2020-14343",
+        "PYSEC-2021-142"
+      ],
+      "summary": "Improper Input Validation in PyYAML",
+      "details": "A vulnerability was discovered in the PyYAML library in versions before 5.4, where it is susceptible to arbitrary code execution when it processes untrusted YAML files through the full_load method or with the FullLoader loader. Applications that use the library to process untrusted input may be vulnerable to this flaw. This flaw allows an attacker to execute arbitrary code on the system by abusing the python/object/new constructor. This flaw is due to an incomplete fix for CVE-2020-1747.",
+      "severity": "CRITICAL",
+      "cwe_ids": [
+        "CWE-20"
+      ],
+      "published": "2021-03-25T21:26:26Z",
+      "modified": "2026-02-04T03:33:10.792778Z",
+      "retrieved_utc": "2026-10-16T16:26:38.727390+00:00",
+      "ecosystem": "PyPI",
+      "package": "pyyaml",
+      "fixed_version": "5.4",
+      "references": [
+        {
+          "type": "ADVISORY",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-14343"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/SeldonIO/seldon-core/issues/2252"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/yaml/pyyaml/issues/420"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/yaml/pyyaml/issues/420#issuecomment-663673966"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/yaml/pyyaml/commit/a001f2782501ad2d24986959f0239a354675f9dc"
+        },
+        {
+          "type": "WEB",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1860466"
+        },
+        {
+          "type": "ADVISORY",
+          "url": "https://github.com/advisories/GHSA-8q59-q68h-6hv4"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/pyyaml/PYSEC-2021-142.yaml"
+        },
+        {
+          "type": "PACKAGE",
+          "url": "https://github.com/yaml/pyyaml"
+        },
+        {
+          "type": "WEB",
+          "url": "https://pypi.org/project/PyYAML"
+        },
+        {
+          "type": "WEB",
+          "url": "https://www.oracle.com/security-alerts/cpuapr2022.html"
+        },
+        {
+          "type": "WEB",
+          "url": "https://www.oracle.com/security-alerts/cpujul2022.html"
+        }
+      ],
+      "finding_ids": [
+        "DEP-101"
+      ],
+      "osv_path": "data/osv/GHSA-8q59-q68h-6hv4.json",
+      "osv_url": "https://osv.dev/vulnerability/GHSA-8q59-q68h-6hv4"
+    },
+    {
+      "id": "GHSA-mjmj-j48q-9wg2",
+      "aliases": [
+        "CVE-2022-1471"
+      ],
+      "summary": "SnakeYaml Constructor Deserialization Remote Code Execution",
+      "details": "### Summary\nSnakeYaml's `Constructor` class, which inherits from `SafeConstructor`, allows\nany type be deserialized given the following line:\n\nnew Yaml(new Constructor(TestDataClass.class)).load(yamlContent);\n\nTypes do not have to match the types of properties in the\ntarget class. A `ConstructorException` is thrown, but only after a malicious\npayload is deserialized.\n\n### Severity\nHigh, lack of type checks during deserialization allows remote code execution.\n\n### Proof of Concept\nExecute `bash run.sh`. The PoC uses Constructor to deserialize a payload\nfor RCE. RCE is demonstrated by using a payload which performs a http request to\nhttp://127.0.0.1:8000.\n\nExample output of successful run of proof of concept:\n\n```\n$ bash run.sh\n\n[+] Downloading snakeyaml if needed\n[+] Starting mock HTTP server on 127.0.0.1:8000 to demonstrate RCE\nnc: no process found\n[+] Compiling and running Proof of Concept, which a payload that sends a HTTP request to mock web server.\n[+] An exception is expected.\nException:\nCannot create property=payload for JavaBean=Main$TestDataClass@3cbbc1e0\n in 'string', line 1, column 1:\n    payload: !!javax.script.ScriptEn ... \n    ^\nCan not set java.lang.String field Main$TestDataClass.payload to javax.script.ScriptEngineManager\n in 'string', line 1, column 10:\n    payload: !!javax.script.ScriptEngineManag ... \n             ^\n\n\tat org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.constructJavaBean2ndStep(Constructor.java:291)\n\tat org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.construct(Constructor.java:172)\n\tat org.yaml.snakeyaml.constructor.Constructor$ConstructYamlObject.construct(Constructor.java:332)\n\tat org.yaml.snakeyaml.constructor.BaseConstructor.constructObjectNoCheck(BaseConstructor.java:230)\n\tat org.yaml.snakeyaml.constructor.BaseConstructor.constructObject(BaseConstructor.java:220)\n\tat org.yaml.snakeyaml.constructor.BaseConstructor.constructDocument(BaseConstructor.java:174)\n\tat org.yaml.snakeyaml.constructor.BaseConstructor.getSingleData(BaseConstructor.java:158)\n\tat org.yaml.snakeyaml.Yaml.loadFromReader(Yaml.java:491)\n\tat org.yaml.snakeyaml.Yaml.load(Yaml.java:416)\n\tat Main.main(Main.java:37)\nCaused by: java.lang.IllegalArgumentException: Can not set java.lang.String field Main$TestDataClass.payload to javax.script.ScriptEngineManager\n\tat java.base/jdk.internal.reflect.UnsafeFieldAccessorImpl.throwSetIllegalArgumentException(UnsafeFieldAccessorImpl.java:167)\n\tat java.base/jdk.internal.reflect.UnsafeFieldAccessorImpl.throwSetIllegalArgumentException(UnsafeFieldAccessorImpl.java:171)\n\tat java.base/jdk.internal.reflect.UnsafeObjectFieldAccessorImpl.set(UnsafeObjectFieldAccessorImpl.java:81)\n\tat java.base/java.lang.reflect.Field.set(Field.java:780)\n\tat org.yaml.snakeyaml.introspector.FieldProperty.set(FieldProperty.java:44)\n\tat org.yaml.snakeyaml.constructor.Constructor$ConstructMapping.constructJavaBean2ndStep(Constructor.java:286)\n\t... 9 more\n[+] Dumping Received HTTP Request. Will not be empty if PoC worked\nGET /proof-of-concept HTTP/1.1\nUser-Agent: Java/11.0.14\nHost: localhost:8000\nAccept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2\nConnection: keep-alive\n```\n\n### Further Analysis\nPotential mitigations include, leveraging SnakeYaml's SafeConstructor while parsing untrusted content.\n\nSee https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64581479 for discussion on the subject.\n\n### Timeline\n**Date reported**: 4/11/2022\n**Date fixed**:  [30/12/2022](https://bitbucket.org/snakeyaml/snakeyaml/pull-requests/44)\n**Date disclosed**: 10/13/2022",
+      "severity": "HIGH",
+      "cwe_ids": [
+        "CWE-20",
+        "CWE-502"
+      ],
+      "published": "2022-12-12T21:19:47Z",
+      "modified": "2026-09-10T03:49:50.365884036Z",
+      "retrieved_utc": "2026-10-16T16:26:39.392895+00:00",
+      "ecosystem": "Maven",
+      "package": "org.yaml:snakeyaml",
+      "fixed_version": "2.0",
+      "references": [
+        {
+          "type": "WEB",
+          "url": "https://github.com/google/security-research/security/advisories/GHSA-mjmj-j48q-9wg2"
+        },
+        {
+          "type": "ADVISORY",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-1471"
+        },
+        {
+          "type": "WEB",
+          "url": "https://www.github.com/mbechler/marshalsec/blob/master/marshalsec.pdf?raw=true"
+        },
+        {
+          "type": "WEB",
+          "url": "https://snyk.io/blog/unsafe-deserialization-snakeyaml-java-cve-2022-1471"
+        },
+        {
+          "type": "WEB",
+          "url": "https://security.netapp.com/advisory/ntap-20240621-0006"
+        },
+        {
+          "type": "WEB",
+          "url": "https://security.netapp.com/advisory/ntap-20230818-0015"
+        },
+        {
+          "type": "WEB",
+          "url": "https://infosecwriteups.com/%EF%B8%8F-inside-the-160-comment-fight-to-fix-snakeyamls-rce-default-1a20c5ca4d4c"
+        },
+        {
+          "type": "WEB",
+          "url": "https://groups.google.com/g/kubernetes-security-announce/c/mwrakFaEdnc"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/mbechler/marshalsec"
+        },
+        {
+          "type": "WEB",
+          "url": "https://confluence.atlassian.com/security/cve-2022-1471-snakeyaml-library-rce-vulnerability-in-multiple-products-1296171009.html"
+        },
+        {
+          "type": "WEB",
+          "url": "https://bitbucket.org/snakeyaml/snakeyaml/wiki/CVE-2022-1471"
+        },
+        {
+          "type": "WEB",
+          "url": "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64876314"
+        },
+        {
+          "type": "WEB",
+          "url": "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64634374"
+        },
+        {
+          "type": "WEB",
+          "url": "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64581479"
+        },
+        {
+          "type": "WEB",
+          "url": "https://bitbucket.org/snakeyaml/snakeyaml/commits/acc44099f5f4af26ff86b4e4e4cc1c874e2dc5c4"
+        },
+        {
+          "type": "WEB",
+          "url": "https://bitbucket.org/snakeyaml/snakeyaml/commits/5014df1a36f50aca54405bb8433bc99a8847f758"
+        },
+        {
+          "type": "PACKAGE",
+          "url": "https://bitbucket.org/snakeyaml/snakeyaml"
+        },
+        {
+          "type": "WEB",
+          "url": "http://packetstormsecurity.com/files/175095/PyTorch-Model-Server-Registration-Deserialization-Remote-Code-Execution.html"
+        },
+        {
+          "type": "WEB",
+          "url": "http://www.openwall.com/lists/oss-security/2023/11/19/1"
+        }
+      ],
+      "finding_ids": [
+        "DEP-301"
+      ],
+      "osv_path": "data/osv/GHSA-mjmj-j48q-9wg2.json",
+      "osv_url": "https://osv.dev/vulnerability/GHSA-mjmj-j48q-9wg2"
+    },
+    {
+      "id": "GHSA-qw6h-vgh9-j6wx",
+      "aliases": [
+        "CVE-2024-43796"
+      ],
+      "summary": "express vulnerable to XSS via response.redirect()",
+      "details": "### Impact\n\nIn express <4.20.0, passing untrusted user input - even after sanitizing it - to `response.redirect()` may execute untrusted code\n\n### Patches\n\nthis issue is patched in express 4.20.0\n\n### Workarounds\n\nusers are encouraged to upgrade to the patched version of express, but otherwise can workaround this issue by making sure any untrusted inputs are safe, ideally by validating them against an explicit allowlist\n\n### Details\n\nsuccessful exploitation of this vector requires the following:\n\n1. The attacker MUST control the input to response.redirect()\n1. express MUST NOT redirect before the template appears\n1. the browser MUST NOT complete redirection before:\n1. the user MUST click on the link in the template\n",
+      "severity": "LOW",
+      "cwe_ids": [
+        "CWE-79"
+      ],
+      "published": "2024-09-10T19:41:04Z",
+      "modified": "2026-09-10T03:50:18.298562940Z",
+      "retrieved_utc": "2026-10-16T16:26:39.075603+00:00",
+      "ecosystem": "npm",
+      "package": "express",
+      "fixed_version": "4.20.0",
+      "references": [
+        {
+          "type": "WEB",
+          "url": "https://github.com/expressjs/express/security/advisories/GHSA-qw6h-vgh9-j6wx"
+        },
+        {
+          "type": "ADVISORY",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-43796"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/expressjs/express/commit/54271f69b511fea198471e6ff3400ab805d6b553"
+        },
+        {
+          "type": "PACKAGE",
+          "url": "https://github.com/expressjs/express"
+        }
+      ],
+      "finding_ids": [
+        "DEP-202"
+      ],
+      "osv_path": "data/osv/GHSA-qw6h-vgh9-j6wx.json",
+      "osv_url": "https://osv.dev/vulnerability/GHSA-qw6h-vgh9-j6wx"
+    },
+    {
+      "id": "GHSA-rv95-896h-c2vc",
+      "aliases": [
+        "CVE-2024-29041"
+      ],
+      "summary": "Express.js Open Redirect in malformed URLs",
+      "details": "### Impact\n\nVersions of Express.js prior to 4.19.2 and pre-release alpha and beta versions before 5.0.0-beta.3 are affected by an open redirect vulnerability using malformed URLs.\n\nWhen a user of Express performs a redirect using a user-provided URL Express performs an encode [using `encodeurl`](https://github.com/pillarjs/encodeurl) on the contents before passing it to the `location` header. This can cause malformed URLs to be evaluated in unexpected ways by common redirect allow list implementations in Express applications, leading to an Open Redirect via bypass of a properly implemented allow list.\n\nThe main method impacted is `res.location()` but this is also called from within `res.redirect()`.\n\n### Patches\n\nhttps://github.com/expressjs/express/commit/0867302ddbde0e9463d0564fea5861feb708c2dd\nhttps://github.com/expressjs/express/commit/0b746953c4bd8e377123527db11f9cd866e39f94\n\nAn initial fix went out with `express@4.19.0`, we then patched a feature regression in `4.19.1` and added improved handling for the bypass in `4.19.2`.\n\n### Workarounds\n\nThe fix for this involves pre-parsing the url string with either `require('node:url').parse` or `new URL`. These are steps you can take on your own before passing the user input string to `res.location` or `res.redirect`.\n\n### Resources\n\nhttps://github.com/expressjs/express/pull/5539\nhttps://github.com/koajs/koa/issues/1800\nhttps://expressjs.com/en/4x/api.html#res.location",
+      "severity": "MODERATE",
+      "cwe_ids": [
+        "CWE-1286",
+        "CWE-601"
+      ],
+      "published": "2024-03-25T19:40:26Z",
+      "modified": "2026-09-10T03:50:10.750068508Z",
+      "retrieved_utc": "2026-10-16T16:26:39.225773+00:00",
+      "ecosystem": "npm",
+      "package": "express",
+      "fixed_version": "4.19.2",
+      "references": [
+        {
+          "type": "WEB",
+          "url": "https://github.com/expressjs/express/security/advisories/GHSA-rv95-896h-c2vc"
+        },
+        {
+          "type": "ADVISORY",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-29041"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/koajs/koa/issues/1800"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/expressjs/express/pull/5539"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/expressjs/express/commit/0867302ddbde0e9463d0564fea5861feb708c2dd"
+        },
+        {
+          "type": "WEB",
+          "url": "https://github.com/expressjs/express/commit/0b746953c4bd8e377123527db11f9cd866e39f94"
+        },
+        {
+          "type": "WEB",
+          "url": "https://expressjs.com/en/4x/api.html#res.location"
+        },
+        {
+          "type": "PACKAGE",
+          "url": "https://github.com/expressjs/express"
+        }
+      ],
+      "finding_ids": [
+        "DEP-201"
+      ],
+      "osv_path": "data/osv/GHSA-rv95-896h-c2vc.json",
+      "osv_url": "https://osv.dev/vulnerability/GHSA-rv95-896h-c2vc"
+    },
+    {
+      "id": "PYSEC-2021-142",
+      "aliases": [
+        "CVE-2020-14343",
+        "GHSA-8q59-q68h-6hv4"
+      ],
+      "summary": "",
+      "details": "A vulnerability was discovered in the PyYAML library in versions before 5.4, where it is susceptible to arbitrary code execution when it processes untrusted YAML files through the full_load method or with the FullLoader loader. Applications that use the library to process untrusted input may be vulnerable to this flaw. This flaw allows an attacker to execute arbitrary code on the system by abusing the python/object/new constructor. This flaw is due to an incomplete fix for CVE-2020-1747.",
+      "severity": null,
+      "cwe_ids": [],
+      "published": "2021-02-09T21:15:00Z",
+      "modified": "2023-11-08T04:02:26.414885Z",
+      "retrieved_utc": "2026-10-16T16:26:38.897527+00:00",
+      "ecosystem": "PyPI",
+      "package": "pyyaml",
+      "fixed_version": "5.4",
+      "references": [
+        {
+          "type": "REPORT",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1860466"
+        },
+        {
+          "type": "ADVISORY",
+          "url": "https://github.com/advisories/GHSA-8q59-q68h-6hv4"
+        }
+      ],
+      "finding_ids": [
+        "DEP-101"
+      ],
+      "osv_path": "data/osv/PYSEC-2021-142.json",
+      "osv_url": "https://osv.dev/vulnerability/PYSEC-2021-142"
+    }
+  ],
+  "remediations": [
+    {
+      "number": 1,
+      "title": "LAB-201: enforce tenant scoping in getChargingSession (CWE-639)",
+      "category": "remediation",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/1",
+      "tickets": [
+        "LAB-201"
+      ],
+      "root_cause_group": "tenant-authorization",
+      "service": "charging-session-api",
+      "fixed_language": "typescript",
+      "state": "open",
+      "state_source": "recorded",
+      "review_state": "human-review",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:06:18Z",
+      "merged_at": null,
+      "session_id": "274b2e98c78a4e538521527e0e1aa568",
+      "session_url": "https://app.devin.ai/sessions/274b2e98c78a4e538521527e0e1aa568",
+      "depends_on": [],
+      "validation": {
+        "validated_head": "bf08dc1",
+        "runner_args": "--fixed typescript",
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941309127/job/117109353086",
+        "notes": "Revalidated after merging main into the branch; CI printed 6/6 MATCH plus the 14-finding audit PASS line."
+      },
+      "summary": "Fix for LAB-201 (TypeScript tenant scoping); awaiting human review.",
+      "recorded_state": "open",
+      "github": null
+    },
+    {
+      "number": 2,
+      "title": "[Session B] Split engineering policies into secure-coding, SLA, and PR/approval policy docs (synthetic)",
+      "category": "policy",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/2",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "state": "merged",
+      "state_source": "recorded",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:26:47Z",
+      "merged_at": "2026-10-16T16:53:28Z",
+      "session_id": "eefa585ecfa44f6fbd50cfdaa0e5cde8",
+      "session_url": "https://app.devin.ai/sessions/eefa585ecfa44f6fbd50cfdaa0e5cde8",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Policy corpus: secure-coding, vulnerability SLA, PR/approval policies.",
+      "recorded_state": "merged",
+      "github": null
+    },
+    {
+      "number": 3,
+      "title": "Session A: synthetic service context docs, CODEOWNERS, CONTRIBUTING",
+      "category": "docs",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/3",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "state": "merged",
+      "state_source": "recorded",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:27:42Z",
+      "merged_at": "2026-10-16T16:53:33Z",
+      "session_id": "0b1da5974649439e8923bcbfe25d31b6",
+      "session_url": "https://app.devin.ai/sessions/0b1da5974649439e8923bcbfe25d31b6",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Service architecture/API/CONTRIBUTING docs; root .github/CODEOWNERS.",
+      "recorded_state": "merged",
+      "github": null
+    },
+    {
+      "number": 4,
+      "title": "SESSION D phase 1: synthetic pinned-vulnerable dependency manifests with OSV evidence",
+      "category": "dependency-evidence",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/4",
+      "tickets": [
+        "DEP-101",
+        "DEP-201",
+        "DEP-202",
+        "DEP-301"
+      ],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "state": "merged",
+      "state_source": "recorded",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:29:42Z",
+      "merged_at": "2026-10-16T16:59:42Z",
+      "session_id": "c0b2a13ec74545f483f4deb25a691f00",
+      "session_url": "https://app.devin.ai/sessions/c0b2a13ec74545f483f4deb25a691f00",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Pinned vulnerable dependency manifests, OSV evidence, executable PyYAML scenario (5.3.1 -> 5.4), README.",
+      "recorded_state": "merged",
+      "github": null
+    },
+    {
+      "number": 5,
+      "title": "Add auto-discoverable Devin skills under .agents/skills",
+      "category": "devin-capabilities",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/5",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "state": "merged",
+      "state_source": "recorded",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:53:13Z",
+      "merged_at": "2026-10-16T16:53:57Z",
+      "session_id": "0a3acf3d3c6246d7b907e705aa96e670",
+      "session_url": "https://app.devin.ai/sessions/0a3acf3d3c6246d7b907e705aa96e670",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Repo skills under .agents/skills/.",
+      "recorded_state": "merged",
+      "github": null
+    },
+    {
+      "number": 6,
+      "title": "Add synthetic LAB-501..504 intake tickets with evidence (append-only)",
+      "category": "intake-data",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/6",
+      "tickets": [
+        "LAB-501",
+        "LAB-502",
+        "LAB-503",
+        "LAB-504"
+      ],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "state": "merged",
+      "state_source": "recorded",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:59:37Z",
+      "merged_at": "2026-10-16T17:01:25Z",
+      "session_id": "307dfd4633ac4e298224ca8f49fb916d",
+      "session_url": "https://app.devin.ai/sessions/307dfd4633ac4e298224ca8f49fb916d",
+      "depends_on": [
+        3
+      ],
+      "validation": null,
+      "summary": "LAB-501..504 intake tickets with evidence; classifications deliberately not committed.",
+      "recorded_state": "merged",
+      "github": null
+    },
+    {
+      "number": 7,
+      "title": "LAB-301: require release-manager role for OTA release approval (synthetic, CWE-862)",
+      "category": "remediation",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/7",
+      "tickets": [
+        "LAB-301"
+      ],
+      "root_cause_group": "ota-release-rbac",
+      "service": "ota-release-gateway",
+      "fixed_language": "java",
+      "state": "open",
+      "state_source": "recorded",
+      "review_state": "human-review",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T16:59:57Z",
+      "merged_at": null,
+      "session_id": "f1993936c07440fa9000c2cd8bd3ee29",
+      "session_url": "https://app.devin.ai/sessions/f1993936c07440fa9000c2cd8bd3ee29",
+      "depends_on": [],
+      "validation": {
+        "validated_head": "3dd5856",
+        "runner_args": "--fixed java",
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941253088/job/117109163079",
+        "notes": "Revalidated after merging main into the branch; CI printed 6/6 MATCH plus the 14-finding audit PASS line."
+      },
+      "summary": "Fix for LAB-301 (Java release-manager check); awaiting human review.",
+      "recorded_state": "open",
+      "github": null
+    },
+    {
+      "number": 8,
+      "title": "LAB-401: redact vehicle-linked fields from telemetry-exporter logs (owner escalation required)",
+      "category": "remediation",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/8",
+      "tickets": [
+        "LAB-401"
+      ],
+      "root_cause_group": "telemetry-log-redaction",
+      "service": "telemetry-exporter",
+      "fixed_language": "go",
+      "state": "open",
+      "state_source": "recorded",
+      "review_state": "blocked-owner-assignment",
+      "blocked_reason": "telemetry-exporter owner is 'unassigned' in data/inventory.json; a human must assign an owner and reviewer before merge.",
+      "created_at": "2026-10-16T16:59:58Z",
+      "merged_at": null,
+      "session_id": "0f0dc5c258304212b770e18474293481",
+      "session_url": "https://app.devin.ai/sessions/0f0dc5c258304212b770e18474293481",
+      "depends_on": [],
+      "validation": {
+        "validated_head": "aae7972",
+        "runner_args": "--fixed go",
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941260924/job/117109189400",
+        "notes": "Revalidated after merging main into the branch; CI printed 6/6 MATCH plus the 14-finding audit PASS line."
+      },
+      "summary": "Fix for LAB-401 (Go log redaction); blocked on owner assignment.",
+      "recorded_state": "open",
+      "github": null
+    },
+    {
+      "number": 9,
+      "title": "LAB-101/102/103: enforce path containment in read_diagnostic_document (CWE-22, synthetic)",
+      "category": "remediation",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/9",
+      "tickets": [
+        "LAB-101",
+        "LAB-102",
+        "LAB-103"
+      ],
+      "root_cause_group": "shared-root-path-validation",
+      "service": "diagnostics-document-api",
+      "fixed_language": "python",
+      "state": "open",
+      "state_source": "recorded",
+      "review_state": "human-review",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T17:00:57Z",
+      "merged_at": null,
+      "session_id": "b5a9af4d306f457bb89d25c0f08840c9",
+      "session_url": "https://app.devin.ai/sessions/b5a9af4d306f457bb89d25c0f08840c9",
+      "depends_on": [],
+      "validation": {
+        "validated_head": "edbabd0",
+        "runner_args": "--fixed python",
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/actions/runs/38941262113/job/117109192771",
+        "notes": "Revalidated after merging main into the branch; CI printed 6/6 MATCH plus the 14-finding audit PASS line. Edits documents.py at the service root (no src/); TOCTOU and hard-link cases out of scope."
+      },
+      "summary": "One fix for the shared root cause of LAB-101/102/103 (Python path containment); awaiting human review.",
+      "recorded_state": "open",
+      "github": null
+    },
+    {
+      "number": 10,
+      "title": "CI: lab-validation workflow, ERROR on missing toolchain, --fixed <lang> runner mode",
+      "category": "ci-validation",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/10",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "state": "merged",
+      "state_source": "recorded",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T17:01:10Z",
+      "merged_at": "2026-10-16T17:04:37Z",
+      "session_id": "72f30a5be47d4f5eaeab8d70c0018ff0",
+      "session_url": "https://app.devin.ai/sessions/72f30a5be47d4f5eaeab8d70c0018ff0",
+      "depends_on": [
+        4
+      ],
+      "validation": {
+        "validated_head": null,
+        "runner_args": null,
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": null,
+        "notes": "lab-validation succeeded on the pull_request run and on the push to main. With node stripped from PATH, run_baselines.py prints 'ERROR ... required toolchain not found on PATH: tsc' and exits 2."
+      },
+      "summary": "run_baselines.py prints ERROR for missing toolchains instead of a false MATCH; --fixed <lang>; lab-validation GitHub Actions workflow.",
+      "recorded_state": "merged",
+      "github": null
+    },
+    {
+      "number": 11,
+      "title": "Add DEP-* dependency tickets for OSV-pinned advisories; scope audit advisory_id checks by prefix",
+      "category": "dependency-tickets",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/11",
+      "tickets": [
+        "DEP-101",
+        "DEP-201",
+        "DEP-202",
+        "DEP-301"
+      ],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "state": "merged",
+      "state_source": "recorded",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T17:04:26Z",
+      "merged_at": "2026-10-16T17:05:21Z",
+      "session_id": "a0569ffb79bc468caf2139de6085ebc3",
+      "session_url": "https://app.devin.ai/sessions/a0569ffb79bc468caf2139de6085ebc3",
+      "depends_on": [
+        4,
+        6
+      ],
+      "validation": {
+        "validated_head": null,
+        "runner_args": null,
+        "ci_workflow": "lab-validation",
+        "ci_conclusion": "success",
+        "ci_run_url": null,
+        "notes": "Negative audit checks on the PR head: a LAB-* ticket with an advisory ID exits 1; a DEP-* ID without a data/osv/ record exits 1."
+      },
+      "summary": "DEP-* dependency tickets; audit scopes advisory IDs by ticket prefix.",
+      "recorded_state": "merged",
+      "github": null
+    },
+    {
+      "number": 12,
+      "title": "Add final lab context status report (docs/lab-context-status.md)",
+      "category": "report",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/12",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "state": "merged",
+      "state_source": "recorded",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T17:08:08Z",
+      "merged_at": "2026-10-16T17:09:33Z",
+      "session_id": "0a3acf3d3c6246d7b907e705aa96e670",
+      "session_url": "https://app.devin.ai/sessions/0a3acf3d3c6246d7b907e705aa96e670",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Lab context status report (first version).",
+      "recorded_state": "merged",
+      "github": null
+    },
+    {
+      "number": 13,
+      "title": "Status report: revalidated fix PR heads, session map, PR dependencies",
+      "category": "report",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/13",
+      "tickets": [],
+      "root_cause_group": null,
+      "service": null,
+      "fixed_language": null,
+      "state": "merged",
+      "state_source": "recorded",
+      "review_state": "merged",
+      "blocked_reason": null,
+      "created_at": "2026-10-16T17:41:06Z",
+      "merged_at": "2026-10-16T17:42:25Z",
+      "session_id": "0a3acf3d3c6246d7b907e705aa96e670",
+      "session_url": "https://app.devin.ai/sessions/0a3acf3d3c6246d7b907e705aa96e670",
+      "depends_on": [],
+      "validation": null,
+      "summary": "Status report update: revalidated fix PR heads, session map, PR dependencies.",
+      "recorded_state": "merged",
+      "github": null
+    }
+  ],
+  "demonstrated_remediations": [
+    {
+      "id": "DEMO-DEP-101-PYYAML-5.4",
+      "tickets": [
+        "DEP-101"
+      ],
+      "kind": "dependency-upgrade-scenario",
+      "status": "demonstrated-not-merged",
+      "summary": "pip-audit 2.10.1 (OSV) reports GHSA-8q59-q68h-6hv4 against PyYAML 5.3.1 and none at 5.4; the scenario tests pass on both. No upgrade PR has been opened.",
+      "reachability": "bundle_manifest.py uses yaml.safe_load, not the full_load / FullLoader path the advisory describes, so DEP-101 is version exposure, not a demonstrated exploit.",
+      "evidence": [
+        {
+          "path": "data/evidence/dependency-scenario/summary.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/summary.json",
+          "bundle_id": "dependency-scenario"
+        },
+        {
+          "path": "data/evidence/dependency-scenario/before/pip-audit.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/before/pip-audit.json",
+          "bundle_id": "dependency-scenario"
+        },
+        {
+          "path": "data/evidence/dependency-scenario/after/pip-audit.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/after/pip-audit.json",
+          "bundle_id": "dependency-scenario"
+        },
+        {
+          "path": "data/evidence/dependency-scenario/before/tests.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/before/tests.txt",
+          "bundle_id": "dependency-scenario"
+        },
+        {
+          "path": "data/evidence/dependency-scenario/after/tests.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/after/tests.txt",
+          "bundle_id": "dependency-scenario"
+        }
+      ],
+      "tool": "tools/verify_dependency_scenario.py",
+      "pr_numbers": [
+        4
+      ]
+    }
+  ],
+  "combined_validations": [
+    {
+      "id": "all-fix-prs-expect-fixed",
+      "pr_numbers": [
+        1,
+        7,
+        8,
+        9
+      ],
+      "command": "python3 tools/run_baselines.py --expect-fixed",
+      "result": "6/6 'PASS; expected PASS; MATCH' and 'PASS all remediations verified' (exit 0)",
+      "context": "Local run with all four PRs' service directories applied together onto main; coordinator session 0a3acf3d.",
+      "session_id": "0a3acf3d3c6246d7b907e705aa96e670"
+    }
+  ],
+  "escalations": [
+    {
+      "id": "telemetry-exporter-owner",
+      "service": "telemetry-exporter",
+      "tickets": [
+        "LAB-401",
+        "LAB-503"
+      ],
+      "pr_numbers": [
+        8
+      ],
+      "reason": "telemetry-exporter has no owner (inventory owner 'unassigned'). Policy: unknown owner = escalation; the SLA clock still runs. PR #8 cannot merge until a human assigns an owner and reviewer.",
+      "open_questions": [
+        "Whether voltage counts as sensitive is still open."
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "0a3acf3d3c6246d7b907e705aa96e670",
+      "url": "https://app.devin.ai/sessions/0a3acf3d3c6246d7b907e705aa96e670",
+      "role": "Coordinator; integration, validation, status report",
+      "pr_numbers": [
+        5,
+        12,
+        13
+      ]
+    },
+    {
+      "id": "274b2e98c78a4e538521527e0e1aa568",
+      "url": "https://app.devin.ai/sessions/274b2e98c78a4e538521527e0e1aa568",
+      "role": "LAB-201 remediation",
+      "pr_numbers": [
+        1
+      ]
+    },
+    {
+      "id": "eefa585ecfa44f6fbd50cfdaa0e5cde8",
+      "url": "https://app.devin.ai/sessions/eefa585ecfa44f6fbd50cfdaa0e5cde8",
+      "role": "Policy corpus",
+      "pr_numbers": [
+        2
+      ]
+    },
+    {
+      "id": "0b1da5974649439e8923bcbfe25d31b6",
+      "url": "https://app.devin.ai/sessions/0b1da5974649439e8923bcbfe25d31b6",
+      "role": "Service context docs, CODEOWNERS",
+      "pr_numbers": [
+        3
+      ]
+    },
+    {
+      "id": "c0b2a13ec74545f483f4deb25a691f00",
+      "url": "https://app.devin.ai/sessions/c0b2a13ec74545f483f4deb25a691f00",
+      "role": "OSV evidence, PyYAML scenario",
+      "pr_numbers": [
+        4
+      ]
+    },
+    {
+      "id": "307dfd4633ac4e298224ca8f49fb916d",
+      "url": "https://app.devin.ai/sessions/307dfd4633ac4e298224ca8f49fb916d",
+      "role": "LAB-501..504 enrichment",
+      "pr_numbers": [
+        6
+      ]
+    },
+    {
+      "id": "f1993936c07440fa9000c2cd8bd3ee29",
+      "url": "https://app.devin.ai/sessions/f1993936c07440fa9000c2cd8bd3ee29",
+      "role": "LAB-301 remediation",
+      "pr_numbers": [
+        7
+      ]
+    },
+    {
+      "id": "0f0dc5c258304212b770e18474293481",
+      "url": "https://app.devin.ai/sessions/0f0dc5c258304212b770e18474293481",
+      "role": "LAB-401 remediation",
+      "pr_numbers": [
+        8
+      ]
+    },
+    {
+      "id": "b5a9af4d306f457bb89d25c0f08840c9",
+      "url": "https://app.devin.ai/sessions/b5a9af4d306f457bb89d25c0f08840c9",
+      "role": "LAB-101/102/103 remediation",
+      "pr_numbers": [
+        9
+      ]
+    },
+    {
+      "id": "72f30a5be47d4f5eaeab8d70c0018ff0",
+      "url": "https://app.devin.ai/sessions/72f30a5be47d4f5eaeab8d70c0018ff0",
+      "role": "CI/validation",
+      "pr_numbers": [
+        10
+      ]
+    },
+    {
+      "id": "a0569ffb79bc468caf2139de6085ebc3",
+      "url": "https://app.devin.ai/sessions/a0569ffb79bc468caf2139de6085ebc3",
+      "role": "DEP-* tickets",
+      "pr_numbers": [
+        11
+      ]
+    }
+  ],
+  "evidence_bundles": [
+    {
+      "id": "LAB-501",
+      "kind": "intake-evidence",
+      "path": "data/evidence/LAB-501/",
+      "tickets": [
+        "LAB-501"
+      ],
+      "summary": null,
+      "files": [
+        {
+          "path": "data/evidence/LAB-501/dast-findings.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-501/dast-findings.json",
+          "size_bytes": 1106,
+          "media_type": "application/json",
+          "preview": "{\n  \"synthetic\": true,\n  \"actual_lucid_finding\": false,\n  \"disclaimer\": \"Synthetic lab evidence. Fictional scanner, fictional portal, synthetic data; not a real Lucid finding.\",\n  \"tool\": {\"name\": \"synthetic-dast-runner\", \"version\": \"0.4.2-lab\"},\n  \"scan\": {\n    \"started_at\": \"2026-10-08T02:10:00Z\",\n    \"target\": \"hypothetical fleet billing portal (nonproduction) -> charging-session-api getChargingSession\",\n    \"authenticated_as\": {\"accountId\": \"fleet-alpha\"}\n  },\n  \"results\": [\n    {\n      \"rule_id\": \"DAST-RESP-FOREIGN-OWNER\",\n      \"name\": \"Response contains a record owned by a different account than the authenticated principal\",\n      \"scanner_severity\": \"high\",\n      \"cwe\": \"CWE-200\",\n      \"request\": {\"caller\": {\"accountId\": \"fleet-alpha\"}, \"sessionId\": \"session-b\"},\n      \"response\": {\"id\": \"session-b\", \"accountId\": \"fleet-beta\", \"kwh\": 29.4, \"locationZone\": \"synthetic-zone-east\"},\n      \"observation\": \"Response accountId 'fleet-beta' does not equal caller accountId 'fleet-alpha'. Identifier was taken from a billing line item, not enumerated.\",\n      \"confidence\": \"firm\"\n    }\n  ]\n}\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/LAB-501/reporter-note.md",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-501/reporter-note.md",
+          "size_bytes": 729,
+          "media_type": "text/markdown",
+          "preview": "# Reporter note (synthetic)\n\n> Synthetic lab evidence. Fictional reporter and team; not a real Lucid finding.\n\n- Reporter: billing-analytics analyst (fictional), filed via the intake queue on 2026-10-08.\n- Symptom: the monthly charging summary for fleet account `fleet-alpha` included a 29.4 kWh session in `synthetic-zone-east`. fleet-alpha has no chargers in that zone.\n- The billing job builds each account's summary by calling the charging session lookup with the account's own caller scope and a session ID from the billing line items.\n- The reporter's severity is `high` (billing totals and location zones of another fleet visible).\n- The reporter has not checked whether existing tickets cover this. No test was attached.\n",
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "LAB-502",
+      "kind": "intake-evidence",
+      "path": "data/evidence/LAB-502/",
+      "tickets": [
+        "LAB-502"
+      ],
+      "summary": null,
+      "files": [
+        {
+          "path": "data/evidence/LAB-502/reporter-note.md",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-502/reporter-note.md",
+          "size_bytes": 423,
+          "media_type": "text/markdown",
+          "preview": "# Reporter note (synthetic)\n\n> Synthetic lab evidence. Fictional reporter and scanner; not a real Lucid finding.\n\n- Reporter: scanner-import bot (fictional), auto-filed from the nightly SAST import on 2026-10-09.\n- The importer kept the scanner's severity (`critical`) and CWE (`CWE-78`).\n- Nobody has reviewed the result yet. The importer did not record which revision was scanned.\n- No reproduction or test was attached.\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/LAB-502/sast-results.sarif.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-502/sast-results.sarif.json",
+          "size_bytes": 1920,
+          "media_type": "application/sarif+json",
+          "preview": "{\n  \"synthetic\": true,\n  \"actual_lucid_finding\": false,\n  \"disclaimer\": \"Synthetic lab evidence in a SARIF-like shape. Fictional scanner and rule; not a real Lucid finding.\",\n  \"version\": \"2.1.0\",\n  \"runs\": [\n    {\n      \"tool\": {\"driver\": {\"name\": \"synthetic-sast-nightly\", \"version\": \"2.3.0-lab\", \"rules\": [\n        {\"id\": \"java-taint-os-command\", \"shortDescription\": {\"text\": \"Caller-controlled data reaches an OS process execution sink\"}, \"properties\": {\"cwe\": \"CWE-78\", \"scanner_severity\": \"critical\"}}\n      ]}},\n      \"invocation\": {\"startTimeUtc\": \"2026-10-09T03:00:00Z\", \"properties\": {\"scanned_revision\": \"not recorded by importer\"}},\n      \"results\": [\n        {\n          \"ruleId\": \"java-taint-os-command\",\n          \"level\": \"error\",\n          \"message\": {\"text\": \"Release.stage() from the approval request flows into java.lang.Runtime.exec(String) without neutralization.\"},\n          \"locations\": [{\"physicalLocation\": {\"artifactLocation\": {\"uri\": \"repos/ota-release-gateway/src/OtaReleaseService.java\"}, \"region\": {\"startLine\": 7}}}],\n          \"codeFlows\": [{\"threadFlows\": [{\"locations\": [\n            {\"location\": {\"physicalLocation\": {\"artifactLocation\": {\"uri\": \"repos/ota-release-gateway/src/OtaReleaseService.java\"}, \"region\": {\"startLine\": 5}}, \"message\": {\"text\": \"source: parameter 'release' of approve(Operator, Release)\"}}},\n            {\"location\": {\"physicalLocation\": {\"artifactLocation\": {\"uri\": \"repos/ota-release-gateway/src/OtaReleaseService.java\"}, \"region\": {\"startLine\": 7}}, \"message\": {\"text\": \"propagation: release.stage()\"}}},\n            {\"location\": {\"physicalLocation\": {\"artifactLocation\": {\"uri\": \"repos/ota-release-gateway/src/OtaReleaseService.java\"}, \"region\": {\"startLine\": 7}}, \"message\": {\"text\": \"sink: java.lang.Runtime.exec(String) (stage-specific rollout script)\"}}}\n          ]}]}],\n          \"properties\": {\"confidence\": \"medium\"}\n        }\n      ]\n    }\n  ]\n}\n",
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "LAB-503",
+      "kind": "intake-evidence",
+      "path": "data/evidence/LAB-503/",
+      "tickets": [
+        "LAB-503"
+      ],
+      "summary": null,
+      "files": [
+        {
+          "path": "data/evidence/LAB-503/crash-log.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-503/crash-log.txt",
+          "size_bytes": 1125,
+          "media_type": "text/plain",
+          "preview": "# Synthetic lab evidence. Fictional batch worker and host; not a real Lucid finding.\n# Captured from a hypothetical nonproduction telemetry export worker (worker id: synth-export-worker-3).\n2026-10-12T04:17:09Z INFO  batch start batch=synth-batch-0412 events=512\n2026-10-12T04:17:09Z WARN  log sink rotation in progress; operational writer re-initialising\npanic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x1 addr=0x18 pc=0x4c6ed6]\n\ngoroutine 41 [running]:\nfmt.Fprintf({0x0, 0x0}, {0x58e19b, 0x25}, {0xc0001a3f30, 0x3, 0x3})\n\t/usr/local/go/src/fmt/print.go:225 +0x76\nexample.com/connected-cloud/telemetry-exporter.Export(...)\n\trepos/telemetry-exporter/export.go:11\nmain.processBatch(0xc0000b2000, 0x200)\n\tsynth-export-worker/worker.go:58 +0x1f4\nmain.main()\n\tsynth-export-worker/worker.go:22 +0x9a\nexit status 2\n2026-10-12T04:17:10Z INFO  supervisor: worker exited (status 2); restart 1/5\n2026-10-12T05:02:44Z INFO  supervisor: worker exited (status 2); restart 2/5\n2026-10-12T05:02:44Z WARN  supervisor: batch synth-batch-0412 re-queued; 512 events delayed\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/LAB-503/reporter-note.md",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-503/reporter-note.md",
+          "size_bytes": 665,
+          "media_type": "text/markdown",
+          "preview": "# Reporter note (synthetic)\n\n> Synthetic lab evidence. Fictional on-call engineer and worker; not a real Lucid finding.\n\n- Reporter: on-call engineer for the hypothetical export pipeline, filed on 2026-10-12.\n- Symptom: the export worker exited twice with a runtime panic during log sink rotation, and a batch was re-queued (see `crash-log.txt`).\n- Reporter's assessment: availability impact only; `medium`. No data exposure observed.\n- The crash was not reproduced on demand. The worker source shown in the trace is not in this lab. No test in `repos/telemetry-exporter` was run against this scenario.\n- Ownership: the service has no owning team in the inventory.\n",
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "LAB-504",
+      "kind": "intake-evidence",
+      "path": "data/evidence/LAB-504/",
+      "tickets": [
+        "LAB-504"
+      ],
+      "summary": null,
+      "files": [
+        {
+          "path": "data/evidence/LAB-504/reporter-note.md",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-504/reporter-note.md",
+          "size_bytes": 715,
+          "media_type": "text/markdown",
+          "preview": "# Reporter note (synthetic)\n\n> Synthetic lab evidence. Fictional reporter, pod, and incident; not a real Lucid finding.\n\n- Reporter: support-cloud SRE (fictional), filed on 2026-10-13.\n- Symptom: the hypothetical support pod hit its memory limit and restarted when an agent opened `bundle-2026-10-13-full.txt` (about 6 GiB) from inside the approved diagnostic root. Support tooling was unavailable to every agent for about 20 minutes.\n- Reporter's severity: `high`. Any support agent can trigger this with a legitimate bundle name, and the outage takes support tooling down for all agents.\n- The scanner rated the same code `low` (see `scanner-findings.json`).\n- The service owner has not confirmed a severity yet.\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/LAB-504/scanner-findings.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-504/scanner-findings.json",
+          "size_bytes": 687,
+          "media_type": "application/json",
+          "preview": "{\n  \"synthetic\": true,\n  \"actual_lucid_finding\": false,\n  \"disclaimer\": \"Synthetic lab evidence. Fictional scanner and rule; not a real Lucid finding.\",\n  \"tool\": {\"name\": \"synthetic-sast-nightly\", \"version\": \"2.3.0-lab\"},\n  \"scanned_at\": \"2026-10-13T03:00:00Z\",\n  \"results\": [\n    {\n      \"rule_id\": \"py-unbounded-file-read\",\n      \"message\": \"Whole-file read with no size bound on a file selected by request input.\",\n      \"file\": \"repos/diagnostics-document-api/documents.py\",\n      \"line\": 6,\n      \"cwe\": \"CWE-400\",\n      \"scanner_severity\": \"low\",\n      \"scanner_rationale\": \"Rule default: resource consumption in an internal-only service.\",\n      \"confidence\": \"high\"\n    }\n  ]\n}\n",
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "dependency-scenario",
+      "kind": "dependency-scenario",
+      "path": "data/evidence/dependency-scenario/",
+      "tickets": [
+        "DEP-101"
+      ],
+      "summary": {
+        "synthetic": true,
+        "repository": "diagnostics-document-api",
+        "started_utc": "2026-10-16T16:55:25.864872+00:00",
+        "python": "3.10.12",
+        "scanner_requirements": [
+          "pip==25.2",
+          "pip-audit==2.10.1"
+        ],
+        "build_constraints": "Cython<3",
+        "expected_advisory_ids": [
+          "GHSA-8q59-q68h-6hv4",
+          "PYSEC-2021-142"
+        ],
+        "phases": {
+          "before": {
+            "manifest": "repos/diagnostics-document-api/requirements.txt",
+            "installed": "PyYAML==5.3.1",
+            "scanner_exit": 1,
+            "scanner_ids_and_aliases": [
+              "CVE-2020-14343",
+              "GHSA-8q59-q68h-6hv4",
+              "PYSEC-2021-142"
+            ],
+            "tests_exit": 0,
+            "evidence": "data/evidence/dependency-scenario/before"
+          },
+          "after": {
+            "manifest": "repos/diagnostics-document-api/requirements-upgrade.txt",
+            "installed": "PyYAML==5.4",
+            "scanner_exit": 0,
+            "scanner_ids_and_aliases": [],
+            "tests_exit": 0,
+            "evidence": "data/evidence/dependency-scenario/after"
+          }
+        },
+        "scanner_version": "pip-audit 2.10.1",
+        "finished_utc": "2026-10-16T16:55:34.828290+00:00",
+        "checks": [
+          {
+            "check": "before manifest matches recorded pin",
+            "passed": true,
+            "detail": "('PyYAML', '5.3.1') vs ('PyYAML', '5.3.1')"
+          },
+          {
+            "check": "upgrade manifest pins the OSV fixed version",
+            "passed": true,
+            "detail": "5.4 vs ['5.4']"
+          },
+          {
+            "check": "before: installed version",
+            "passed": true,
+            "detail": "PyYAML 5.3.1"
+          },
+          {
+            "check": "before: scanner reports recorded advisories",
+            "passed": true,
+            "detail": "missing=[] scanner_exit=1"
+          },
+          {
+            "check": "before: scenario tests pass",
+            "passed": true,
+            "detail": "exit=0"
+          },
+          {
+            "check": "after: installed version",
+            "passed": true,
+            "detail": "PyYAML 5.4"
+          },
+          {
+            "check": "after: recorded advisories absent",
+            "passed": true,
+            "detail": "present=[] scanner_exit=0"
+          },
+          {
+            "check": "after: scenario tests pass",
+            "passed": true,
+            "detail": "exit=0"
+          }
+        ],
+        "result": "PASS"
+      },
+      "files": [
+        {
+          "path": "data/evidence/dependency-scenario/after/pip-audit.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/after/pip-audit.json",
+          "size_bytes": 83,
+          "media_type": "application/json",
+          "preview": "{\"dependencies\": [{\"name\": \"pyyaml\", \"version\": \"5.4\", \"vulns\": []}], \"fixes\": []}\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/dependency-scenario/after/pip-freeze.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/after/pip-freeze.txt",
+          "size_bytes": 12,
+          "media_type": "text/plain",
+          "preview": "PyYAML==5.4\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/dependency-scenario/after/tests.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/after/tests.txt",
+          "size_bytes": 567,
+          "media_type": "text/plain",
+          "preview": "test_parses_valid_manifest (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_invalid_artifact_count (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_malformed_yaml (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_missing_fields (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_non_mapping (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_unknown_tag (test_bundle_manifest.BundleManifestTests) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/dependency-scenario/before/pip-audit.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/before/pip-audit.json",
+          "size_bytes": 858,
+          "media_type": "application/json",
+          "preview": "{\"dependencies\": [{\"name\": \"pyyaml\", \"version\": \"5.3.1\", \"vulns\": [{\"id\": \"PYSEC-2021-142\", \"fix_versions\": [\"5.4\"], \"aliases\": [\"CVE-2020-14343\", \"GHSA-8q59-q68h-6hv4\"], \"description\": \"Improper Input Validation in PyYAML\"}, {\"id\": \"PYSEC-2021-142\", \"fix_versions\": [\"5.4\"], \"aliases\": [\"CVE-2020-14343\", \"GHSA-8q59-q68h-6hv4\"], \"description\": \"A vulnerability was discovered in the PyYAML library in versions before 5.4, where it is susceptible to arbitrary code execution when it processes untrusted YAML files through the full_load method or with the FullLoader loader. Applications that use the library to process untrusted input may be vulnerable to this flaw. This flaw allows an attacker to execute arbitrary code on the system by abusing the python/object/new constructor. This flaw is due to an incomplete fix for CVE-2020-1747.\"}]}], \"fixes\": []}\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/dependency-scenario/before/pip-freeze.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/before/pip-freeze.txt",
+          "size_bytes": 14,
+          "media_type": "text/plain",
+          "preview": "PyYAML==5.3.1\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/dependency-scenario/before/tests.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/before/tests.txt",
+          "size_bytes": 567,
+          "media_type": "text/plain",
+          "preview": "test_parses_valid_manifest (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_invalid_artifact_count (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_malformed_yaml (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_missing_fields (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_non_mapping (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_unknown_tag (test_bundle_manifest.BundleManifestTests) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/dependency-scenario/commands.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/commands.json",
+          "size_bytes": 8157,
+          "media_type": "application/json",
+          "preview": "[\n  {\n    \"command\": \"/usr/bin/python3 -m venv $WORKDIR/scanner\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:25.864898+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:27.815355+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/python -m pip install -q --disable-pip-version-check pip==25.2 pip-audit==2.10.1\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:27.815398+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:31.241170+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/pip-audit --version\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:31.241220+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:31.534225+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"pip-audit 2.10.1\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/python -m pip freeze --all\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:31.534272+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:31.682514+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"boolean.py==5.0\\nCacheControl==0.14.4\\ncertifi==2026.7.22\\ncharset-normalizer==3.5.2\\ncyclonedx-python-lib==11.12.0\\ndefusedxml==0.7.1\\nfilelock==4.1.0\\nidna==3.20\\nlicense-expression==30.4.4\\nmarkdown-it-py==4.2.0\\nmdurl==0.1.2\\nmsgpack==1.2.3\\npackageurl-python==0.17.6\\npackaging==26.3\\npip==25.2\\npip-requirements-parser==32.0.1\\npip_api==0.0.35\\npip_audit==2.10.1\\nplatformdirs==4.12.4\\npy-serializable==2.1.0\\nPygments==2.21.0\\npyparsing==3.3.3\\nrequests==2.34.2\\nrich==15.0.0\\nsetuptools==59.6.0\\nsortedcontainers==2.4.0\\ntomli==2.5.0\\ntomli_w==1.2.0\\ntyping_extensions==4.16.0\\nurllib3==2.8.0\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"/usr/bin/python3 -m venv --without-pip $WORKDIR/before\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:31.682779+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:31.706449+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/python -m pip --python $WORKDIR/before/bin/python install -q --disable-pip-version-check -r $REPO/repos/diagnostics-document-api/requirements.txt\",\n    \"cwd\": \"$REPO\",\n    \"env\": {\n      \"PIP_CONSTRAINT\": \"$WORKDIR/build-constraints.txt\"\n    },\n    \"started_utc\": \"2026-10-16T16:55:31.706479+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:32.208891+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/python -m pip --python $WORKDIR/before/bin/python freeze --all\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:32.208933+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:32.488779+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"PyYAML==5.3.1\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/before/bin/python -c import importlib.metadata as m; print(m.version('PyYAML'))\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:32.488925+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:32.524627+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"5.3.1\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/before/bin/python -c import sysconfig; print(sysconfig.get_paths()['purelib'])\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:32.524642+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:32.534430+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"$WORKDIR/before/lib/python3.10/site-packages\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/pip-audit --path $WORKDIR/before/lib/python3.10/site-packages --vulnerability-service osv --format json --output $REPO/data/evidence/dependency-scenario/before/pip-audit.json --progress-spinner off\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:32.534470+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:33.248009+00:00\",\n    \"returncode\": 1,\n    \"stdout\": \"\",\n    \"stderr\": \"Found 2 known vulnerabilities in 1 package\\n\"\n  },\n  {\n    \"command\": \"$WORKDIR/before/bin/python -m unittest discover -s depe",
+          "truncated": true
+        },
+        {
+          "path": "data/evidence/dependency-scenario/scanner-freeze.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/scanner-freeze.txt",
+          "size_bytes": 572,
+          "media_type": "text/plain",
+          "preview": "boolean.py==5.0\nCacheControl==0.14.4\ncertifi==2026.7.22\ncharset-normalizer==3.5.2\ncyclonedx-python-lib==11.12.0\ndefusedxml==0.7.1\nfilelock==4.1.0\nidna==3.20\nlicense-expression==30.4.4\nmarkdown-it-py==4.2.0\nmdurl==0.1.2\nmsgpack==1.2.3\npackageurl-python==0.17.6\npackaging==26.3\npip==25.2\npip-requirements-parser==32.0.1\npip_api==0.0.35\npip_audit==2.10.1\nplatformdirs==4.12.4\npy-serializable==2.1.0\nPygments==2.21.0\npyparsing==3.3.3\nrequests==2.34.2\nrich==15.0.0\nsetuptools==59.6.0\nsortedcontainers==2.4.0\ntomli==2.5.0\ntomli_w==1.2.0\ntyping_extensions==4.16.0\nurllib3==2.8.0\n",
+          "truncated": false
+        },
+        {
+          "path": "data/evidence/dependency-scenario/summary.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/summary.json",
+          "size_bytes": 2108,
+          "media_type": "application/json",
+          "preview": "{\n  \"synthetic\": true,\n  \"repository\": \"diagnostics-document-api\",\n  \"started_utc\": \"2026-10-16T16:55:25.864872+00:00\",\n  \"python\": \"3.10.12\",\n  \"scanner_requirements\": [\n    \"pip==25.2\",\n    \"pip-audit==2.10.1\"\n  ],\n  \"build_constraints\": \"Cython<3\",\n  \"expected_advisory_ids\": [\n    \"GHSA-8q59-q68h-6hv4\",\n    \"PYSEC-2021-142\"\n  ],\n  \"phases\": {\n    \"before\": {\n      \"manifest\": \"repos/diagnostics-document-api/requirements.txt\",\n      \"installed\": \"PyYAML==5.3.1\",\n      \"scanner_exit\": 1,\n      \"scanner_ids_and_aliases\": [\n        \"CVE-2020-14343\",\n        \"GHSA-8q59-q68h-6hv4\",\n        \"PYSEC-2021-142\"\n      ],\n      \"tests_exit\": 0,\n      \"evidence\": \"data/evidence/dependency-scenario/before\"\n    },\n    \"after\": {\n      \"manifest\": \"repos/diagnostics-document-api/requirements-upgrade.txt\",\n      \"installed\": \"PyYAML==5.4\",\n      \"scanner_exit\": 0,\n      \"scanner_ids_and_aliases\": [],\n      \"tests_exit\": 0,\n      \"evidence\": \"data/evidence/dependency-scenario/after\"\n    }\n  },\n  \"scanner_version\": \"pip-audit 2.10.1\",\n  \"finished_utc\": \"2026-10-16T16:55:34.828290+00:00\",\n  \"checks\": [\n    {\n      \"check\": \"before manifest matches recorded pin\",\n      \"passed\": true,\n      \"detail\": \"('PyYAML', '5.3.1') vs ('PyYAML', '5.3.1')\"\n    },\n    {\n      \"check\": \"upgrade manifest pins the OSV fixed version\",\n      \"passed\": true,\n      \"detail\": \"5.4 vs ['5.4']\"\n    },\n    {\n      \"check\": \"before: installed version\",\n      \"passed\": true,\n      \"detail\": \"PyYAML 5.3.1\"\n    },\n    {\n      \"check\": \"before: scanner reports recorded advisories\",\n      \"passed\": true,\n      \"detail\": \"missing=[] scanner_exit=1\"\n    },\n    {\n      \"check\": \"before: scenario tests pass\",\n      \"passed\": true,\n      \"detail\": \"exit=0\"\n    },\n    {\n      \"check\": \"after: installed version\",\n      \"passed\": true,\n      \"detail\": \"PyYAML 5.4\"\n    },\n    {\n      \"check\": \"after: recorded advisories absent\",\n      \"passed\": true,\n      \"detail\": \"present=[] scanner_exit=0\"\n    },\n    {\n      \"check\": \"after: scenario tests pass\",\n      \"passed\": true,\n      \"detail\": \"exit=0\"\n    }\n  ],\n  \"result\": \"PASS\"\n}\n",
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "baselines": {
+    "source": "baseline-results.txt",
+    "command": "python3 tools/run_baselines.py",
+    "exit_code": null,
+    "jobs": [
+      {
+        "name": "Python",
+        "language": "python",
+        "result": "FAIL",
+        "expected": "FAIL",
+        "match": true
+      },
+      {
+        "name": "TypeScript compile",
+        "language": "typescript",
+        "result": "PASS",
+        "expected": "PASS",
+        "match": true
+      },
+      {
+        "name": "TypeScript tests",
+        "language": "typescript",
+        "result": "FAIL",
+        "expected": "FAIL",
+        "match": true
+      },
+      {
+        "name": "Java compile",
+        "language": "java",
+        "result": "PASS",
+        "expected": "PASS",
+        "match": true
+      },
+      {
+        "name": "Java tests",
+        "language": "java",
+        "result": "FAIL",
+        "expected": "FAIL",
+        "match": true
+      },
+      {
+        "name": "Go",
+        "language": "go",
+        "result": "FAIL",
+        "expected": "FAIL",
+        "match": true
+      }
+    ],
+    "summary_line": "PASS all expected outcomes; baseline weaknesses remain",
+    "raw": "Python: FAIL; expected FAIL; MATCH\nTypeScript compile: PASS; expected PASS; MATCH\nTypeScript tests: FAIL; expected FAIL; MATCH\nJava compile: PASS; expected PASS; MATCH\nJava tests: FAIL; expected FAIL; MATCH\nGo: FAIL; expected FAIL; MATCH\nPASS all expected outcomes; baseline weaknesses remain\n",
+    "captured_at": null
+  },
+  "audits": {
+    "audit_findings": {
+      "command": "python3 tools/audit_findings.py",
+      "exit_code": 0,
+      "stdout": "PASS schema/provenance audit: 14 synthetic findings (10 LAB-*, 4 DEP-*), 4 represented languages, no advisory IDs on LAB-* findings, 4 DEP-* advisory IDs matched to data/osv records, 4 LAB-5xx tickets with evidence directories\n",
+      "stderr": "",
+      "passed": true
+    },
+    "triage": {
+      "command": "python3 tools/triage.py",
+      "exit_code": 0,
+      "stdout": "14 synthetic findings across 4 repositories / 8 candidate root causes\nshared-root-path-validation: LAB-101, LAB-102, LAB-103; source=synthetic-static-review; group requires code review\ntenant-authorization: LAB-201; source=synthetic-static-review; group requires code review\nota-release-rbac: LAB-301; source=synthetic-static-review; group requires code review\ntelemetry-log-redaction: LAB-401; source=synthetic-static-review; group requires code review\nintake-unclassified: LAB-501, LAB-502, LAB-503, LAB-504; source=synthetic-intake-queue; group requires code review\ndependency-pyyaml: DEP-101; source=synthetic-dependency-pin-osv-match; group requires code review\ndependency-express: DEP-201, DEP-202; source=synthetic-dependency-pin-osv-match; group requires code review\ndependency-snakeyaml: DEP-301; source=synthetic-dependency-pin-osv-match; group requires code review\n",
+      "stderr": "",
+      "passed": true
+    }
+  },
+  "ci": {
+    "lab_validation_main": null,
+    "deploy_dashboard_main": null
+  },
+  "history": [
+    {
+      "at": "2026-10-16T17:42:25Z",
+      "type": "pr-merged",
+      "summary": "#13 merged: Status report: revalidated fix PR heads, session map, PR dependencies",
+      "ref": "#13",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/13"
+    },
+    {
+      "at": "2026-10-16T17:41:06Z",
+      "type": "pr-opened",
+      "summary": "#13 opened: Status report: revalidated fix PR heads, session map, PR dependencies",
+      "ref": "#13",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/13"
+    },
+    {
+      "at": "2026-10-16T17:09:33Z",
+      "type": "pr-merged",
+      "summary": "#12 merged: Add final lab context status report (docs/lab-context-status.md)",
+      "ref": "#12",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/12"
+    },
+    {
+      "at": "2026-10-16T17:08:08Z",
+      "type": "pr-opened",
+      "summary": "#12 opened: Add final lab context status report (docs/lab-context-status.md)",
+      "ref": "#12",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/12"
+    },
+    {
+      "at": "2026-10-16T17:05:21Z",
+      "type": "pr-merged",
+      "summary": "#11 merged: Add DEP-* dependency tickets for OSV-pinned advisories; scope audit advisory_id checks by prefix",
+      "ref": "#11",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/11"
+    },
+    {
+      "at": "2026-10-16T17:04:37Z",
+      "type": "pr-merged",
+      "summary": "#10 merged: CI: lab-validation workflow, ERROR on missing toolchain, --fixed <lang> runner mode",
+      "ref": "#10",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/10"
+    },
+    {
+      "at": "2026-10-16T17:04:26Z",
+      "type": "pr-opened",
+      "summary": "#11 opened: Add DEP-* dependency tickets for OSV-pinned advisories; scope audit advisory_id checks by prefix",
+      "ref": "#11",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/11"
+    },
+    {
+      "at": "2026-10-16T17:01:25Z",
+      "type": "pr-merged",
+      "summary": "#6 merged: Add synthetic LAB-501..504 intake tickets with evidence (append-only)",
+      "ref": "#6",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/6"
+    },
+    {
+      "at": "2026-10-16T17:01:10Z",
+      "type": "pr-opened",
+      "summary": "#10 opened: CI: lab-validation workflow, ERROR on missing toolchain, --fixed <lang> runner mode",
+      "ref": "#10",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/10"
+    },
+    {
+      "at": "2026-10-16T17:00:57Z",
+      "type": "pr-opened",
+      "summary": "#9 opened: LAB-101/102/103: enforce path containment in read_diagnostic_document (CWE-22, synthetic)",
+      "ref": "#9",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/9"
+    },
+    {
+      "at": "2026-10-16T16:59:58Z",
+      "type": "pr-opened",
+      "summary": "#8 opened: LAB-401: redact vehicle-linked fields from telemetry-exporter logs (owner escalation required)",
+      "ref": "#8",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/8"
+    },
+    {
+      "at": "2026-10-16T16:59:57Z",
+      "type": "pr-opened",
+      "summary": "#7 opened: LAB-301: require release-manager role for OTA release approval (synthetic, CWE-862)",
+      "ref": "#7",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/7"
+    },
+    {
+      "at": "2026-10-16T16:59:42Z",
+      "type": "pr-merged",
+      "summary": "#4 merged: SESSION D phase 1: synthetic pinned-vulnerable dependency manifests with OSV evidence",
+      "ref": "#4",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/4"
+    },
+    {
+      "at": "2026-10-16T16:59:37Z",
+      "type": "pr-opened",
+      "summary": "#6 opened: Add synthetic LAB-501..504 intake tickets with evidence (append-only)",
+      "ref": "#6",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/6"
+    },
+    {
+      "at": "2026-10-16T16:55:34Z",
+      "type": "evidence-captured",
+      "summary": "Dependency scenario evidence captured (DEP-101; result PASS)",
+      "ref": "data/evidence/dependency-scenario/",
+      "url": null
+    },
+    {
+      "at": "2026-10-16T16:53:57Z",
+      "type": "pr-merged",
+      "summary": "#5 merged: Add auto-discoverable Devin skills under .agents/skills",
+      "ref": "#5",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/5"
+    },
+    {
+      "at": "2026-10-16T16:53:33Z",
+      "type": "pr-merged",
+      "summary": "#3 merged: Session A: synthetic service context docs, CODEOWNERS, CONTRIBUTING",
+      "ref": "#3",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/3"
+    },
+    {
+      "at": "2026-10-16T16:53:28Z",
+      "type": "pr-merged",
+      "summary": "#2 merged: [Session B] Split engineering policies into secure-coding, SLA, and PR/approval policy docs (synthetic)",
+      "ref": "#2",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/2"
+    },
+    {
+      "at": "2026-10-16T16:53:13Z",
+      "type": "pr-opened",
+      "summary": "#5 opened: Add auto-discoverable Devin skills under .agents/skills",
+      "ref": "#5",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/5"
+    },
+    {
+      "at": "2026-10-16T16:29:42Z",
+      "type": "pr-opened",
+      "summary": "#4 opened: SESSION D phase 1: synthetic pinned-vulnerable dependency manifests with OSV evidence",
+      "ref": "#4",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/4"
+    },
+    {
+      "at": "2026-10-16T16:27:42Z",
+      "type": "pr-opened",
+      "summary": "#3 opened: Session A: synthetic service context docs, CODEOWNERS, CONTRIBUTING",
+      "ref": "#3",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/3"
+    },
+    {
+      "at": "2026-10-16T16:26:47Z",
+      "type": "pr-opened",
+      "summary": "#2 opened: [Session B] Split engineering policies into secure-coding, SLA, and PR/approval policy docs (synthetic)",
+      "ref": "#2",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/2"
+    },
+    {
+      "at": "2026-10-16T16:26:39Z",
+      "type": "advisory-retrieved",
+      "summary": "GHSA-rv95-896h-c2vc retrieved from OSV",
+      "ref": "GHSA-rv95-896h-c2vc",
+      "url": "https://osv.dev/vulnerability/GHSA-rv95-896h-c2vc"
+    },
+    {
+      "at": "2026-10-16T16:26:39Z",
+      "type": "advisory-retrieved",
+      "summary": "GHSA-qw6h-vgh9-j6wx retrieved from OSV",
+      "ref": "GHSA-qw6h-vgh9-j6wx",
+      "url": "https://osv.dev/vulnerability/GHSA-qw6h-vgh9-j6wx"
+    },
+    {
+      "at": "2026-10-16T16:26:39Z",
+      "type": "advisory-retrieved",
+      "summary": "GHSA-mjmj-j48q-9wg2 retrieved from OSV",
+      "ref": "GHSA-mjmj-j48q-9wg2",
+      "url": "https://osv.dev/vulnerability/GHSA-mjmj-j48q-9wg2"
+    },
+    {
+      "at": "2026-10-16T16:26:38Z",
+      "type": "advisory-retrieved",
+      "summary": "PYSEC-2021-142 retrieved from OSV",
+      "ref": "PYSEC-2021-142",
+      "url": "https://osv.dev/vulnerability/PYSEC-2021-142"
+    },
+    {
+      "at": "2026-10-16T16:26:38Z",
+      "type": "advisory-retrieved",
+      "summary": "GHSA-8q59-q68h-6hv4 retrieved from OSV",
+      "ref": "GHSA-8q59-q68h-6hv4",
+      "url": "https://osv.dev/vulnerability/GHSA-8q59-q68h-6hv4"
+    },
+    {
+      "at": "2026-10-16T16:06:18Z",
+      "type": "pr-opened",
+      "summary": "#1 opened: LAB-201: enforce tenant scoping in getChargingSession (CWE-639)",
+      "ref": "#1",
+      "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/pull/1"
+    },
+    {
+      "at": "2026-10-16",
+      "type": "finding-reported",
+      "summary": "DEP-301 reported: SnakeYaml Constructor Deserialization Remote Code Execution",
+      "ref": "DEP-301",
+      "url": null
+    },
+    {
+      "at": "2026-10-16",
+      "type": "finding-reported",
+      "summary": "DEP-202 reported: express vulnerable to XSS via response.redirect()",
+      "ref": "DEP-202",
+      "url": null
+    },
+    {
+      "at": "2026-10-16",
+      "type": "finding-reported",
+      "summary": "DEP-201 reported: Express.js Open Redirect in malformed URLs",
+      "ref": "DEP-201",
+      "url": null
+    },
+    {
+      "at": "2026-10-16",
+      "type": "finding-reported",
+      "summary": "DEP-101 reported: Improper Input Validation in PyYAML",
+      "ref": "DEP-101",
+      "url": null
+    },
+    {
+      "at": "2026-10-13",
+      "type": "finding-reported",
+      "summary": "LAB-504 reported: Large diagnostic bundle request restarts support pod",
+      "ref": "LAB-504",
+      "url": null
+    },
+    {
+      "at": "2026-10-12",
+      "type": "finding-reported",
+      "summary": "LAB-503 reported: Export worker restarts with runtime panic during log sink rotation",
+      "ref": "LAB-503",
+      "url": null
+    },
+    {
+      "at": "2026-10-09",
+      "type": "finding-reported",
+      "summary": "LAB-502 reported: Release stage value reported to reach process execution",
+      "ref": "LAB-502",
+      "url": null
+    },
+    {
+      "at": "2026-10-08",
+      "type": "finding-reported",
+      "summary": "LAB-501 reported: Billing summary includes charging energy from an unrelated fleet",
+      "ref": "LAB-501",
+      "url": null
+    },
+    {
+      "at": "2026-10-01",
+      "type": "finding-reported",
+      "summary": "LAB-401 reported: Vehicle-linked location metadata in logs",
+      "ref": "LAB-401",
+      "url": null
+    },
+    {
+      "at": "2026-10-01",
+      "type": "finding-reported",
+      "summary": "LAB-301 reported: Viewer can approve synthetic OTA release",
+      "ref": "LAB-301",
+      "url": null
+    },
+    {
+      "at": "2026-10-01",
+      "type": "finding-reported",
+      "summary": "LAB-201 reported: Charging session visible cross-tenant",
+      "ref": "LAB-201",
+      "url": null
+    },
+    {
+      "at": "2026-10-01",
+      "type": "finding-reported",
+      "summary": "LAB-103 reported: Symlink resolves outside document root",
+      "ref": "LAB-103",
+      "url": null
+    },
+    {
+      "at": "2026-10-01",
+      "type": "finding-reported",
+      "summary": "LAB-102 reported: Absolute path bypasses document root",
+      "ref": "LAB-102",
+      "url": null
+    },
+    {
+      "at": "2026-10-01",
+      "type": "finding-reported",
+      "summary": "LAB-101 reported: Path traversal via parent segment",
+      "ref": "LAB-101",
+      "url": null
+    }
+  ]
+}
