@@ -41,6 +41,27 @@
         "all tickets, owners, priorities, timestamps, sample assets, rules and code"
       ],
       "disclaimer": "Created for demo; not real incidents or actual Lucid data."
+    },
+    {
+      "type": "synthetic",
+      "claims": [
+        "LAB-501..LAB-504 intake tickets in data/findings.json",
+        "scanner output, SARIF-like results, crash log, and reporter notes under data/evidence/LAB-501..LAB-504/"
+      ],
+      "files": [
+        "data/evidence/LAB-501/",
+        "data/evidence/LAB-502/",
+        "data/evidence/LAB-503/",
+        "data/evidence/LAB-504/"
+      ],
+      "conventions": [
+        "LAB-5xx tickets are untriaged intake: root_cause_group is 'intake-unclassified' and source is 'synthetic-intake-queue' until triage confirms them against code",
+        "test_name is null when no existing test is linked to the ticket; it is never an empty string or a placeholder name",
+        "verification_status 'unverified_pending_triage' means not yet reviewed; 'not_reproduced_no_failing_test' means reported but no test reproduces it",
+        "severity is the tracked intake severity per devin/knowledge/vulnerability-sla-policy.md; scanner and reporter severities are recorded in the evidence files",
+        "every LAB-5xx ticket has an evidence directory data/evidence/<ticket>/ (checked by tools/audit_findings.py)"
+      ],
+      "disclaimer": "Fictional scanners, reporters, workers, and incidents created for triage practice; not real findings, tools, or actual Lucid data. Evidence does not describe remediation."
     }
   ]
 }
