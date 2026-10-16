@@ -147,6 +147,22 @@ class RecordedBuild(unittest.TestCase):
         self.assertEqual(by_ticket(self.data)['LAB-401']['status'], 'fix-blocked')
         self.assertFalse(by_ticket(self.data)['LAB-401']['owner_assigned'])
 
+    def test_alias_advisory_links_finding(self):
+        advisories = {a['id']: a for a in self.data['advisories']}
+        self.assertEqual(advisories['PYSEC-2021-142']['finding_ids'], ['DEP-101'])
+        self.assertEqual(advisories['GHSA-8q59-q68h-6hv4']['finding_ids'], ['DEP-101'])
+        self.assertEqual(by_ticket(self.data)['DEP-101']['advisory_id'], 'GHSA-8q59-q68h-6hv4')
+        self.assertTrue(all(a['finding_ids'] for a in advisories.values()))
+
+    def test_evidence_refs_are_tracked_files(self):
+        import subprocess
+        tracked = set(subprocess.run(['git', 'ls-files'], cwd=build_data.ROOT, capture_output=True, text=True,
+                                     check=True).stdout.splitlines())
+        refs = [e['path'] for f in self.data['findings'] for e in f['evidence'] if not e['path'].endswith('/')]
+        refs += [x['path'] for b in self.data['evidence_bundles'] for x in b['files']]
+        self.assertTrue(refs)
+        self.assertEqual([r for r in refs if r not in tracked], [])
+
     def test_github_skipped(self):
         self.assertEqual(self.data['sources']['github']['status'], 'skipped')
         self.assertTrue(all(r['state_source'] == 'recorded' and r['github'] is None for r in self.data['remediations']))
@@ -254,6 +270,11 @@ class ValidateData(unittest.TestCase):
         def add_alias(d):
             by_ticket(d)['LAB-201']['aliases'] = ['CVE-2024-29041']
         self.assertTrue(self.rejected(self.mutate(add_alias)))
+
+    def test_rejects_orphaned_alias_advisory(self):
+        def orphan(d):
+            next(a for a in d['advisories'] if a['id'] == 'PYSEC-2021-142')['finding_ids'] = []
+        self.assertTrue(self.rejected(self.mutate(orphan)))
 
     def test_rejects_pr8_unblocked(self):
         def unblock(d):

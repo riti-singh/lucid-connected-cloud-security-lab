@@ -53,8 +53,10 @@ def semantic_checks(data, source_findings):
     for f in dep:
         assert f['advisory_id'] in advisory_ids, f"{f['ticket']}: advisory_id {f['advisory_id']!r} not in advisories"
     for a in data['advisories']:
-        for t in a['finding_ids']:
-            assert t in by_ticket and by_ticket[t]['advisory_id'] == a['id'], f"advisory {a['id']} lists {t}, whose advisory_id differs"
+        expected = sorted(f['ticket'] for f in dep
+                          if f['advisory_id'] == a['id'] or a['id'] in f['aliases'] or f['advisory_id'] in a['aliases'])
+        assert a['finding_ids'] == expected, \
+            f"advisory {a['id']} finding_ids {a['finding_ids']} != {expected} (ID/alias match on DEP-* findings)"
 
     grouped = {}
     for g in data['root_cause_groups']:

@@ -402,11 +402,25 @@ def evidence_file(path, links):
             'media_type': media_type(path), 'preview': preview, 'truncated': truncated}
 
 
+UNTRACKED_DIRS = {'__pycache__', 'dist', 'build', 'node_modules'}
+
+
+def tracked_files(directory):
+    """Files under directory that are committed, so blob URLs resolve; generated output is excluded."""
+    try:
+        out = subprocess.run(['git', 'ls-files', '-z', '--', rel(directory)], cwd=ROOT, capture_output=True,
+                             check=True).stdout.decode()
+        files = [ROOT / p for p in out.split('\0') if p]
+    except (OSError, subprocess.CalledProcessError):
+        files = [f for f in directory.rglob('*') if not set(f.relative_to(directory).parts) & UNTRACKED_DIRS]
+    return sorted(f for f in files if f.is_file())
+
+
 def build_evidence_bundles(raw_findings, links):
     bundles = []
     ev_root = ROOT / 'data/evidence'
     for d in sorted(p for p in ev_root.iterdir() if p.is_dir()):
-        files = [evidence_file(f, links) for f in sorted(d.rglob('*')) if f.is_file()]
+        files = [evidence_file(f, links) for f in tracked_files(d)]
         path = rel(d) + '/'
         if re.fullmatch(r'LAB-5\d\d', d.name):
             bundles.append({'id': d.name, 'kind': 'intake-evidence', 'path': path, 'tickets': [d.name],
@@ -433,9 +447,8 @@ def test_file_refs(service, test_name, links):
     if not test_name or not svc.is_dir():
         return []
     refs = []
-    for f in sorted(svc.rglob('*')):
-        parts = set(f.relative_to(svc).parts)
-        if not f.is_file() or parts & {'dist', 'build', 'node_modules'} or 'test' not in f.name.lower():
+    for f in tracked_files(svc):
+        if 'test' not in f.name.lower():
             continue
         try:
             if test_name in f.read_text(errors='replace'):
@@ -484,6 +497,14 @@ def advisory_package(osv, linked):
     return pkg.get('ecosystem'), pkg.get('name'), (fixed_versions[0] if fixed_versions else None)
 
 
+def advisory_matches(finding, advisory_id, advisory_aliases):
+    """Same vulnerability: either side's ID is the other's ID or one of its aliases."""
+    own = finding.get('advisory_id')
+    return (own == advisory_id
+            or advisory_id in (finding.get('aliases') or [])
+            or (own is not None and own in (advisory_aliases or [])))
+
+
 def build_advisories(raw_findings):
     advisories, inputs = [], []
     for path in sorted((ROOT / 'data/osv').glob('*.json')):
@@ -494,7 +515,8 @@ def build_advisories(raw_findings):
         osv = doc.get('response')
         if not isinstance(osv, dict) or not osv.get('id'):
             continue
-        linked = sorted((f for f in raw_findings if f['ticket'].startswith('DEP-') and f.get('advisory_id') == osv['id']),
+        linked = sorted((f for f in raw_findings
+                         if f['ticket'].startswith('DEP-') and advisory_matches(f, osv['id'], osv.get('aliases'))),
                         key=lambda f: f['ticket'])
         ecosystem, package, fixed = advisory_package(osv, linked)
         for f in linked:

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-16T18:02:21Z",
+  "generated_at": "2026-10-16T18:06:40Z",
   "synthetic": true,
   "disclaimer": "All tickets, services, owners, and findings are synthetic lab data; LAB-* and DEP-* tickets are not real Lucid findings.",
   "repository": {
@@ -8,7 +8,7 @@
     "name": "lucid-connected-cloud-security-lab",
     "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab",
     "default_branch": "main",
-    "commit_sha": "c2fa74ce8bdb56774e8e842073aec215bc9b3ba9",
+    "commit_sha": "c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc",
     "pages_url": "https://riti-singh.github.io/lucid-connected-cloud-security-lab/"
   },
   "sources": {
@@ -56,7 +56,7 @@
         "LAB-201",
         "LAB-501"
       ],
-      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/charging-session-api"
+      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/charging-session-api"
     },
     {
       "repo": "diagnostics-document-api",
@@ -73,7 +73,7 @@
         "LAB-103",
         "LAB-504"
       ],
-      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/diagnostics-document-api"
+      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/diagnostics-document-api"
     },
     {
       "repo": "ota-release-gateway",
@@ -88,7 +88,7 @@
         "LAB-301",
         "LAB-502"
       ],
-      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/ota-release-gateway"
+      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/ota-release-gateway"
     },
     {
       "repo": "telemetry-exporter",
@@ -102,7 +102,7 @@
         "LAB-401",
         "LAB-503"
       ],
-      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/telemetry-exporter"
+      "source_url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/telemetry-exporter"
     }
   ],
   "findings": [
@@ -140,22 +140,22 @@
       "evidence": [
         {
           "path": "repos/diagnostics-document-api/requirements.txt",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/diagnostics-document-api/requirements.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/diagnostics-document-api/requirements.txt",
           "bundle_id": null
         },
         {
           "path": "data/osv/pypi-PyYAML-5.3.1.query.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/osv/pypi-PyYAML-5.3.1.query.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/pypi-PyYAML-5.3.1.query.json",
           "bundle_id": null
         },
         {
           "path": "data/osv/GHSA-8q59-q68h-6hv4.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/osv/GHSA-8q59-q68h-6hv4.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/GHSA-8q59-q68h-6hv4.json",
           "bundle_id": null
         },
         {
           "path": "data/evidence/dependency-scenario/",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario",
           "bundle_id": "dependency-scenario"
         }
       ],
@@ -200,17 +200,17 @@
       "evidence": [
         {
           "path": "repos/charging-session-api/package.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/charging-session-api/package.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/charging-session-api/package.json",
           "bundle_id": null
         },
         {
           "path": "data/osv/npm-express-4.18.2.query.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/osv/npm-express-4.18.2.query.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/npm-express-4.18.2.query.json",
           "bundle_id": null
         },
         {
           "path": "data/osv/GHSA-rv95-896h-c2vc.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/osv/GHSA-rv95-896h-c2vc.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/GHSA-rv95-896h-c2vc.json",
           "bundle_id": null
         }
       ],
@@ -254,17 +254,17 @@
       "evidence": [
         {
           "path": "repos/charging-session-api/package.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/charging-session-api/package.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/charging-session-api/package.json",
           "bundle_id": null
         },
         {
           "path": "data/osv/npm-express-4.18.2.query.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/osv/npm-express-4.18.2.query.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/npm-express-4.18.2.query.json",
           "bundle_id": null
         },
         {
           "path": "data/osv/GHSA-qw6h-vgh9-j6wx.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/osv/GHSA-qw6h-vgh9-j6wx.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/GHSA-qw6h-vgh9-j6wx.json",
           "bundle_id": null
         }
       ],
@@ -309,17 +309,17 @@
       "evidence": [
         {
           "path": "repos/ota-release-gateway/pom.xml",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/ota-release-gateway/pom.xml",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/ota-release-gateway/pom.xml",
           "bundle_id": null
         },
         {
           "path": "data/osv/maven-org.yaml-snakeyaml-1.33.query.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/osv/maven-org.yaml-snakeyaml-1.33.query.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/maven-org.yaml-snakeyaml-1.33.query.json",
           "bundle_id": null
         },
         {
           "path": "data/osv/GHSA-mjmj-j48q-9wg2.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/osv/GHSA-mjmj-j48q-9wg2.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/osv/GHSA-mjmj-j48q-9wg2.json",
           "bundle_id": null
         }
       ],
@@ -361,7 +361,7 @@
       "evidence": [
         {
           "path": "repos/diagnostics-document-api/tests/test_documents.py",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/diagnostics-document-api/tests/test_documents.py",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/diagnostics-document-api/tests/test_documents.py",
           "bundle_id": null
         }
       ],
@@ -405,7 +405,7 @@
       "evidence": [
         {
           "path": "repos/diagnostics-document-api/tests/test_documents.py",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/diagnostics-document-api/tests/test_documents.py",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/diagnostics-document-api/tests/test_documents.py",
           "bundle_id": null
         }
       ],
@@ -449,7 +449,7 @@
       "evidence": [
         {
           "path": "repos/diagnostics-document-api/tests/test_documents.py",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/diagnostics-document-api/tests/test_documents.py",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/diagnostics-document-api/tests/test_documents.py",
           "bundle_id": null
         }
       ],
@@ -493,7 +493,7 @@
       "evidence": [
         {
           "path": "repos/charging-session-api/src/charging.test.ts",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/charging-session-api/src/charging.test.ts",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/charging-session-api/src/charging.test.ts",
           "bundle_id": null
         }
       ],
@@ -537,7 +537,7 @@
       "evidence": [
         {
           "path": "repos/ota-release-gateway/src/OtaReleaseTests.java",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/ota-release-gateway/src/OtaReleaseTests.java",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/ota-release-gateway/src/OtaReleaseTests.java",
           "bundle_id": null
         }
       ],
@@ -581,7 +581,7 @@
       "evidence": [
         {
           "path": "repos/telemetry-exporter/export_test.go",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/repos/telemetry-exporter/export_test.go",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/repos/telemetry-exporter/export_test.go",
           "bundle_id": null
         }
       ],
@@ -625,7 +625,7 @@
       "evidence": [
         {
           "path": "data/evidence/LAB-501/",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-501",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-501",
           "bundle_id": "LAB-501"
         }
       ],
@@ -667,7 +667,7 @@
       "evidence": [
         {
           "path": "data/evidence/LAB-502/",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-502",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-502",
           "bundle_id": "LAB-502"
         }
       ],
@@ -709,7 +709,7 @@
       "evidence": [
         {
           "path": "data/evidence/LAB-503/",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-503",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-503",
           "bundle_id": "LAB-503"
         }
       ],
@@ -751,7 +751,7 @@
       "evidence": [
         {
           "path": "data/evidence/LAB-504/",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-504",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/tree/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-504",
           "bundle_id": "LAB-504"
         }
       ],
@@ -1184,7 +1184,9 @@
           "url": "https://github.com/advisories/GHSA-8q59-q68h-6hv4"
         }
       ],
-      "finding_ids": [],
+      "finding_ids": [
+        "DEP-101"
+      ],
       "osv_path": "data/osv/PYSEC-2021-142.json",
       "osv_url": "https://osv.dev/vulnerability/PYSEC-2021-142"
     }
@@ -1577,27 +1579,27 @@
       "evidence": [
         {
           "path": "data/evidence/dependency-scenario/summary.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/summary.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/summary.json",
           "bundle_id": "dependency-scenario"
         },
         {
           "path": "data/evidence/dependency-scenario/before/pip-audit.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/before/pip-audit.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/before/pip-audit.json",
           "bundle_id": "dependency-scenario"
         },
         {
           "path": "data/evidence/dependency-scenario/after/pip-audit.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/after/pip-audit.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/after/pip-audit.json",
           "bundle_id": "dependency-scenario"
         },
         {
           "path": "data/evidence/dependency-scenario/before/tests.txt",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/before/tests.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/before/tests.txt",
           "bundle_id": "dependency-scenario"
         },
         {
           "path": "data/evidence/dependency-scenario/after/tests.txt",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/after/tests.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/after/tests.txt",
           "bundle_id": "dependency-scenario"
         }
       ],
@@ -1743,7 +1745,7 @@
       "files": [
         {
           "path": "data/evidence/LAB-501/dast-findings.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-501/dast-findings.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-501/dast-findings.json",
           "size_bytes": 1106,
           "media_type": "application/json",
           "preview": "{\n  \"synthetic\": true,\n  \"actual_lucid_finding\": false,\n  \"disclaimer\": \"Synthetic lab evidence. Fictional scanner, fictional portal, synthetic data; not a real Lucid finding.\",\n  \"tool\": {\"name\": \"synthetic-dast-runner\", \"version\": \"0.4.2-lab\"},\n  \"scan\": {\n    \"started_at\": \"2026-10-08T02:10:00Z\",\n    \"target\": \"hypothetical fleet billing portal (nonproduction) -> charging-session-api getChargingSession\",\n    \"authenticated_as\": {\"accountId\": \"fleet-alpha\"}\n  },\n  \"results\": [\n    {\n      \"rule_id\": \"DAST-RESP-FOREIGN-OWNER\",\n      \"name\": \"Response contains a record owned by a different account than the authenticated principal\",\n      \"scanner_severity\": \"high\",\n      \"cwe\": \"CWE-200\",\n      \"request\": {\"caller\": {\"accountId\": \"fleet-alpha\"}, \"sessionId\": \"session-b\"},\n      \"response\": {\"id\": \"session-b\", \"accountId\": \"fleet-beta\", \"kwh\": 29.4, \"locationZone\": \"synthetic-zone-east\"},\n      \"observation\": \"Response accountId 'fleet-beta' does not equal caller accountId 'fleet-alpha'. Identifier was taken from a billing line item, not enumerated.\",\n      \"confidence\": \"firm\"\n    }\n  ]\n}\n",
@@ -1751,7 +1753,7 @@
         },
         {
           "path": "data/evidence/LAB-501/reporter-note.md",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-501/reporter-note.md",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-501/reporter-note.md",
           "size_bytes": 729,
           "media_type": "text/markdown",
           "preview": "# Reporter note (synthetic)\n\n> Synthetic lab evidence. Fictional reporter and team; not a real Lucid finding.\n\n- Reporter: billing-analytics analyst (fictional), filed via the intake queue on 2026-10-08.\n- Symptom: the monthly charging summary for fleet account `fleet-alpha` included a 29.4 kWh session in `synthetic-zone-east`. fleet-alpha has no chargers in that zone.\n- The billing job builds each account's summary by calling the charging session lookup with the account's own caller scope and a session ID from the billing line items.\n- The reporter's severity is `high` (billing totals and location zones of another fleet visible).\n- The reporter has not checked whether existing tickets cover this. No test was attached.\n",
@@ -1770,7 +1772,7 @@
       "files": [
         {
           "path": "data/evidence/LAB-502/reporter-note.md",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-502/reporter-note.md",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-502/reporter-note.md",
           "size_bytes": 423,
           "media_type": "text/markdown",
           "preview": "# Reporter note (synthetic)\n\n> Synthetic lab evidence. Fictional reporter and scanner; not a real Lucid finding.\n\n- Reporter: scanner-import bot (fictional), auto-filed from the nightly SAST import on 2026-10-09.\n- The importer kept the scanner's severity (`critical`) and CWE (`CWE-78`).\n- Nobody has reviewed the result yet. The importer did not record which revision was scanned.\n- No reproduction or test was attached.\n",
@@ -1778,7 +1780,7 @@
         },
         {
           "path": "data/evidence/LAB-502/sast-results.sarif.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-502/sast-results.sarif.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-502/sast-results.sarif.json",
           "size_bytes": 1920,
           "media_type": "application/sarif+json",
           "preview": "{\n  \"synthetic\": true,\n  \"actual_lucid_finding\": false,\n  \"disclaimer\": \"Synthetic lab evidence in a SARIF-like shape. Fictional scanner and rule; not a real Lucid finding.\",\n  \"version\": \"2.1.0\",\n  \"runs\": [\n    {\n      \"tool\": {\"driver\": {\"name\": \"synthetic-sast-nightly\", \"version\": \"2.3.0-lab\", \"rules\": [\n        {\"id\": \"java-taint-os-command\", \"shortDescription\": {\"text\": \"Caller-controlled data reaches an OS process execution sink\"}, \"properties\": {\"cwe\": \"CWE-78\", \"scanner_severity\": \"critical\"}}\n      ]}},\n      \"invocation\": {\"startTimeUtc\": \"2026-10-09T03:00:00Z\", \"properties\": {\"scanned_revision\": \"not recorded by importer\"}},\n      \"results\": [\n        {\n          \"ruleId\": \"java-taint-os-command\",\n          \"level\": \"error\",\n          \"message\": {\"text\": \"Release.stage() from the approval request flows into java.lang.Runtime.exec(String) without neutralization.\"},\n          \"locations\": [{\"physicalLocation\": {\"artifactLocation\": {\"uri\": \"repos/ota-release-gateway/src/OtaReleaseService.java\"}, \"region\": {\"startLine\": 7}}}],\n          \"codeFlows\": [{\"threadFlows\": [{\"locations\": [\n            {\"location\": {\"physicalLocation\": {\"artifactLocation\": {\"uri\": \"repos/ota-release-gateway/src/OtaReleaseService.java\"}, \"region\": {\"startLine\": 5}}, \"message\": {\"text\": \"source: parameter 'release' of approve(Operator, Release)\"}}},\n            {\"location\": {\"physicalLocation\": {\"artifactLocation\": {\"uri\": \"repos/ota-release-gateway/src/OtaReleaseService.java\"}, \"region\": {\"startLine\": 7}}, \"message\": {\"text\": \"propagation: release.stage()\"}}},\n            {\"location\": {\"physicalLocation\": {\"artifactLocation\": {\"uri\": \"repos/ota-release-gateway/src/OtaReleaseService.java\"}, \"region\": {\"startLine\": 7}}, \"message\": {\"text\": \"sink: java.lang.Runtime.exec(String) (stage-specific rollout script)\"}}}\n          ]}]}],\n          \"properties\": {\"confidence\": \"medium\"}\n        }\n      ]\n    }\n  ]\n}\n",
@@ -1797,7 +1799,7 @@
       "files": [
         {
           "path": "data/evidence/LAB-503/crash-log.txt",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-503/crash-log.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-503/crash-log.txt",
           "size_bytes": 1125,
           "media_type": "text/plain",
           "preview": "# Synthetic lab evidence. Fictional batch worker and host; not a real Lucid finding.\n# Captured from a hypothetical nonproduction telemetry export worker (worker id: synth-export-worker-3).\n2026-10-12T04:17:09Z INFO  batch start batch=synth-batch-0412 events=512\n2026-10-12T04:17:09Z WARN  log sink rotation in progress; operational writer re-initialising\npanic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x1 addr=0x18 pc=0x4c6ed6]\n\ngoroutine 41 [running]:\nfmt.Fprintf({0x0, 0x0}, {0x58e19b, 0x25}, {0xc0001a3f30, 0x3, 0x3})\n\t/usr/local/go/src/fmt/print.go:225 +0x76\nexample.com/connected-cloud/telemetry-exporter.Export(...)\n\trepos/telemetry-exporter/export.go:11\nmain.processBatch(0xc0000b2000, 0x200)\n\tsynth-export-worker/worker.go:58 +0x1f4\nmain.main()\n\tsynth-export-worker/worker.go:22 +0x9a\nexit status 2\n2026-10-12T04:17:10Z INFO  supervisor: worker exited (status 2); restart 1/5\n2026-10-12T05:02:44Z INFO  supervisor: worker exited (status 2); restart 2/5\n2026-10-12T05:02:44Z WARN  supervisor: batch synth-batch-0412 re-queued; 512 events delayed\n",
@@ -1805,7 +1807,7 @@
         },
         {
           "path": "data/evidence/LAB-503/reporter-note.md",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-503/reporter-note.md",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-503/reporter-note.md",
           "size_bytes": 665,
           "media_type": "text/markdown",
           "preview": "# Reporter note (synthetic)\n\n> Synthetic lab evidence. Fictional on-call engineer and worker; not a real Lucid finding.\n\n- Reporter: on-call engineer for the hypothetical export pipeline, filed on 2026-10-12.\n- Symptom: the export worker exited twice with a runtime panic during log sink rotation, and a batch was re-queued (see `crash-log.txt`).\n- Reporter's assessment: availability impact only; `medium`. No data exposure observed.\n- The crash was not reproduced on demand. The worker source shown in the trace is not in this lab. No test in `repos/telemetry-exporter` was run against this scenario.\n- Ownership: the service has no owning team in the inventory.\n",
@@ -1824,7 +1826,7 @@
       "files": [
         {
           "path": "data/evidence/LAB-504/reporter-note.md",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-504/reporter-note.md",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-504/reporter-note.md",
           "size_bytes": 715,
           "media_type": "text/markdown",
           "preview": "# Reporter note (synthetic)\n\n> Synthetic lab evidence. Fictional reporter, pod, and incident; not a real Lucid finding.\n\n- Reporter: support-cloud SRE (fictional), filed on 2026-10-13.\n- Symptom: the hypothetical support pod hit its memory limit and restarted when an agent opened `bundle-2026-10-13-full.txt` (about 6 GiB) from inside the approved diagnostic root. Support tooling was unavailable to every agent for about 20 minutes.\n- Reporter's severity: `high`. Any support agent can trigger this with a legitimate bundle name, and the outage takes support tooling down for all agents.\n- The scanner rated the same code `low` (see `scanner-findings.json`).\n- The service owner has not confirmed a severity yet.\n",
@@ -1832,7 +1834,7 @@
         },
         {
           "path": "data/evidence/LAB-504/scanner-findings.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/LAB-504/scanner-findings.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/LAB-504/scanner-findings.json",
           "size_bytes": 687,
           "media_type": "application/json",
           "preview": "{\n  \"synthetic\": true,\n  \"actual_lucid_finding\": false,\n  \"disclaimer\": \"Synthetic lab evidence. Fictional scanner and rule; not a real Lucid finding.\",\n  \"tool\": {\"name\": \"synthetic-sast-nightly\", \"version\": \"2.3.0-lab\"},\n  \"scanned_at\": \"2026-10-13T03:00:00Z\",\n  \"results\": [\n    {\n      \"rule_id\": \"py-unbounded-file-read\",\n      \"message\": \"Whole-file read with no size bound on a file selected by request input.\",\n      \"file\": \"repos/diagnostics-document-api/documents.py\",\n      \"line\": 6,\n      \"cwe\": \"CWE-400\",\n      \"scanner_severity\": \"low\",\n      \"scanner_rationale\": \"Rule default: resource consumption in an internal-only service.\",\n      \"confidence\": \"high\"\n    }\n  ]\n}\n",
@@ -1932,7 +1934,7 @@
       "files": [
         {
           "path": "data/evidence/dependency-scenario/after/pip-audit.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/after/pip-audit.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/after/pip-audit.json",
           "size_bytes": 83,
           "media_type": "application/json",
           "preview": "{\"dependencies\": [{\"name\": \"pyyaml\", \"version\": \"5.4\", \"vulns\": []}], \"fixes\": []}\n",
@@ -1940,7 +1942,7 @@
         },
         {
           "path": "data/evidence/dependency-scenario/after/pip-freeze.txt",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/after/pip-freeze.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/after/pip-freeze.txt",
           "size_bytes": 12,
           "media_type": "text/plain",
           "preview": "PyYAML==5.4\n",
@@ -1948,7 +1950,7 @@
         },
         {
           "path": "data/evidence/dependency-scenario/after/tests.txt",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/after/tests.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/after/tests.txt",
           "size_bytes": 567,
           "media_type": "text/plain",
           "preview": "test_parses_valid_manifest (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_invalid_artifact_count (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_malformed_yaml (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_missing_fields (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_non_mapping (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_unknown_tag (test_bundle_manifest.BundleManifestTests) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n",
@@ -1956,7 +1958,7 @@
         },
         {
           "path": "data/evidence/dependency-scenario/before/pip-audit.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/before/pip-audit.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/before/pip-audit.json",
           "size_bytes": 858,
           "media_type": "application/json",
           "preview": "{\"dependencies\": [{\"name\": \"pyyaml\", \"version\": \"5.3.1\", \"vulns\": [{\"id\": \"PYSEC-2021-142\", \"fix_versions\": [\"5.4\"], \"aliases\": [\"CVE-2020-14343\", \"GHSA-8q59-q68h-6hv4\"], \"description\": \"Improper Input Validation in PyYAML\"}, {\"id\": \"PYSEC-2021-142\", \"fix_versions\": [\"5.4\"], \"aliases\": [\"CVE-2020-14343\", \"GHSA-8q59-q68h-6hv4\"], \"description\": \"A vulnerability was discovered in the PyYAML library in versions before 5.4, where it is susceptible to arbitrary code execution when it processes untrusted YAML files through the full_load method or with the FullLoader loader. Applications that use the library to process untrusted input may be vulnerable to this flaw. This flaw allows an attacker to execute arbitrary code on the system by abusing the python/object/new constructor. This flaw is due to an incomplete fix for CVE-2020-1747.\"}]}], \"fixes\": []}\n",
@@ -1964,7 +1966,7 @@
         },
         {
           "path": "data/evidence/dependency-scenario/before/pip-freeze.txt",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/before/pip-freeze.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/before/pip-freeze.txt",
           "size_bytes": 14,
           "media_type": "text/plain",
           "preview": "PyYAML==5.3.1\n",
@@ -1972,7 +1974,7 @@
         },
         {
           "path": "data/evidence/dependency-scenario/before/tests.txt",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/before/tests.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/before/tests.txt",
           "size_bytes": 567,
           "media_type": "text/plain",
           "preview": "test_parses_valid_manifest (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_invalid_artifact_count (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_malformed_yaml (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_missing_fields (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_non_mapping (test_bundle_manifest.BundleManifestTests) ... ok\ntest_rejects_unknown_tag (test_bundle_manifest.BundleManifestTests) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n",
@@ -1980,7 +1982,7 @@
         },
         {
           "path": "data/evidence/dependency-scenario/commands.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/commands.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/commands.json",
           "size_bytes": 8157,
           "media_type": "application/json",
           "preview": "[\n  {\n    \"command\": \"/usr/bin/python3 -m venv $WORKDIR/scanner\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:25.864898+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:27.815355+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/python -m pip install -q --disable-pip-version-check pip==25.2 pip-audit==2.10.1\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:27.815398+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:31.241170+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/pip-audit --version\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:31.241220+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:31.534225+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"pip-audit 2.10.1\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/python -m pip freeze --all\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:31.534272+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:31.682514+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"boolean.py==5.0\\nCacheControl==0.14.4\\ncertifi==2026.7.22\\ncharset-normalizer==3.5.2\\ncyclonedx-python-lib==11.12.0\\ndefusedxml==0.7.1\\nfilelock==4.1.0\\nidna==3.20\\nlicense-expression==30.4.4\\nmarkdown-it-py==4.2.0\\nmdurl==0.1.2\\nmsgpack==1.2.3\\npackageurl-python==0.17.6\\npackaging==26.3\\npip==25.2\\npip-requirements-parser==32.0.1\\npip_api==0.0.35\\npip_audit==2.10.1\\nplatformdirs==4.12.4\\npy-serializable==2.1.0\\nPygments==2.21.0\\npyparsing==3.3.3\\nrequests==2.34.2\\nrich==15.0.0\\nsetuptools==59.6.0\\nsortedcontainers==2.4.0\\ntomli==2.5.0\\ntomli_w==1.2.0\\ntyping_extensions==4.16.0\\nurllib3==2.8.0\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"/usr/bin/python3 -m venv --without-pip $WORKDIR/before\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:31.682779+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:31.706449+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/python -m pip --python $WORKDIR/before/bin/python install -q --disable-pip-version-check -r $REPO/repos/diagnostics-document-api/requirements.txt\",\n    \"cwd\": \"$REPO\",\n    \"env\": {\n      \"PIP_CONSTRAINT\": \"$WORKDIR/build-constraints.txt\"\n    },\n    \"started_utc\": \"2026-10-16T16:55:31.706479+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:32.208891+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/python -m pip --python $WORKDIR/before/bin/python freeze --all\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:32.208933+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:32.488779+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"PyYAML==5.3.1\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/before/bin/python -c import importlib.metadata as m; print(m.version('PyYAML'))\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:32.488925+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:32.524627+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"5.3.1\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/before/bin/python -c import sysconfig; print(sysconfig.get_paths()['purelib'])\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:32.524642+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:32.534430+00:00\",\n    \"returncode\": 0,\n    \"stdout\": \"$WORKDIR/before/lib/python3.10/site-packages\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"command\": \"$WORKDIR/scanner/bin/pip-audit --path $WORKDIR/before/lib/python3.10/site-packages --vulnerability-service osv --format json --output $REPO/data/evidence/dependency-scenario/before/pip-audit.json --progress-spinner off\",\n    \"cwd\": \"$REPO\",\n    \"env\": {},\n    \"started_utc\": \"2026-10-16T16:55:32.534470+00:00\",\n    \"finished_utc\": \"2026-10-16T16:55:33.248009+00:00\",\n    \"returncode\": 1,\n    \"stdout\": \"\",\n    \"stderr\": \"Found 2 known vulnerabilities in 1 package\\n\"\n  },\n  {\n    \"command\": \"$WORKDIR/before/bin/python -m unittest discover -s depe",
@@ -1988,7 +1990,7 @@
         },
         {
           "path": "data/evidence/dependency-scenario/scanner-freeze.txt",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/scanner-freeze.txt",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/scanner-freeze.txt",
           "size_bytes": 572,
           "media_type": "text/plain",
           "preview": "boolean.py==5.0\nCacheControl==0.14.4\ncertifi==2026.7.22\ncharset-normalizer==3.5.2\ncyclonedx-python-lib==11.12.0\ndefusedxml==0.7.1\nfilelock==4.1.0\nidna==3.20\nlicense-expression==30.4.4\nmarkdown-it-py==4.2.0\nmdurl==0.1.2\nmsgpack==1.2.3\npackageurl-python==0.17.6\npackaging==26.3\npip==25.2\npip-requirements-parser==32.0.1\npip_api==0.0.35\npip_audit==2.10.1\nplatformdirs==4.12.4\npy-serializable==2.1.0\nPygments==2.21.0\npyparsing==3.3.3\nrequests==2.34.2\nrich==15.0.0\nsetuptools==59.6.0\nsortedcontainers==2.4.0\ntomli==2.5.0\ntomli_w==1.2.0\ntyping_extensions==4.16.0\nurllib3==2.8.0\n",
@@ -1996,7 +1998,7 @@
         },
         {
           "path": "data/evidence/dependency-scenario/summary.json",
-          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c2fa74ce8bdb56774e8e842073aec215bc9b3ba9/data/evidence/dependency-scenario/summary.json",
+          "url": "https://github.com/riti-singh/lucid-connected-cloud-security-lab/blob/c910762c7260ce35fe6e465f7b9ea68a7ff4bfcc/data/evidence/dependency-scenario/summary.json",
           "size_bytes": 2108,
           "media_type": "application/json",
           "preview": "{\n  \"synthetic\": true,\n  \"repository\": \"diagnostics-document-api\",\n  \"started_utc\": \"2026-10-16T16:55:25.864872+00:00\",\n  \"python\": \"3.10.12\",\n  \"scanner_requirements\": [\n    \"pip==25.2\",\n    \"pip-audit==2.10.1\"\n  ],\n  \"build_constraints\": \"Cython<3\",\n  \"expected_advisory_ids\": [\n    \"GHSA-8q59-q68h-6hv4\",\n    \"PYSEC-2021-142\"\n  ],\n  \"phases\": {\n    \"before\": {\n      \"manifest\": \"repos/diagnostics-document-api/requirements.txt\",\n      \"installed\": \"PyYAML==5.3.1\",\n      \"scanner_exit\": 1,\n      \"scanner_ids_and_aliases\": [\n        \"CVE-2020-14343\",\n        \"GHSA-8q59-q68h-6hv4\",\n        \"PYSEC-2021-142\"\n      ],\n      \"tests_exit\": 0,\n      \"evidence\": \"data/evidence/dependency-scenario/before\"\n    },\n    \"after\": {\n      \"manifest\": \"repos/diagnostics-document-api/requirements-upgrade.txt\",\n      \"installed\": \"PyYAML==5.4\",\n      \"scanner_exit\": 0,\n      \"scanner_ids_and_aliases\": [],\n      \"tests_exit\": 0,\n      \"evidence\": \"data/evidence/dependency-scenario/after\"\n    }\n  },\n  \"scanner_version\": \"pip-audit 2.10.1\",\n  \"finished_utc\": \"2026-10-16T16:55:34.828290+00:00\",\n  \"checks\": [\n    {\n      \"check\": \"before manifest matches recorded pin\",\n      \"passed\": true,\n      \"detail\": \"('PyYAML', '5.3.1') vs ('PyYAML', '5.3.1')\"\n    },\n    {\n      \"check\": \"upgrade manifest pins the OSV fixed version\",\n      \"passed\": true,\n      \"detail\": \"5.4 vs ['5.4']\"\n    },\n    {\n      \"check\": \"before: installed version\",\n      \"passed\": true,\n      \"detail\": \"PyYAML 5.3.1\"\n    },\n    {\n      \"check\": \"before: scanner reports recorded advisories\",\n      \"passed\": true,\n      \"detail\": \"missing=[] scanner_exit=1\"\n    },\n    {\n      \"check\": \"before: scenario tests pass\",\n      \"passed\": true,\n      \"detail\": \"exit=0\"\n    },\n    {\n      \"check\": \"after: installed version\",\n      \"passed\": true,\n      \"detail\": \"PyYAML 5.4\"\n    },\n    {\n      \"check\": \"after: recorded advisories absent\",\n      \"passed\": true,\n      \"detail\": \"present=[] scanner_exit=0\"\n    },\n    {\n      \"check\": \"after: scenario tests pass\",\n      \"passed\": true,\n      \"detail\": \"exit=0\"\n    }\n  ],\n  \"result\": \"PASS\"\n}\n",
