@@ -35,7 +35,14 @@ PASS schema/provenance audit: 14 synthetic findings (10 LAB-*, 4 DEP-*), 4 repre
 exit=0
 $ python3 tools/triage.py; echo "exit=$?"
 14 synthetic findings across 4 repositories / 8 candidate root causes
-...
+shared-root-path-validation: LAB-101, LAB-102, LAB-103; source=synthetic-static-review; group requires code review
+tenant-authorization: LAB-201; source=synthetic-static-review; group requires code review
+ota-release-rbac: LAB-301; source=synthetic-static-review; group requires code review
+telemetry-log-redaction: LAB-401; source=synthetic-static-review; group requires code review
+intake-unclassified: LAB-501, LAB-502, LAB-503, LAB-504; source=synthetic-intake-queue; group requires code review
+dependency-pyyaml: DEP-101; source=synthetic-dependency-pin-osv-match; group requires code review
+dependency-express: DEP-201, DEP-202; source=synthetic-dependency-pin-osv-match; group requires code review
+dependency-snakeyaml: DEP-301; source=synthetic-dependency-pin-osv-match; group requires code review
 exit=0
 ```
 
@@ -83,7 +90,7 @@ SLA note: LAB-201 and LAB-301 (critical, reported 2026-10-01) were due 2026-10-0
 |---|---|---|
 | Skills: `security-validation`, `lab-baseline-verification`, `finding-triage`, `advisory-verification`, `remediation-evidence` | `.agents/skills/` (repo, auto-discovered) | `skill_activated` events: LAB-101..103, LAB-301 and LAB-401 sessions, 4 skills each; enrichment session 3; dependency-ticket session 3 (including `advisory-verification`); CI session 1 |
 | Playbook: Lab security remediation | Devin org playbook | Attached (`playbook_id`) to all three remediation sessions; their PRs follow its evidence format |
-| Playbook: Lab multi-session coordination | Devin org playbook | Used by the coordinating session; updated with the skill-mount retry and answer-key rules found during this work |
+| Playbook: Lab multi-session coordination | Devin org playbook | Used by the coordinating session; updated after the enrichment and dependency-evidence sessions with what worked |
 | Knowledge: `lab-tooling-gotchas`, `lab-baseline-interpretation`, `lab-ownership-and-provenance`, `lab-remediation-evidence` | Personal plugin rules (owner's sessions only) | Active; they load only in sessions started after they were saved, so these sessions do not show their use |
 
 `devin/skills/`, `devin/knowledge/` and `devin/playbooks/` are not loaded automatically. Sessions read them as files when the prompt or a skill points to them.
